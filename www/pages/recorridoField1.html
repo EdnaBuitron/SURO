@@ -1,0 +1,116 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="javascript:location.reload()" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <input type="hidden" id="resp1" name="resp1" />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Recorrido Levantamiento</h2></div>
+                    </div>
+                </div>
+                    <div class="buttons-container" style="display: flex;">
+                        <a href="/datosgeneralesField1/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/persona2.svg" width="90px" height="90px" id="img1"/>
+                            <span class="fwm-text-recorrido">Datos Generales</span>
+                        </a>
+                        <a href="/antesField1/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/revision.svg" width="90px" height="90px" id="img2"/>
+                            <span class="fwm-text-recorrido">Revisión de Equipo</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                        <a href="/formField2/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/datoscoche.svg" width="90px" height="90px" id="img4"/>
+                            <span class="fwm-text-recorrido">Datos del Equipo</span>
+                        </a>
+                        <a href="/cierreField1/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/estrellas.svg" width="90px" height="90px" id="img5"/>
+                            <span class="fwm-text-recorrido">Evaluación y cierre</span>
+                        </a>
+                    </div>
+                <!-- Inicio FWM Recorrido -->
+                    <div id="FWM-Menu" class="container-items" style="width: 100%;"></div>
+                <!-- Fin FWM Recorrido -->
+                <fwm></fwm>
+            </div> 
+        </div>
+    </div>
+</template>
+           
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                //Para cambiar los iconos de color
+                var id_cedula = localStorage.getItem("IdCedula");
+                
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from levantamiento_Field WHERE id_cedula = ? AND (nombre_cliente IS NOT NULL AND nombre_contacto IS NOT NULL AND telefono_contacto IS NOT NULL AND correo_contacto IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img1").src="img/iconsMenu/persona.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                //Durante
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select * FROM levantamiento_Field WHERE id_cedula = ? AND (comentario_equipo IS NOT NULL AND lugar_reparacion IS NOT NULL AND reparo_visita IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img2").src="img/iconsMenu/revision2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                //Despues
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from levantamiento_Field WHERE id_cedula = ? AND (orden_servicio IS NOT NULL AND marca IS NOT NULL AND modelo IS NOT NULL AND numero_serie IS NOT NULL AND tipo_motor IS NOT NULL AND tipo_boquilla IS NOT NULL AND tipo_combustible IS NOT NULL AND tipo_mastil IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img4").src="img/iconsMenu/datoscoche2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

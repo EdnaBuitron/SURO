@@ -1,0 +1,161 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="back">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Información del  Equipo</h2>
+  
+                <form class="list" style="margin-top: 0;">
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }
+                        select{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }                      
+                        .border-capture-item{
+                          margin-top: 33px;
+                          margin-left: 0px;
+                          margin-right: 33px;
+                          position: relative;
+                        }
+
+                        textarea{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            font-size: 2vw;
+                        }
+                        #cajaB {
+              width: 350px;
+            }
+
+            #cajaB h1 {
+              color: rgb(3, 3, 3);
+              font-size: 12px;
+              text-transform: uppercase;
+              text-align: left;
+              line-height: 30px;
+              margin-left: 5px;
+            }
+
+            #pregunta {
+              position: relative ;
+              display: flex;
+              margin-top: 5px;
+              border: transparent;
+              box-sizing: border-box;
+              background: #FAFAFA;
+            }
+
+            #pregunta input[type=radio] {
+              display: none;
+            }
+
+            #pregunta label {
+              display: block;
+              width: 150px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: 0.5s;
+              background: #FFF;  
+              
+            }
+
+            #pregunta label:hover {
+              background: #679ceb;
+            }
+
+            #pregunta input[type=radio]:checked + label {
+              background: #063E7F;
+              color: #FAFAFA;
+            }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                      <form>
+                        <div id="cajaB">
+                        <span class="span" style="font-weight: bold;width: 90%;"> Modelo:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Numero de serie:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox">  
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Ubicación/ Áreas Del Equipo:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Fecha De Última Capacitación:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Uso Principal De Lavado:</span>
+                        <div id="pregunta" style="border: 1px solid #063E7F;width: 90%;margin-left: 5%;font-size: 17px;">
+                            <input type="radio" name="pregunta1"  value="1" id="Res1-11">
+                            <label for="Res1-11" style="width: 156px;">Cristalería</label>
+                            <input type="radio" name="pregunta1"  value="2" id="Res2-11">
+                            <label for="Res2-11" style="width: 100px;">Peltre</label>
+                            <input type="radio" name="pregunta1"  value="13" id="Res3-11">
+                            <label for="Res3-11">Loza</label>
+                            <input type="radio" name="pregunta1"  value="13" id="Res4-11">
+                            <label for="Res4-11">Melanina</label>
+                            <input type="radio" name="pregunta1"  value="13" id="Res5-11">
+                            <label for="Res5-11">Otro</label>
+                        </div>
+                        <br>
+                        <span class="span" style="font-weight: bold;width: 90%; line-height: 15px;"> Consumo De Químicos De Limpieza al Mes:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%; line-height: 15px;margin-top: 15px;"> Cuenta Con Suministro De Agua Caliente (Boiler):</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%; line-height: 15px;margin-top: 15px;height: auto;"> Cuenta Con Suministro Contra Incendios:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Modelo" id="Modelo"  class="FWM-textBox"> 
+                        </span>                     
+                                             
+
+                        <br>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                          <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                            <span class="resize-handler"></span>
+                            <a href="#" onclick="guardarCCharolaPPL(1);" class="boton-equipo">Guardar datos</a>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+            </div>    
+  </template>
+  <script>
+    return {
+        on: {
+          pageInit: function () {
+            $('.preloader').remove();
+            $('.infinite-scroll-preloader').remove();
+            
+            }
+          }
+    }
+  </script>

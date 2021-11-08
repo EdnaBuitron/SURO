@@ -1,0 +1,295 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoSMC3();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Prospección</h2>
+
+                    <div style="text-align: left;line-height: 10px;">     
+                        <form class="list FWM-fixing-form"> 
+                            <span class="span FWM-span-form">Objetivo de la visita:</span>
+                            <textarea class ="FWM-input" id="objetivo" name="objetivo" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+
+                            <span class="span FWM-span-form">Necesidad del cliente:</span>
+                            <textarea class ="FWM-input" id="necesidad" name="necesidad" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+
+                            <span class="span FWM-span-form">¿Que marca de montacargas tiene?:</span>
+                            <input type="text" class="FWM-input" id="marca" name="marca" onchange="inputLleno(this.id,this.value)" autocomplete="off"/>
+
+                            <span class="span FWM-span-form">¿Cuantos montacargas tiene?</span>
+                            <input type='text' name="numeroActivo" id="numeroActivo" class="FWM-input" onchange="inputLleno(this.id,this.value)"/>
+
+                            <span class="span FWM-span-form">Los montacargas son:</span>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta1" onclick="sonRentados()" id="tipo1" value="1" >PROPIOS</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta1" onclick="sonRentados()" id="tipo0" value="0" >RENTADOS</label>
+                            </div>
+
+                            <div id="contrato" style="display: none;">
+                                <span class="span FWM-span-form">¿Cuando vence el contrato?</span>
+                                <input type="text" readonly="readonly" name="Cuandoc" id="demo-calendar-modal" style="border: 1px solid gray;border-radius: 8px;padding-left: 10px;"/>
+                            </div>
+
+                            <span class="span FWM-span-form">¿Que marca de llantas usan?:</span>
+                            <input type="text" class="FWM-input" id="marcall" name="marcall" onchange="inputLleno(this.id,this.value)" autocomplete="off"/>
+
+                            <span class="span FWM-span-form">¿Que tipo de llantas son?</span>
+                            <input type='text' name="llantas" id="llantas" class="FWM-input" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"/>
+                            
+                            <span class="span FWM-span-form">¿Cuáles son las medidas?</span>
+                            <input type='text' name="medidas" id="medidas" class="FWM-input" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"/>
+
+                            <span class="span FWM-span-form">Se resolvió el problema o requerimiento del cliente:</span>
+                            <br><br><br>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta2" id="tipo11" value="1" >SI</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta2" id="tipo01" value="0" >NO</label>
+                            </div>
+
+                            <span class="span FWM-span-form">¿Por que?:</span>
+                            <textarea class ="FWM-input" id="porque" name="porque" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+
+                            <span class="span FWM-span-form">Se requiere una siguiente visita:</span>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta3" onclick="siguienteVisita()" id="tipo110" value="1" >SI</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta3" onclick="siguienteVisita()" id="tipo010" value="0" >NO</label>
+                            </div>
+
+                            <div id="siguienteVisita" style="display: none;">
+                                <span class="span FWM-span-form">¿Cuando?</span>
+                                <input type="text" readonly="readonly" id="demo-calendar-modal1" name="cuando" style="border: 1px solid gray;border-radius: 8px;padding-left: 10px;"/>
+                            </div>
+
+                            <span class="span FWM-span-form">¿Se llevó el cliente un presente (materíal pop)?</span>
+                                <br><br><br>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta4" onclick="dejaPresente()"  id="tipo1101" value="1" >SI</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="radio" name="pregunta4" onclick="dejaPresente()" id="tipo0101" value="0" >NO</label>
+                            </div>
+
+                            <div id="presente" style="display: none;">
+                                <span class="span FWM-span-form">¿Cuáles?</span>
+                                <input type='text' name="cuales" id="cuales" class="FWM-input" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"/>
+                            </div>
+                            
+                            <span class="span FWM-span-form">Competencia</span>
+                            <input type='text' name="competencia" id="competencia" class="FWM-input" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"/>
+
+                            <span class="span FWM-span-form">Sugerencias del cliente:</span>
+                            <textarea class ="FWM-input" id="sugerencia" name="sugerencia" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+
+                            <span class="span FWM-span-form">Comentarios:</span>
+                            <textarea class ="FWM-input" id="comentarios" name="comentarios" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+                        </form>
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 170px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarProspeccionSMC();" class="boton-equipo">Guardar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                let calendarDefault;
+                let calendarDefault1;
+
+                $('.preloader').remove();
+                $('.infinite-scroll-preloader').remove();
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select objetivo_prospeccion,necesidad_prospeccion ,marca_montacargas_prospeccion ,numero_montacargas_prospeccion ,status_montacarga_prospeccion ,venc_contrato ,marca_llantas_prospeccion ,tipo_llantas_prospeccion ,mediadas_prospeccion ,resolvio_prospeccion ,por_que_prospeccion ,vista_prospeccion ,cuando_prospeccion , presente_prospeccion ,cuales_prospeccion ,copetencia_prospeccion,sugerencia_prospeccion,comentarios_prospeccion from ventaSMC where id_cedula= ?",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                dejaPresente();
+                                siguienteVisita();
+                                sonRentados();
+                                if(item.objetivo_prospeccion == null){
+                                } else {
+                                    $("#objetivo").val(item.objetivo_prospeccion);
+                                }
+                                if(item.necesidad_prospeccion == null){
+                                } else {
+                                    $("#necesidad").val(item.necesidad_prospeccion);
+                                }
+                                if(item.marca_montacargas_prospeccion == null){
+                                } else {
+                                    $("#marca").val(item.marca_montacargas_prospeccion);
+                                }
+                                if(item.numero_montacargas_prospeccion == null){
+                                } else {
+                                    $("#numeroActivo").val(item.numero_montacargas_prospeccion);
+                                }
+                                if(item.status_montacarga_prospeccion == 1){
+                                    $("#tipo1").prop("checked", true);
+                                } else if(item.status_montacarga_prospeccion == 0){
+                                    $("#tipo0").prop("checked", true);
+                                }
+                                if(item.venc_contrato == null){
+                                } else {
+                                    $("#cuandoc").val(item.venc_contrato);
+                                }
+                                if(item.marca_llantas_prospeccion == null){
+                                } else {
+                                    $("#marcall").val(item.marca_llantas_prospeccion);
+                                }
+                                if(item.tipo_llantas_prospeccion == null){
+                                } else {
+                                    $("#llantas").val(item.tipo_llantas_prospeccion);
+                                }
+                                if(item.mediadas_prospeccion == null){
+                                } else {
+                                    $("#medidas").val(item.mediadas_prospeccion);
+                                }
+                                if(item.resolvio_prospeccion == 1){
+                                    $("#tipo11").prop("checked", true);
+                                } else if(item.resolvio_prospeccion == 0) {
+                                    $("#tipo01").prop("checked", true);
+                                }
+                                if(item.por_que_prospeccion == null){
+                                } else {
+                                    $("#porque").val(item.por_que_prospeccion);
+                                }
+                                if(item.vista_prospeccion == 1){
+                                    $("#tipo110").prop("checked", true);
+                                } else if(item.vista_prospeccion == 0){
+                                    $("#tipo010").prop("checked", true);
+                                }
+                                if(item.cuando_prospeccion == null){
+                                } else {
+                                    $("#cuando").val(item.cuando_prospeccion);
+                                }
+                                if(item.presente_prospeccion == 1){
+                                    $("#tipo1101").prop("checked", true);
+                                } else if (item.presente_prospeccion == 0) {
+                                    $("#tipo0101").prop("checked", true);
+                                }
+                                if(item.cuales_prospeccion == null){
+                                } else {
+                                    $("#cuales").val(item.cuales_prospeccion);
+                                }
+                                if(item.copetencia_prospeccion == null){
+                                } else {
+                                    $("#competencia").val(item.copetencia_prospeccion);
+                                }
+                                if(item.sugerencia_prospeccion == null){
+                                } else {
+                                    $("#sugerencia").val(item.sugerencia_prospeccion);
+                                }
+                                if(item.comentarios_prospeccion == null){
+                                } else {
+                                    $("#comentarios").val(item.comentarios_prospeccion);
+                                }
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                var self = this;
+                var app = self.$app; 
+                var OPCV = localStorage.getItem("Opcion");       
+                var Division = localStorage.getItem("Division");
+                var NomJson = 'marcas_SMC';
+
+                self.autocompleteDropdownAjax = app.autocomplete.create({
+                    inputEl: '#marca',
+                    openIn: 'dropdown',
+                    preloader: true, //enable preloader
+                    valueProperty: 'code', //object's "value" property name
+                    textProperty:  'name', //object's "text" property name
+                    limit: 10, //limit to 20 results
+                    dropdownPlaceholderText: 'Seleccionar Cliente...',
+                    source: function (query, render) {
+                        var autocomplete = this;
+                        var results = [];
+                        if (query.length === 0) {
+                            render(results);
+                            return;
+                        }
+                        // Show Preloader
+                        autocomplete.preloaderShow();
+                        // Do Ajax request to Autocomplete data
+                        app.request({
+                            url: cordova.file.dataDirectory + "jsons/"+NomJson+".json",
+                            method: 'GET',
+                            dataType: 'json',
+                            data: {
+                                query: query,
+                            },success: function (data) {
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+                                }
+                                autocomplete.preloaderHide();
+                                render(results);
+                            }
+                        }); 
+                    }
+                });
+                $('#marca').change(function () {
+                    var cliente = $("#marca").val();
+                    app.request.get(cordova.file.dataDirectory + "jsons/"+NomJson+".json", function (data) {
+                        var content2 = JSON.parse(data);
+                        for(var x = 0; x < content2.length; x++) {
+                            if(content2[x].code == cliente){
+                                $("#marca").val(content2[x].code + " " + content2[x].name);
+                            }         
+                        }
+                    });
+                });
+            
+                calendarDefault = app.calendar.create({
+                    inputEl: '#demo-calendar-modal',
+                    openIn: 'customModal',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto' , 'Septiembre' , 'Octubre', 'Noviembre', 'Diciembre'], 
+                    dayNames:["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"],
+                    dayNamesShort:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+                    toolbarCloseText: "Seleccionar",
+                    headerPlaceholder: "Seleccione el dia",
+                    header: true,
+                    footer: true,
+                });
+                calendarDefault1 = app.calendar.create({
+                    inputEl: '#demo-calendar-modal1',
+                    openIn: 'customModal',
+                    monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto' , 'Septiembre' , 'Octubre', 'Noviembre', 'Diciembre'], 
+                    dayNames:["Domingo","Lunes","Martes","Miercoles","Jueves","Viernes","Sabado"],
+                    dayNamesShort:["Dom","Lun","Mar","Mie","Jue","Vie","Sab"],
+                    toolbarCloseText: "Seleccionar",
+                    headerPlaceholder: "Seleccione el dia",
+                    header: true,
+                    footer: true,
+                });
+            }
+        }  
+    }
+</script>

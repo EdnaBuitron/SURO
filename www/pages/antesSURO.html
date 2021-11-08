@@ -1,0 +1,196 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoSURO();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Realizar recorrido en las áreas a tratar</h2>
+                            
+                    <form class="list FWM-fixing-form">                        
+                        <div style="text-align: left;">
+                            <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                                <div>
+                                    <span class="span FWM-span-form">EPP:</span>
+                                    <div class="FWM-photo-container">
+                                        <div class="border-capture-item">
+                                        <a id="1" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon1" width="45px"/>
+                                        </a>
+                                        </div>
+                                        <img class="FWM-photo-hide-item" id="smallImage1" src=""/>
+                                        <input type="hidden" id="imagenC1" name="imagenC1"/>
+                                    </div>    
+                                </div>
+                                <div>
+                                    <span class="span FWM-span-form">Maquina:</span>
+                                    <div class="FWM-photo-container">
+                                        <a id="2" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <div class="border-capture-item">
+                                                <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon2" width="45px"/>
+                                            </div>
+                                        </a>
+                                        <img class="FWM-photo-hide-item" id="smallImage2" src=""/>
+                                        <input type="hidden" id="imagenC2" name="imagenC2"/>
+                                    </div>
+                                </div>
+                            </div>      
+                            <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                                <div>
+                                    <span class="span FWM-span-form">Aspersor:</span>
+                                    <div class="FWM-photo-container">
+                                        <div class="border-capture-item">
+                                        <a id="3" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon3" width="45px"/>
+                                        </a>
+                                        </div>
+                                        <img class="FWM-photo-hide-item" id="smallImage3" src=""/>
+                                        <input type="hidden" id="imagenC3" name="imagenC3"/>
+                                    </div>    
+                                </div>
+                                <div>
+                                    <span class="span FWM-span-form">Quimico a utilizar:</span>
+                                    <div class="FWM-photo-container">
+                                        <a id="4" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <div class="border-capture-item">
+                                                <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon4" width="45px"/>
+                                            </div>
+                                        </a>
+                                        <img class="FWM-photo-hide-item" id="smallImage4" src=""/>
+                                        <input type="hidden" id="imagenC4" name="imagenC4"/>
+                                    </div>
+                                </div>
+                            </div>  
+                            <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                                <div>
+                                    <span class="span FWM-span-form">Accesos y avisos:</span>
+                                    <div class="FWM-photo-container">
+                                        <div class="border-capture-item">
+                                        <a id="5" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon5" width="45px"/>
+                                        </a>
+                                        </div>
+                                        <img class="FWM-photo-hide-item" id="smallImage5" src=""/>
+                                        <input type="hidden" id="imagenC5" name="imagenC5"/>
+                                    </div>    
+                                </div>
+                                <div>
+                                    <span class="span FWM-span-form">Delimita área:</span>
+                                    <div class="FWM-photo-container">
+                                        <a id="6" onclick="captureMultiplePhotoSaved(this.id);">
+                                            <div class="border-capture-item">
+                                                <img class="FWM-photo-item" src="img/camera.svg" id="photoIcon6" width="45px"/>
+                                            </div>
+                                        </a>
+                                        <img class="FWM-photo-hide-item" id="smallImage6" src=""/>
+                                        <input type="hidden" id="imagenC6" name="imagenC6"/>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
+                    </form>
+                </div>
+            <!-- Fin contenido formulario -->
+            <fwm></fwm>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+      on: {
+        pageInit: function (e, page) {
+            var id_cedula = localStorage.getItem("IdCedula");
+            databaseHandler.db.transaction(
+                function(tx1){
+                    tx1.executeSql(
+                        "Select foto_epp,foto_maquina,foto_aspersor from sanitizacion_Suro where id_cedula= ?",
+                        [id_cedula],
+                        function(tx, results){
+                            var item = results.rows.item(0);
+                            if(item.foto_epp == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage1');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_epp;
+                                $("#imagenC1").val(item.foto_epp);
+                                $("#photoIcon1").attr("src","img/reload.svg");
+                            }   
+                            if(item.foto_maquina == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage2');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_maquina;
+                                $("#imagenC2").val(item.foto_maquina);
+                                $("#photoIcon2").attr("src","img/reload.svg");
+                            }   
+                            if(item.foto_aspersor == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage3');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_aspersor;
+                                $("#imagenC3").val(item.foto_aspersor);
+                                $("#photoIcon3").attr("src","img/reload.svg");
+                            }                   
+                        },
+                        function(tx, error){
+                            console.log("Error al consultar: " + error.message);
+                        }
+                    );
+                },
+                function(error){},
+                function(){}
+            );
+            databaseHandler.db.transaction(
+                function(tx1){
+                    tx1.executeSql(
+                        "Select foto_quimico,foto_accesos,foto_delimita_area from sanitizacion_Suro where id_cedula= ?",
+                        [id_cedula],
+                        function(tx, results){
+                            var item = results.rows.item(0);
+                            if(item.foto_quimico == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage4');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_quimico;
+                                $("#imagenC4").val(item.foto_quimico);
+                                $("#photoIcon4").attr("src","img/reload.svg");
+                            }                
+                            if(item.foto_accesos == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage5');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_accesos;
+                                $("#imagenC5").val(item.foto_accesos);
+                                $("#photoIcon5").attr("src","img/reload.svg");
+                            }   
+                            if(item.foto_delimita_area == null){
+                            } else {
+                                var smallImage = document.getElementById('smallImage6');
+                                smallImage.style.display = 'flex';
+                                smallImage.src = item.foto_delimita_area;
+                                $("#imagenC6").val(item.foto_delimita_area);
+                                $("#photoIcon6").attr("src","img/reload.svg");
+                            }      
+                        },
+                        function(tx, error){
+                            console.log("Error al consultar: " + error.message);
+                        }
+                    );
+                },
+                function(error){},
+                function(){}
+            );
+        }
+      }  
+    }
+</script>

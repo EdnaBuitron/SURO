@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Field - Menu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#2196f3"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: gap:" />
+    <script type="text/javascript" src="js/raphael-min.js"></script>
+    <link rel="stylesheet" href="lib/framework7/css/framework7.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/morris.css">
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/form.css" />
+    <link rel="stylesheet" href="css/SimpleStarRating.css" />
+    <link rel="shortcut icon" type="image/png" href="img/favicon.png" />
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="fonts/AvantGarde.css">
+    <link rel="stylesheet" href="css/fwm.css"/>
+    <link rel="stylesheet" href="css/camera-field.css"/>
+  </head>
+  <body>
+    <div id="app">
+      <div class="statusbar" style="color: #ffffff;"></div>
+      <div class="panel panel-left panel-cover panel-resizable">
+        <div class="page">
+          <div class="page-content  panel-custom">
+            <div class="footer">
+              <div class="item-content panel-logout">
+                  <i class="material-icons md-light panel-cerrar" style="color: #ffffff;">exit_to_app</i>
+                  <div class="item-title"><a class="panel-text" href="#" onclick="logaout();">Cerrar sesión</a></div>
+              </div>
+            </div>
+            <div style="text-align: center;background-color: white;">
+              <div class="item-media" style="z-index: 9999999;position: absolute;top: 10px;left: 10px;">
+                <a href="/settings/" class="panel-close"><i class="material-icons md-light" style="color: #1D4F91;font-size: 35px;">settings</i></a>
+              </div>
+
+              <img src="img/logo.png" width="80px" style="margin-top: 30px;" />
+              <br>
+              <span style="margin-left: -190px; color: #00A7B5; font-weight: bold;">Versión 6.2.0</span>
+            </div>
+            <div class="list">
+              <ul class="menu-left-menu">
+                <li class="pannel-left-menu">
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="material-icons md-light" style="color: #ffffff;">sync</i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title"><a href="#" class="panel-text" onclick="updateData();">Sincronizar datos</a></div>
+                      <div class="item-after"><span id="processclick" class="99badge99" style="padding-bottom: 20px;" hidden="true"><i class="material-icons md-light spin" style="color: #1D4F91;">rotate_right</i></span></div>
+                    </div>
+                  </div>
+                </li>
+                <li id ="tracking"></li>
+                <li>
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="material-icons md-light" style="color: #ffffff;">create</i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title"><a href="/continuarc/" class="panel-close panel-text" >Continuar cédula</a></div>
+                      <div class="item-after"><span class="badge" id="contce">0</span></div>
+                    </div>
+                  </div>
+                </li>
+
+                <li>
+                  <div class="item-content">
+                    <div class="item-media">
+                      <i class="material-icons md-light" style="color: #ffffff;">done</i>
+                    </div>
+                    <div class="item-inner">
+                      <div class="item-title"><a href="/bandeja/" class="panel-close panel-text">Bandeja de salida</a></div>
+                      <div class="item-after"><span id="contceb" class="badge">0</span></div>
+                    </div>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="800" data-url="/">
+        <div class="page">
+          <div class="page-content ptr-content bg-color-white">
+            <div class="ptr-preloader color-blue">
+                <br><br><div id="process" style="text-align: center; color: #003E7F; font-weight: bold; background-color:#FFFFFF;" hidden="false"></div>
+                <div class="preloader color-blue"></div>
+            </div>
+          <div>
+            <nav class="left top-left">
+              <a href="#" class="link icon-only panel-open menu-nav" data-panel="left">
+                <i class="icon f7-icons if-not-md">menu</i>
+                <i class="icon material-icons md-only" style="color: #1D4F91; font-weight: bold; font-size: xx-large;margin-top: 16px; margin-left: 15px;">menu</i>
+              </a>
+              <img src="img/field.png" height="41.38px" alt="Logo Field" style="margin-left: 30%; margin-top: 15px;">
+            </nav>
+            <nav class="footer-nav">
+              <div>
+                <span style="color: white;font-weight: bold;font-size: 12px;">Última sincronización de datos:&nbsp;</span>
+                <span id="Fecha2" name="Fecha2" style="color: #00A7B5; font-weight: bold;text-decoration: underline;font-size: 12px;">Sus datos no estan actualizados</span>
+              </div>
+            </nav>
+            <div class="left">
+              <div class="texto title" style="margin-top:25px;">
+                <div class="user-name">
+                  <span style="color: #3D4647;">Bienvenido&nbsp;</span><span id="NombreUsuario" name="NombreUsuario" style="color: #3D4647;"></span>
+                </div>
+                <span class="subtitle-nav" style="color:#00A7B5">Menú Field</span>
+              </div>
+            </div>
+        </div>
+          <div><br>
+              <center>
+                <table>
+                  <tr>
+                    <td colspan="2">
+                      <div>
+                        <a class="item-content item-link entrar principalButton" href="#" onclick="moveMenu();"  style="text-decoration: none;"><p>Nueva Cédula</p><img src="img/iconsMenu/crear_cedula.svg" height="41.91px;"></a>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr style="text-align: center;">
+                    <td>
+                      <a class="item-content item-link entrar extra secundaryButton" onclick="moveProgram()"><img src="img/iconsMenu/portapapeles.svg" width="55.81pt" height="74.41pt"></a>
+                      <p class="bottom-third">Programa de</p>
+                      <p class="bottom-second">visitas</p>
+                    </td>
+                    <td style="text-align: center;">
+                      <a class="item-content item-link entrar secundaryButton" href="/pdfs/"><img src="img/iconsMenu/calendario.svg" width="55.81pt" height="74.41pt"></a>
+                      <p class="bottom-third">Historial de</p>
+                      <p class="bottom-second">visitas</p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="text-align: center;">
+                      <a class="item-content item-link entrar extra secundaryButton" href="/tablerocalificaciones/"><img src="img/iconsMenu/usuario.svg" width="55.81pt" height="74.41pt"></a>
+                      <p class="bottom-third">Calificiones de</p>
+                      <p class="bottom-second">Cliente</p>
+                    </td>
+                    <td style="text-align: center;">
+                      <a class="external item-content item-link entrar secundaryButton" href="https://www.fwm.com.mx" target="_system" style="text-decoration: none;"><img src="img/iconsMenu/global.svg" width="55.81pt" height="74.41pt"></a>
+                      <p class="bottom-third">Portal</p>
+                      <p class="bottom-second">Field</p>
+                    </td>
+                  </tr>
+                </table>
+                <br><br>
+              </center>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="lib/framework7/js/framework7.bundle.min.js"></script>
+  <script src="js/routes.js"></script>
+   <!-- <script src="js/signature/modernizr.js"></script> -->
+   <script src="js/signature_pad.min.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/field-notifications.js"></script>
+  <script type="text/javascript" src="js/databaseHandler.js"></script>
+  <script type="text/javascript" src="js/in.js"></script>
+  <script type="text/javascript" src="js/productHandler.js"></script>
+  <script type="text/javascript" src="js/morris.min.js"></script>
+  <script src="js/metodos.js"></script>
+  <script src="js/jquery-3.3.1.js"></script>
+  <script src="js/qrcode.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  <!-- Data table Inicio -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css">
+  <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
+  <!-- Data -->
+  <!--<script src="js/signature/jSignature.min.noconflict.js"></script> -->
+  <script src="js/SimpleStarRating.js"></script>
+  <script type="text/javascript" charset="utf-8">
+    if(localStorage.getItem("nombre") == null || localStorage.getItem("id_usuario") == null){
+      window.localStorage.removeItem("id_usuario");
+    }
+    window.localStorage.removeItem("IdCedula");
+    window.localStorage.removeItem("IdCte");
+    window.localStorage.removeItem("Opcion");
+    window.localStorage.removeItem("imagenC");
+    window.localStorage.removeItem("foto_llegada");
+    window.localStorage.removeItem("sucursal");
+    window.localStorage.removeItem("personaRecibe");
+    window.localStorage.removeItem("documentoIngresar");
+    window.localStorage.removeItem("codigoPostal");
+    window.localStorage.removeItem("alcance");
+    window.localStorage.removeItem("direccion");
+    window.localStorage.removeItem("nombreCliente");
+    window.localStorage.removeItem("ordenServicio");
+    window.localStorage.removeItem("descripcion");
+    window.localStorage.removeItem("correo");
+    window.localStorage.removeItem("atencion");
+    window.localStorage.removeItem("telefono");
+    window.localStorage.removeItem("tiposervicio");
+    window.localStorage.removeItem("RFC");
+    window.localStorage.removeItem("nombrecontacto");
+    window.localStorage.removeItem("datosCliente");
+    window.localStorage.removeItem("datosEquipo");
+
+    
+    window.localStorage.removeItem("orden_servicio");
+    window.localStorage.removeItem("order_number");
+    window.localStorage.removeItem("equip");
+    window.localStorage.removeItem("serie");
+    window.localStorage.removeItem("mark");
+    window.localStorage.removeItem("direccionD");
+    window.localStorage.removeItem("id_visita");
+    window.localStorage.removeItem("nombre_comercial");
+    window.localStorage.removeItem("ciudad");
+    window.localStorage.removeItem("model");
+    window.localStorage.removeItem("store");
+    window.localStorage.removeItem("programa");
+    window.localStorage.removeItem("category");
+    window.localStorage.removeItem("horario_programado");
+    window.localStorage.removeItem("almacen");
+    
+    if(localStorage.getItem("camera") == undefined){
+      localStorage.setItem("camera", 1);
+    } else {
+
+    }
+    var em = localStorage.getItem("nombre_empresa"); 
+    if(em == "DIPREC" || em == "A&B"){
+      if(localStorage.getItem("programa") == undefined){
+        localStorage.setItem("programa", 0);
+      } else {
+
+      }
+    } else {
+      if(localStorage.getItem("programa") == undefined){
+        localStorage.setItem("programa", 1);
+      } else {
+
+      }
+    }
+    // Eliminar datos cedula pasada
+    var IdCte = localStorage.getItem("IdCte");
+    var IdUsuario = localStorage.getItem("id_usuario");
+    var Nombre = localStorage.getItem("nombre");
+    var Apellidos = localStorage.getItem("apellido_paterno");
+    var nombreCompleto = Nombre + " " + Apellidos;
+    $("#NombreUsuario").html(nombreCompleto);
+    // Called when a photo is successfully retrieved
+    function onPhotoDataSuccess(imageData) {
+      var camera = localStorage.getItem("camera");
+      if(camera == 0){
+        var smallImage = document.getElementById('smallImage');
+        smallImage.style.display = 'flex';
+        smallImage.src = imageData;
+        $("#imagenC").val(imageData);
+        $("#photoIcon").attr("src","img/reload.svg"); 
+      }else{
+        var smallImage = document.getElementById('smallImage');
+        smallImage.style.display = 'flex';
+        var nameima = "data:image/jpeg;base64," + imageData;
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+        console.log(nameima);
+        $("#imagenC").val(nameima);
+        $("#photoIcon").attr("src","img/reload.svg");
+      }
+    }
+    // Called when a photo is successfully retrieved
+    function onPhotoURISuccess(imageURI) {
+      var largeImage = document.getElementById('largeImage');
+      largeImage.style.display = 'block';
+      largeImage.src = imageURI;
+    }
+    //Multiples fotos
+    var multi;
+    function captureMultiplePhoto(id) {
+      multi = id;
+      var camera = localStorage.getItem("camera");
+        if(camera == 0){
+          var camera = app.popup.create({
+            content: `
+                <div class="popup" id="camera">
+                    <div class="app">
+                      <div id="deviceready camera-Field-frame">
+                        <div class="top"></div>
+                        <canvas id="camera-frame" style="display: none;"></canvas>
+                        <video id="camera-view" autoplay playsinline class="raster" style="display: none;"></video>
+                        <img src="" id="phototaked">
+                        <div class="camera">
+                            <div class="take" id="take" onclick="onTake()">
+                                <div class="bubble-take"></div>
+                            </div>
+                            <div class="select popup-close" id="select" style="display: none;" onClick="onDone()"><img id="img-select" src="img/validar_camera.svg"></div>
+                        </div>
+                        <div class="left-action">
+                            <div class="cancel popup-close" id="cancelCamera" onClick="onCancelCamera()"><img class="image-cancel" src="img/cerrar_camera.svg"></div>
+                            <div class="cancel" id="cancelPicure" onClick="onCancelPicture()"><img class="image-cancel" src="img/cerrar_camera.svg"></div>
+                        </div>
+                        <div class="actions">
+                            <div class="action torch" id="torch" onClick="onTorch()"><img id="flash" src="img/flash_off.svg" width="30px"></div>
+                            <div class="action rotate-right" id="rotateRight" onClick="onRotateRight()" style="display:none"><img id="flash" src="img/rotate-right.svg" width="30px"></div>
+                            <div class="action rotate-left" id="rotateLeft" onClick="onRotateLeft()" style="display:none"><img id="flash" src="img/rotate-left.svg" width="30px"></div>
+                        </div>
+                        <div class="right-action">
+                            <div class="switch" id="switch" onClick="onSwitch()"><img class="image-switch" src="img/flip.svg"></div>
+                        </div>
+                        <audio id="audio" controls style="display: none;">
+                            <source type="audio/mp3" src="img/camera.mp3">
+                        </audio>
+                        <input type="hidden" id="deviceOrientation" name="deviceOrientation"/>
+                      </div>
+                      <fwm></fwm>
+                    </div>
+                </div>
+            `,
+            on: {
+                open: function (popup) {
+                  var permissions = cordova.plugins.permissions;
+                  permissions.checkPermission(permissions.CAMERA, function( status ){
+                      if (status.hasPermission){
+                          cargarEmpresa(`./js/camera-field.js`, empresaCargada);
+                          function empresaCargada(){
+                              cameraStart(onMultipleSuccess)
+                          }
+                          function cargarEmpresa(url, callback){
+                              var pie = document.getElementsByTagName('fwm')[0];
+                              var script = document.createElement('script');
+                              script.type = 'text/javascript';
+                              script.src = url;
+                              script.id = "cameraSource";
+                              script.onload = callback;
+                              pie.appendChild(script);
+                          }
+                      }else{
+                          permissions.requestPermission(permissions.CAMERA, success, error);
+                          function error() {
+                              app.sheet.close('.popup')
+                              swal("Field Requiere los permisos","Para poder tomar las evidencias fotograficas necesitamos el permiso.","warning");
+                          }
+                          function success( status ){
+                              if(!status.hasPermission){
+                                  error();
+                              } else {
+                                  cargarEmpresa(`./js/camera-field.js`, empresaCargada);
+                                  function empresaCargada(){
+                                      cameraStart(onMultipleSuccess)
+                                  }
+                                  function cargarEmpresa(url, callback){
+                                      var pie = document.getElementsByTagName('fwm')[0];
+                                      var script = document.createElement('script');
+                                      script.type = 'text/javascript';
+                                      script.src = url;
+                                      script.id = "cameraSource";
+                                      script.onload = callback;
+                                      pie.appendChild(script);
+                                  }
+                              }
+
+                          }
+                      }
+                  });
+                },
+                opened: function (popup) {
+                  localStorage.setItem("cameraField", "Active");
+                },
+                closed: function (popup) {
+                  window.localStorage.removeItem("cameraField");
+                },
+            }
+          });
+          camera.open();
+        } else {
+          navigator.camera.getPicture(onMultipleSuccess, onMultipleFail, {
+              quality: 50,
+              destinationType: destinationType.DATA_URL,
+              targetWidth: 500,
+              targetHeight: 500,
+              correctOrientation: true
+          });
+        }
+    }
+    function captureMultiplePhotoSaved(id) {
+      multi = id;
+      var camera = localStorage.getItem("camera");
+        if(camera == 0){
+          var camera = app.popup.create({
+            content: `
+                  <div class="popup" id="camera">
+                      <div class="app">
+                        <div id="deviceready camera-Field-frame">
+                          <div class="top"></div>
+                          <canvas id="camera-frame" style="display: none;"></canvas>
+                          <video id="camera-view" autoplay playsinline class="raster" style="display: none;"></video>
+                          <img src="" id="phototaked">
+                          <div class="camera">
+                              <div class="take" id="take" onclick="onTake()">
+                                  <div class="bubble-take"></div>
+                              </div>
+                              <div class="select popup-close" id="select" style="display: none;" onClick="onDone()"><img id="img-select" src="img/validar_camera.svg"></div>
+                          </div>
+                          <div class="left-action">
+                              <div class="cancel popup-close" id="cancelCamera" onClick="onCancelCamera()"><img class="image-cancel" src="img/cerrar_camera.svg"></div>
+                              <div class="cancel" id="cancelPicure" onClick="onCancelPicture()"><img class="image-cancel" src="img/cerrar_camera.svg"></div>
+                          </div>
+                          <div class="actions">
+                              <div class="action torch" id="torch" onClick="onTorch()"><img id="flash" src="img/flash_off.svg" width="30px"></div>
+                              <div class="action rotate-right" id="rotateRight" onClick="onRotateRight()" style="display:none"><img id="flash" src="img/rotate-right.svg" width="30px"></div>
+                              <div class="action rotate-left" id="rotateLeft" onClick="onRotateLeft()" style="display:none"><img id="flash" src="img/rotate-left.svg" width="30px"></div>
+                          </div>
+                          <div class="right-action">
+                              <div class="switch" id="switch" onClick="onSwitch()"><img class="image-switch" src="img/flip.svg"></div>
+                          </div>
+                          <audio id="audio" controls style="display: none;">
+                              <source type="audio/mp3" src="img/camera.mp3">
+                          </audio>
+                          <input type="hidden" id="deviceOrientation" name="deviceOrientation"/>
+                        </div>
+                        <fwm></fwm>
+                      </div>
+                  </div>
+                `,
+                on: {
+                    open: function (popup) {
+                      var permissions = cordova.plugins.permissions;
+                      permissions.checkPermission(permissions.CAMERA, function( status ){
+                          if (status.hasPermission){
+                              cargarEmpresa(`./js/camera-field.js`, empresaCargada);
+                              function empresaCargada(){
+                                  cameraStart(onMultipleSuccessSaved)
+                              }
+                              function cargarEmpresa(url, callback){
+                                  var pie = document.getElementsByTagName('fwm')[0];
+                                  var script = document.createElement('script');
+                                  script.type = 'text/javascript';
+                                  script.src = url;
+                                  script.id = "cameraSource";
+                                  script.onload = callback;
+                                  pie.appendChild(script);
+                              }
+                          }else{
+                              permissions.requestPermission(permissions.CAMERA, success, error);
+                              function error() {
+                                  app.sheet.close('.popup')
+                                  swal("Field Requiere los permisos","Para poder tomar las evidencias fotograficas necesitamos el permiso.","warning");
+                              }
+                              function success( status ){
+                                  if(!status.hasPermission){
+                                      error();
+                                  } else {
+                                      cargarEmpresa(`./js/camera-field.js`, empresaCargada);
+                                      function empresaCargada(){
+                                          cameraStart(onMultipleSuccessSaved)
+                                      }
+                                      function cargarEmpresa(url, callback){
+                                          var pie = document.getElementsByTagName('fwm')[0];
+                                          var script = document.createElement('script');
+                                          script.type = 'text/javascript';
+                                          script.src = url;
+                                          script.id = "cameraSource";
+                                          script.onload = callback;
+                                          pie.appendChild(script);
+                                      }
+                                  }
+
+                              }
+                          }
+                      });
+                    },
+                    opened: function (popup) {
+                      localStorage.setItem("cameraField", "Active");
+                    },
+                    closed: function (popup) {
+                      window.localStorage.removeItem("cameraField");
+                    },
+                }
+          });
+          camera.open();
+        } else {
+          navigator.camera.getPicture(onMultipleSuccessSaved, onMultipleFail, {
+              quality: 100,
+              destinationType: destinationType.DATA_URL,
+              targetWidth: 500,
+              targetHeight: 500,
+              correctOrientation: true
+          });
+        }
+    }
+    function onMultipleSuccess(imageData) {
+      var camera = localStorage.getItem("camera");
+      if(camera == 0){
+        var small = 'smallImage' + multi;
+        var imagen = '#imagenC' + multi;
+        var icon = '#photoIcon' + multi;
+        var smallImage = document.getElementById(small);
+        smallImage.style.display = 'flex';
+        smallImage.src = imageData;
+        $(imagen).val(imageData);
+        $(icon).attr("src","img/reload.svg");
+      }else{
+        var small = 'smallImage' + multi;
+        var imagen = '#imagenC' + multi;
+        var icon = '#photoIcon' + multi;
+        var smallImage = document.getElementById(small);
+        smallImage.style.display = 'flex';
+        var nameima = "data:image/jpeg;base64," + imageData;
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+        $(imagen).val(nameima);
+        $(icon).attr("src","img/reload.svg");
+      }
+    }
+    function onMultipleSuccessSaved(imageData) {
+      var camera = localStorage.getItem("camera");
+      if(camera == 0){
+        var small = 'smallImage' + multi;
+        var imagen = '#imagenC' + multi;
+        var icon = '#photoIcon' + multi;
+        var smallImage = document.getElementById(small);
+        smallImage.style.display = 'flex';
+        smallImage.src = imageData;
+        $(imagen).val(imageData);
+        $(icon).attr("src","img/reload.svg");
+      }else{
+        var small = 'smallImage' + multi;
+        var imagen = '#imagenC' + multi;
+        var icon = '#photoIcon' + multi;
+        var smallImage = document.getElementById(small);
+        smallImage.style.display = 'flex';
+        var nameima = "data:image/jpeg;base64," + imageData;
+        smallImage.src = "data:image/jpeg;base64," + imageData;
+        $(imagen).val(nameima);
+        $(icon).attr("src","img/reload.svg");
+      }
+      if(localStorage.getItem("nombre_empresa") == "SURO"){
+        var id_cedula = localStorage.getItem("IdCedula");
+        var image = $("#imagenC"+multi).val();
+        var fecha = new Date();
+        var fecha_registro = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+        if(multi == "1"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_epp = ?,fecha_foto_epp = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "2"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_maquina = ?,fecha_foto_maquina = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "3"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_aspersor = ?,fecha_foto_aspersor = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "4"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_quimico = ?, fecha_foto_quimico = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "5"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_accesos = ?, fecha_foto_acceso = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "6"){
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("UPDATE sanitizacion_Suro SET foto_delimita_area = ?,fecha_foto_area = ? WHERE id_cedula = ?",
+                    [image,fecha_registro,id_cedula],
+                    function(tx, results){
+                        swal("","La foto fue guardada correctamente","success");
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "7"){
+          var id_cedula = localStorage.getItem("IdCedula");
+          var grupo = $("#grupo").val();
+          var foto = $('#imagenC7').val();
+          var fecha = new Date();
+          var fecha_registro = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("INSERT INTO evidencia(id_cedula,nombre_grupo,foto_evidencia,fases,fecha_foto) VALUES (?,?,?,'durante',?)",
+                    [id_cedula,grupo,foto,fecha_registro],
+                    function(tx, results){
+                        databaseHandler.db.transaction(
+                            function(tx){
+                                tx.executeSql("Select MAX(id_evidencia) as Id from evidencia",
+                                    [],
+                                    function(tx, results){
+                                        var item = results.rows.item(0);
+                                        var id_evidencia = item.Id;
+                                        app.preloader.hide();
+                                        //Consultar el producto
+                                        databaseHandler.db.transaction(
+                                            function(tx){
+                                                tx.executeSql("Select * from evidencia where id_evidencia = ?",
+                                                [id_evidencia],
+                                                    function(tx, results){
+                                                        var item = results.rows.item(0);
+                                                        $("#smallImage7").attr("src","img/blank.png");
+                                                        $('#imagenC7').val("");
+                                                        $("#photoIcon7").attr("src","img/camera.svg");
+                                                        $("#tabla_durante tbody").append("<tr id='fila"+ item.id_evidencia +"'><td><a href='#' onclick='eliminarFilaSURO("+ item.id_evidencia +",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a></td><td><img src='"+item.foto_evidencia+"' width='60px' style='margin-top: 4px;'/></td><td style='text-align: center;'>" + unescape(item.nombre_grupo) + "</td><td style='text-align: center;'>" + item.fecha_foto + "</td></tr>");
+                                                        $("#message-nr").css("display", "none");
+                                                        $('.preloader').remove();
+                                                        $('.infinite-scroll-preloader').remove();
+                                                        app.preloader.hide();
+                                                        swal("","La foto fue guardada correctamente","success");
+                                                    },
+                                                    function(tx, error){
+                                                        console.log("Error al guardar cedula: " + error.message);
+                                                        app.preloader.hide();
+                                                    }
+                                                );
+                                            },
+                                            function(error){},
+                                            function(){}
+                                        );
+                                    },
+                                    function(tx, error){
+                                        swal("Error al mostrar Registro guardado",error.message,"error");
+                                        app.preloader.hide();
+                                    }
+                                );
+                            },
+                            function(error){},
+                            function(){}
+                        );
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        } else if(multi == "8"){
+          var id_cedula = localStorage.getItem("IdCedula");
+          var grupo = $("#grupo").val();
+          var foto = $('#imagenC8').val();
+          var fecha = new Date();
+          var fecha_registro = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+          databaseHandler.db.transaction(
+            function(tx){
+                tx.executeSql("INSERT INTO evidencia(id_cedula,nombre_grupo,foto_evidencia,fases,fecha_foto) VALUES (?,?,?,'fomites',?)",
+                    [id_cedula,grupo,foto,fecha_registro],
+                    function(tx, results){
+                        databaseHandler.db.transaction(
+                            function(tx){
+                                tx.executeSql("Select MAX(id_evidencia) as Id from evidencia",
+                                    [],
+                                    function(tx, results){
+                                        var item = results.rows.item(0);
+                                        var id_evidencia = item.Id;
+                                        app.preloader.hide();
+                                        //Consultar el producto
+                                        databaseHandler.db.transaction(
+                                            function(tx){
+                                                tx.executeSql("Select * from evidencia where id_evidencia = ?",
+                                                [id_evidencia],
+                                                    function(tx, results){
+                                                        var item = results.rows.item(0);
+                                                        $("#smallImage8").attr("src","img/blank.png");
+                                                        $('#imagenC8').val("");
+                                                        $("#photoIcon8").attr("src","img/camera.svg");
+                                                        $("#tabla_fomites tbody").append("<tr id='fila"+ item.id_evidencia +"'><td><a href='#' onclick='eliminarFilaSURO("+ item.id_evidencia +",2);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a></td><td><img src='"+item.foto_evidencia+"' width='60px' style='margin-top: 4px;'/></td><td style='text-align: center;'>" + unescape(item.nombre_grupo) + "</td><td style='text-align: center;'>" + item.fecha_foto + "</td></tr>");
+                                                        $("#message-nr").css("display", "none");
+                                                        $('.preloader').remove();
+                                                        $('.infinite-scroll-preloader').remove();
+                                                        app.preloader.hide();
+                                                        swal("","La foto fue guardada correctamente","success");
+                                                    },
+                                                    function(tx, error){
+                                                        console.log("Error al guardar cedula: " + error.message);
+                                                        app.preloader.hide();
+                                                    }
+                                                );
+                                            },
+                                            function(error){},
+                                            function(){}
+                                        );
+                                    },
+                                    function(tx, error){
+                                        swal("Error al mostrar Registro guardado",error.message,"error");
+                                        app.preloader.hide();
+                                    }
+                                );
+                            },
+                            function(error){},
+                            function(){}
+                        );
+                    },
+                    function(tx, error){
+                        swal("Error al guardar : ",error.message,"error");
+                    }
+                );
+            },
+            function(error){},
+            function(){}
+          );
+        }
+      }
+    }
+    function onMultipleFail(message) {
+      swal('Error',message,error)
+    }
+    // Called if something bad happens.
+    function onFail(message) {
+      alert("Failed because: "+message);
+    }
+    
+    var id_empresa = localStorage.getItem("id_empresa");
+    if(id_empresa == 9){
+      $("#tracking").append(`
+      <div class="item-content">
+        <div class="item-media">
+          <i class="material-icons md-light" style="color: #ffffff;">folder_special</i>
+        </div>
+        <div class="item-inner">
+          <div class="item-title"><a href="/tracking-servicios/" class="panel-close panel-text" >Tracking documental</a></div>
+        </div>
+      </div>
+      `);
+    }
+    // Scroll para actualizar
+    var $ptrContent = $('.ptr-content');
+    $ptrContent.on('ptr:refresh', function (e) {
+      $("#process").show();
+      var jsonPadre = new download();
+      jsonPadre.Initialize({
+        fileSystem : cordova.file.dataDirectory,
+        folder: "jsons",
+        remove: false,
+        timeout: 0,
+        success: DownloaderSuccess,
+        error: DownloaderError,
+        headers: [
+          {
+            key : "Cache-Control",
+            Value: "no-store"
+          }
+        ]
+      });
+      
+      if(id_empresa == 2){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_DIPREC.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName_DIPREC.json";
+      } else if(id_empresa == 6){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_SURO.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName_SURO.json";
+      } else if(id_empresa == 8){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_servind.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName_servind.json";
+      } else if(id_empresa == 3){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_SMC.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName_SMC.json";
+      } else if(id_empresa == 5){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_Bennetts.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName_Bennetts.json";
+      } else {
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName.json" + '?timestamp=' + Date.now());
+        var directory = "jsons/jsonName.json";
+      }
+      function DownloaderError(err) {
+        console.error("Error al descargar: " + err);
+        $("#processclick").html("Error");
+        app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+      }
+      function DownloaderSuccess() {
+        app.request.get(cordova.file.dataDirectory + directory, function (data) {
+          let termino = "</html>";
+          let posicion = data.toLowerCase().indexOf(termino.toLowerCase());
+          if(posicion !== -1){
+            swal("","No cuentas con internet!","error");
+            app.ptr.done();
+            $("#process").hide();
+          } else {
+            const nameJson = JSON.parse(data);
+            var count = 0;
+            var progress = 0;
+            var dialog = app.dialog.progress('Sincronizando Datos', progress);
+            dialog.setText('Archivo 1 de ' + nameJson.length);
+            nameJson.forEach((valor, indice, array) => {
+              window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(oEntry) {
+                var jsonHijos = new download();
+                jsonHijos.Initialize({
+                  fileSystem : cordova.file.dataDirectory,
+                  folder: "jsons",
+                  remove: false,
+                  timeout: 0,
+                  success: DownloaderSuccess,
+                  error: DownloaderError,
+                  headers: [
+                    {
+                      key : "Cache-Control",
+                      Value: "no-store",
+                    }
+                  ]
+                });
+                jsonHijos.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/" + valor.jsonName + '?timestamp=' + Date.now());
+                function DownloaderError(err) {
+                  console.error("Error al descargar: " + valor.jsonName + " " + err);
+                  $("#processclick").html("Error");
+                  app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+                }
+                function DownloaderSuccess() {
+                  count++;
+                  progress += 1;
+                  var interval = setInterval(function () {
+                    dialog.setProgress((progress * 100) / nameJson.length);
+                    dialog.setText('Archivo ' + progress + ' de ' + nameJson.length);
+                    if (progress === nameJson.length) {
+                      clearInterval(interval);
+                      dialog.close();
+                    }
+                  }, 300)
+                  if(count == nameJson.length){
+                    app.ptr.done();
+                    $("#process").hide();
+                    var fecha = new Date();
+                    var fFinal = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+                    databaseHandler.db.transaction(
+                      function(tx5){
+                        tx5.executeSql(
+                          "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
+                          [IdUsuario, fFinal],
+                          function(tx5, results){
+                            databaseHandler.db.transaction(
+                              function(tx5){
+                                tx5.executeSql(
+                                  "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                  [],
+                                  function(tx5, results){
+                                    var length = results.rows.length;
+                                    var item1 = results.rows.item(0);
+                                    $("#Fecha").html(item1.Fecha);
+                                    $("#Fecha2").html(item1.Fecha);
+                                    // $("#Fecha").css("color","#1e90ff");
+                                    $("#Fecha").css("color","#FFFFFF");
+                                    $("#Fecha2").css("color","#00A7B5");
+                                  }
+                                );
+                              },
+                              function(error){},
+                              function(){}
+                            );
+                          }
+                        );
+                      },
+                      function(error){},
+                      function(){}
+                    );
+                    $("#processclick").html('<i class="material-icons md-light" style="color: #1D4F91;">cloud_done</i>');
+                  }
+                }
+              });
+            });
+          }
+        });
+      }
+    });
+    // Funcion para actualizar datos de la aplicacion cuando se inicia la aplicacion, se actualiza con el boton en el menu o cuando esta vacia mi base de datos local
+    function updateData(){
+      $("#processclick").show();
+      $("#processclick").removeClass('99badge99');
+      $("#processclick").addClass('badge');
+      $("#processclick").addClass('fixBadgeMenu');
+      $("#processclick").html('<i class="material-icons md-light spin" style="color: #1D4F91;">rotate_right</i>');
+      var jsonPadre = new download();
+      jsonPadre.Initialize({
+        fileSystem : cordova.file.dataDirectory,
+        folder: "jsons",
+        remove: false,
+        timeout: 0,
+        success: DownloaderSuccess,
+        error: DownloaderError,
+        headers: [
+          {
+            key : "Cache-Control",
+            Value: "no-store"
+          }
+        ]
+      });
+      if(id_empresa == 2){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_DIPREC.json");
+        var directory = "jsons/jsonName_DIPREC.json";
+      } else if(id_empresa == 8){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_servind.json");
+        var directory = "jsons/jsonName_servind.json";
+      } else if(id_empresa == 6){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_SURO.json");
+        var directory = "jsons/jsonName_SURO.json";
+      } else if(id_empresa == 3){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_SMC.json");
+        var directory = "jsons/jsonName_SMC.json";
+      } else if(id_empresa == 5){
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName_Bennetts.json");
+        var directory = "jsons/jsonName_Bennetts.json";
+      } else {
+        jsonPadre.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/jsonName.json");
+        var directory = "jsons/jsonName.json";
+      }
+      function DownloaderError(err) {
+        console.error("Error al descargar: " + err);
+        $("#processclick").html("Error");
+        app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+      }
+      function DownloaderSuccess() {
+        app.request.get(cordova.file.dataDirectory + directory, function (data) {
+          let termino = "</html>";
+          let posicion = data.toLowerCase().indexOf(termino.toLowerCase());
+          if(posicion !== -1){
+            swal("","No cuentas con internet!","error");
+            app.ptr.done();
+            $("#process").hide();
+            $("#processclick").html('<i class="material-icons md-light" style="color: #1D4F91;">close</i>');
+          } else {
+            const nameJson = JSON.parse(data);
+            var count = 0;
+            var progress = 0;
+            var dialog = app.dialog.progress('Sincronizando Datos', progress);
+            dialog.setText('Archivo 1 de ' + nameJson.length);
+            nameJson.forEach((valor, indice, array) => {
+              window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(oEntry) {
+                var jsonHijos = new download();
+                jsonHijos.Initialize({
+                  fileSystem : cordova.file.dataDirectory,
+                  folder: "jsons",
+                  remove: false,
+                  timeout: 0,
+                  success: DownloaderSuccess,
+                  error: DownloaderError,
+                  headers: [
+                    {
+                      key : "Cache-Control",
+                      Value: "no-store"
+                    }
+                  ]
+                });
+                jsonHijos.Get("http://appbennetts.com/FWM2/app/ARCHIVOSJSONS/" + valor.jsonName);
+                function DownloaderError(err) {
+                  console.error("Error al descargar: " + valor.jsonName + " " + err);
+                  $("#processclick").html("Error");
+                  app.dialog.alert('Error al conectar con la Base de Datos', 'Error');
+                }
+                function DownloaderSuccess() {
+                  count++;
+                  progress += 1;
+                  var interval = setInterval(function () {
+                    dialog.setProgress((progress * 100) / nameJson.length);
+                    dialog.setText('Archivo ' + progress + ' de ' + nameJson.length);
+                    if (progress === nameJson.length) {
+                      clearInterval(interval);
+                      dialog.close();
+                    }
+                  }, 300)
+                  if(count == nameJson.length){
+                    app.ptr.done();
+                    $("#process").hide();
+                    var fecha = new Date();
+                    var fFinal = fecha.getFullYear()+"-"+(fecha.getMonth()+1)+"-"+fecha.getDate()+" "+fecha.getHours()+":"+fecha.getMinutes()+":"+fecha.getSeconds();
+                    databaseHandler.db.transaction(
+                      function(tx5){
+                        tx5.executeSql(
+                          "INSERT INTO Actualizaciones (IdUsuario, Fecha) VALUES (?,?)",
+                          [IdUsuario, fFinal,],
+                          function(tx5, results){
+                            databaseHandler.db.transaction(
+                              function(tx5){
+                                tx5.executeSql(
+                                  "SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",
+                                  [],
+                                  function(tx5, results){
+                                    var length = results.rows.length;
+                                    var item1 = results.rows.item(0);
+                                    $("#Fecha").html(item1.Fecha);
+                                    $("#Fecha2").html(item1.Fecha);
+                                    // $("#Fecha").css("color","#1e90ff");
+                                    $("#Fecha").css("color","#FFFFFF");
+                                    $("#Fecha2").css("color","#00A7B5");
+                                  }
+                                );
+                              },
+                              function(error){},
+                              function(){}
+                            );
+                          }
+                        );
+                      },
+                      function(error){},
+                      function(){}
+                    );
+                    $("#processclick").html('<i class="material-icons md-light" style="color: #1D4F91;">cloud_done</i>');
+                  }
+                }
+              });
+            });
+          }
+        });
+      }
+    }
+    // Evento de inicio de base de datos y consuLtas
+    document.addEventListener("deviceready", function(){
+        // Inicializando camara
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+        //Verificar g
+        cordova.plugins.diagnostic.isGpsLocationEnabled(function(enabled){
+          if(enabled == true){
+            // console.log("GPS Activado");
+          }else{
+            swal("GPS Apagado","Por favor activa tu ubicacion!","error");
+          }
+        },function(error){
+          console.error("The following error occurred: "+error);
+        });
+        //Sin conexion
+        var sinConexion = 0;
+        document.addEventListener("offline", onOffline, false);
+        function networkInfo() {
+          var networkState = navigator.connection.type;
+          var states = {};
+          states[Connection.UNKNOWN]  = 'Unknown connection';
+          states[Connection.ETHERNET] = 'Ethernet connection';
+          states[Connection.WIFI]     = 'WiFi connection';
+          states[Connection.CELL_2G]  = 'Cell 2G connection';
+          states[Connection.CELL_3G]  = 'Cell 3G connection';
+          states[Connection.CELL_4G]  = 'Cell 4G connection';
+          states[Connection.CELL]     = 'Cell generic connection';
+          states[Connection.NONE]     = 'No network connection';
+          alert("Connection type: "+ states[networkState]);
+        }
+        var alerted = 0;
+        function onOffline() {
+          if(alerted==0){
+            app.dialog.alert('Vaya! No tienes internet. Cuando te conectes se enviaran o descargaran los datos.', 'Aviso');
+            alerted++;
+            sinConexion = 1;
+          } else {}
+        }
+        //Verificar si existen actualizaciones y si no existen, acutalizar datos
+        setTimeout(function(){
+          if(sinConexion == 1){
+            
+          } else {
+            databaseHandler.db.transaction(
+              function(tx5){
+                tx5.executeSql("SELECT * FROM Actualizaciones ORDER BY idActualizacion DESC LIMIT 1",[],
+                  function(tx5, results){
+                    var length = results.rows.length;
+                    if(length == 0){
+                      updateData();
+                    } else {
+                      var item1 = results.rows.item(0);
+                      $("#Fecha").html(item1.Fecha);
+                      $("#Fecha2").html(item1.Fecha);
+                      $("#Fecha").css("color","#FFFFFF");
+                      $("#Fecha2").css("color","#00A7B5");
+                      var item1 = results.rows.item(0);
+                      var tu = item1.Fecha;
+                      var sep = tu.split(' ');
+                      var sep2 = sep[0];
+                      var tu2 = sep2.split('-')
+                      var sy = tu2[0];
+                      var sm = tu2[1];
+                      var sd = tu2[2];
+                      n =  new Date();
+                      y = n.getFullYear();
+                      m = n.getMonth() + 1;
+                      d = n.getDate();
+                      if(y == sy && m == sm && d == sd){}
+
+                      else{
+                        updateData();
+                      }
+                    }
+                  }
+                );
+              },
+              function(error){},
+                function(){}
+            );
+          }
+        },500)
+        //Mostrar cedulas sin terminar
+        databaseHandler.db.transaction(
+          function(tx4){
+            let id_usuario = localStorage.getItem("id_usuario");
+            let estatus = 0;
+            tx4.executeSql("SELECT COUNT(id_cedula) as total FROM cedulas_general WHERE id_usuario = ? AND estatus = ? AND (tipo_cedula = 'levantamiento' OR tipo_cedula = 'fumigacion' OR tipo_cedula = 'sanitizacion' OR tipo_cedula = 'mantenimiento' OR tipo_cedula = 'reporteTecnico' OR tipo_cedula = 'minutaCoordinador' OR tipo_cedula = 'baja' OR tipo_cedula = 'sanitizacionSURO' OR tipo_cedula = 'ventaSMC' OR tipo_cedula = 'servicioSMC' OR tipo_cedula = 'checklistServ' OR tipo_cedula = 'reporteGeneral' OR tipo_cedula = 'AuditoriaTecnico' OR tipo_cedula = 'AuditoriaSupervisorTecnico' OR tipo_cedula = 'AuditoriaLider' OR tipo_cedula = 'reporteFotografico' OR tipo_cedula = 'conteo')",
+              [id_usuario,estatus],
+              function(tx4, results){
+                var item = results.rows.item(0);
+                $('#contce').html(item.total);
+              },
+              function(tx4, error){
+                console.error("Error al guardar registro: " + error.message);
+              }
+            );
+          },
+          function(error){},
+          function(){}
+        );
+        databaseHandler.db.transaction(
+          function(tx4){
+            let id_usuario = localStorage.getItem("id_usuario");
+            let estatus1 = 1;
+            let estatus2 = 2;
+            tx4.executeSql("SELECT COUNT(id_cedula) as total FROM cedulas_general WHERE id_usuario = ? AND (estatus = ? OR estatus = ?)",
+              [id_usuario,estatus1,estatus2],
+              function(tx4, results){
+                var item = results.rows.item(0);
+                $('#contceb').html(item.total);
+              },
+              function(tx4, error){
+                console.error("Error al guardar registro: " + error.message);
+              }
+            );
+          },
+          function(error){},
+          function(){}
+        );
+        // Envio automatico de cedulas cada 30s
+        document.addEventListener("online", onOnline, false);
+        function onOnline(){
+          if(localStorage.getItem('sendFlag') == 0){
+            EnviarCedulas();
+          } else {}
+        }
+        // Ejecuta el envio cada 30s
+        setInterval(function(){
+          onOnline();
+        },15000);
+        // Funcion para enviar cedulas
+        function EnviarCedulas(){
+          var id_usuario = localStorage.getItem("id_usuario");
+          databaseHandler.db.transaction(
+            function(tx4){
+              tx4.executeSql("SELECT id_cedula, tipo_cedula FROM cedulas_general WHERE id_usuario = ? AND (estatus = 1 OR estatus = 2) LIMIT 1",
+              [id_usuario],
+                function(tx4, results){
+                  var length = results.rows.length;
+                  for(var i = 0; i < length; i++){
+                    localStorage.setItem("sendFlag", 1);
+                    var item2 = results.rows.item(i);
+                    databaseHandler.db.transaction(
+                        function(tx7){
+                            tx7.executeSql(
+                                "UPDATE cedulas_general SET estatus = 2 WHERE id_cedula = ?",
+                                [item2.id_cedula],
+                                function(tx7, results){
+                                  llevarTodo(item2.id_cedula,item2.tipo_cedula);
+                                }
+                            );
+                        }
+                    );
+                  }
+                },
+                function(tx4, error){
+                  console.error("Error al guardar registro: " + error.message);
+                }
+              );
+            },
+            function(error){},
+            function(){}
+          );
+        }
+        //Boton para regresar en en recorridos
+        document.addEventListener('backbutton', function (e) {
+          if(localStorage.getItem("cameraField")){
+            e.preventDefault();
+          } else {
+            if(app.views.main.router.url == "/recorridoDIPREC3/" || app.views.main.router.url == "/recorrido/" || app.views.main.router.url == "/menuBennetts/" || app.views.main.router.url == "/recorrido1/" || app.views.main.router.url == "/recorrido3/" || app.views.main.router.url == "/recorridoDIPREC1/" || app.views.main.router.url == "/recorridoSMC1/" || app.views.main.router.url == "/recorridoSMC2/"){
+              e.preventDefault();
+              location.reload()
+            } else if(app.views.main.router.url == "/datosgeneralesBennetts2/"){ 
+              app.views.main.router.back('/recorridoBennetts2/', {force: true, ignoreCache: true, reload: true});
+              e.preventDefault();
+            } else if(app.views.main.router.url == "/template2/"){ 
+              e.preventDefault();
+            } else {
+              app.views.main.router.back();
+            }
+          }
+        });
+        //Eliminar historial de Cedulas de menores a 9 dias
+        setTimeout(() => {
+          EliminarRegistrosAntiguos();  
+        }, 1000);
+        //Eliminar historial de Actualizaciones de menores a 9 dias
+        EliminarActualizacionesAntiguas();
+    },false);
+    </script>
+</body>
+</html>

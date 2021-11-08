@@ -1,0 +1,247 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <a href="#" class="float" onclick="showTPM()">
+                    <i class="material-icons md-light" style="color: #ffffff;font-size: 35px;">book</i>
+                </a>
+                <div style="text-align: center; justify-content:center;width: 100%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Sistema de control electrónico y/o electrónicos</h2>
+
+                    <div style="text-align: left;">
+                        <form class="list FWM-fixing-form" style="width: 96%;margin-left: 2%;"> 
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">13.- Verificar secuencia de operación(Encendido - Control - Protección - Apagado</span>
+                                <select id="3-1-select" name="3-1-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">14.- Operación y arranque</span>
+                                <select id="3-2-select" name="3-2-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">15.- Verificación de termostato de alto nivel</span>
+                                <select id="3-3-select" name="3-3-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">16.- Revisión de contactores y /o relevadores</span>
+                                <select id="3-4-select" name="3-4-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">17.- Revisión de funcionamiento interruptores de seguridad (Encendido - Control, Protección - Apagado)</span>
+                                <select id="3-5-select" name="3-5-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">18.- Funcionamiento y operaciones de controles de ignición</span>
+                                <select id="3-6-select" name="3-6-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">19.- Revisión de control de presión</span>
+                                <select id="3-7-select" name="3-7-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">20.- Revisión y limpieza de controles de nivel</span>
+                                <select id="3-8-select" name="3-8-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">21.- Funcionamiento válvula de control de gas automáticas</span>
+                                <select id="3-9-select" name="3-9-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">22.- Revisión de solenoides de procesos</span>
+                                <select id="3-10-select" name="3-10-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <span class="span FWM-span-form" style="margin-top: 10px;">23.- Motores eléctricos principales operación</span>
+                            <div style="display: flex;justify-content: space-around;margin-bottom: 10px;">
+                                <label class="text-divided-check">Amp1<input type="text" id="amp1" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp2<input type="text" id="amp2" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp3<input type="text" id="amp3" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp4<input type="text" id="amp4" class="multiple-input-divided-check"></label>
+                            </div>
+                            <span class="span FWM-span-form" style="margin-top: 10px;">24.- Revisión de resistencias</span>
+                            <div style="display: flex;justify-content: space-around;margin-bottom: 25px;">
+                                <label class="text-divided-check">Amp1<input type="text" id="amp5" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp2<input type="text" id="amp6" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp3<input type="text" id="amp7" class="multiple-input-divided-check"></label>
+                                <label class="text-divided-check">Amp4<input type="text" id="amp8" class="multiple-input-divided-check"></label>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">25.- Revisión de transformadores</span>
+                                <select id="3-11-select" name="3-11-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">26.- Revisión driver velocidad</span>
+                                <select id="3-12-select" name="3-12-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 170px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarSistemaServind();" class="boton-equipo">Guardar Control</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select opcion,valor from selectcheck WHERE id_cedula = ? AND fase = '3'",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#3-"+item.opcion+"-select").val(item.valor);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select amp1,amp2,amp3,amp4,amp5,amp6,amp7,amp8 from checklist WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#amp1").val(item.amp1);
+                                    $("#amp2").val(item.amp2);
+                                    $("#amp3").val(item.amp3);
+                                    $("#amp4").val(item.amp4);
+                                    $("#amp5").val(item.amp5);
+                                    $("#amp6").val(item.amp6);
+                                    $("#amp7").val(item.amp6);
+                                    $("#amp8").val(item.amp6);
+                                }
+                                console.log("No trae")
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

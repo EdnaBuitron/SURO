@@ -1,0 +1,1425 @@
+<template>
+  <div class="page" style="background-color: rgb(245, 245, 245);">
+    <div class="navbar" style="background-color: #063E7F;height: 53px;">
+      <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+        <div class="navbar-inner sliding" style="height: 53px;">
+          <div class="left">
+            <a href="#" class="back">
+              <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <style type="text/css">
+        input[type=text]{
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          }
+        input[type=number]{
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          }
+          input[type=date]{
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          }
+        input[type=time]{
+          margin: 8px 0;
+          border: 1px solid #ccc;
+          border-radius: 6px;
+          }
+          .boton-personalizado-4 {
+            text-decoration: none;
+            font-family: 'ITC Avant Garde Gothic', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            color: #FFFFFF;
+            padding-top: 15px;
+            padding-bottom: 13px;
+            padding-left: 30px;
+            padding-right: 30px;
+            background-color: #063E7F;
+            border-radius: 15px;
+          }
+          td {
+            padding: 5px;
+          }
+
+          #cajaB {
+            width: 350px;
+          }
+
+          #cajaB h1 {
+            color: rgb(3, 3, 3);
+            font-size: 12px;
+            text-transform: uppercase;
+            text-align: left;
+            line-height: 30px;
+            margin-left: 5px;
+          }
+
+          #pregunta {
+            position: relative ;
+            display: flex;
+            margin-top: 5px;
+            border: transparent;
+            box-sizing: border-box;
+            background: #FAFAFA;
+          }
+
+          #pregunta input[type=radio] {
+            display: none;
+          }
+
+          #pregunta label {
+            display: block;
+            width: 150px;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s;
+            background: #FFF;  
+            
+          }
+
+          #pregunta label:hover {
+            background: #679ceb;
+          }
+
+          #pregunta input[type=radio]:checked + label {
+            background: #063E7F;
+            color: #FAFAFA;
+          }
+          #Cali{
+            margin-left: 250px;
+            box-sizing: border-box;
+            background: #063E7F;
+            color: #FAFAFA;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            width: 100px;              
+          }
+
+     </style>
+      <div class="page-content">
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Datos Generales</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <table style="width: 95%">
+                <tr>
+                  <th><span class="span" style="font-weight: bold;width: 90%;">ID TECNICO:</span></th>
+                  <td style='text-align: left;'><input type='number' name="id_tec" id="id_tec" class="FWM-textBox"  /></td>
+                </tr>
+                <tr class="table-active">
+                  <th><span class="span" style="font-weight: bold;width: 90%;">TECNICO:</span></th>
+                  <td style='text-align: left;'><input type='text' name="tec" id="tec" class="FWM-textBox"  /></td>
+                </tr>
+                <tr>
+                  <th><span class="span" style="font-weight: bold;width: 90%;">PUESTO:</span></th>
+                  <td style='text-align: left;'><input type='text' name="puesto" id="puesto" class="FWM-textBox"  /></td>
+                </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">1. PRESENTACIÓN DEL TÉCNICO</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P11">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">1.1 Porta uniforme completo: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta1.1" onclick="calificacionSERV(this.value,1,'AT_Resp1')" value=".75" id="Res1-11">
+                  <label for="Res1-11">SI</label>
+                  <input type="radio" name="pregunta1.1" onclick="calificacionSERV(this.value,1,'AT_Resp1')" value="200" id="Res2-11">
+                  <label for="Res2-11">NO</label>
+                  <input type="radio" name="pregunta1.1" onclick="calificacionSERV(this.value,1,'AT_Resp1')" value="100" id="Res3-11">
+                  <label for="Res3-11">OB</label>
+                </div>
+                <h1 id="nombrePregunta">1.2 Camisa fajada:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta1.2" onclick="calificacionSERV(this.value,1,'AT_Resp2')" value=".75" id="Res1-12">
+                  <label for="Res1-12">SI</label>
+                  <input type="radio" name="pregunta1.2" onclick="calificacionSERV(this.value,1,'AT_Resp2')" value="200" id="Res2-12">
+                  <label for="Res2-12">NO</label>
+                  <input type="radio" name="pregunta1.2" onclick="calificacionSERV(this.value,1,'AT_Resp2')" value="100" id="Res3-12">
+                  <label for="Res3-12">OB</label>
+                </div>
+                <h1 id="nombrePregunta">1.3 Zapatos de seguridad:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta1.3" onclick="calificacionSERV(this.value,1,'AT_Resp3')" value=".75" id="Res1-13">
+                  <label for="Res1-13">SI</label>
+                  <input type="radio" name="pregunta1.3" onclick="calificacionSERV(this.value,1,'AT_Resp3')" value="200" id="Res2-13">
+                  <label for="Res2-13">NO</label>
+                  <input type="radio" name="pregunta1.3" onclick="calificacionSERV(this.value,1,'AT_Resp3')" value="100" id="Res3-13">
+                  <label for="Res3-13">OB</label>
+                </div>
+                <h1 id="nombrePregunta">1.4 Porta gafete a la vista:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta1.4" onclick="calificacionSERV(this.value,1,'AT_Resp4')" value=".75" id="Res1-14">
+                  <label for="Res1-14">SI</label>
+                  <input type="radio" name="pregunta1.4" onclick="calificacionSERV(this.value,1,'AT_Resp4')" value="200" id="Res2-14">
+                  <label for="Res2-14">NO</label>
+                  <input type="radio" name="pregunta1.4" onclick="calificacionSERV(this.value,1,'AT_Resp4')" value="100" id="Res3-14">
+                  <label for="Res3-14">OB</label>
+                </div>
+                <h1 id="nombrePregunta">1.5 Puntualidad:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta1.5" onclick="calificacionSERV(this.value,1,'AT_Resp5')" value="2" id="Res1-15">
+                  <label for="Res1-15">SI</label>
+                  <input type="radio" name="pregunta1.5" onclick="calificacionSERV(this.value,1,'AT_Resp5')" value="200" id="Res2-15">
+                  <label for="Res2-15">NO</label>
+                  <input type="radio" name="pregunta1.5" onclick="calificacionSERV(this.value,1,'AT_Resp5')" value="100" id="Res3-15">
+                  <label for="Res3-15">OB</label>
+                </div>
+              </div>
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo1" name="Titulo1" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>
+                  <div class="FWM-photo-container">
+                      <a id="1" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon1" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage1" src=""/>
+                      <input type="hidden" id="imagenC1" name="imagenC1"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,1);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+              <div class="block-title FWM-subtitulo">Evidencias presentación del tecnico</div>  
+              <div class="card data-table">
+                <div class="infinite-scroll-content">
+                    <table id="tabla_levantamiento1">
+                        <thead>
+                            <tr>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                            </tr>
+                        </thead>
+                        <div id="tabla_levantamiento_content1">
+                            <tbody id="levantamiento_content1"></tbody>
+                        </div>
+                    </table>
+                    <div id="message-nr1" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                        <p>Sin registros</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">2. HERRAMIENTA</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P22">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">2.1 Limpieza y órden del maletín: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.1" onclick="calificacionSERV(this.value,2,'AT_Resp1')" value="1" id="Res1-21">
+                  <label for="Res1-21">Bueno</label>
+                  <input type="radio" name="pregunta2.1" onclick="calificacionSERV(this.value,2,'AT_Resp1')" value="200" id="Res2-21">
+                  <label for="Res2-21">Regular</label>
+                  <input type="radio" name="pregunta2.1" onclick="calificacionSERV(this.value,2,'AT_Resp1')" value="100" id="Res3-21">
+                  <label for="Res3-21">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.2 Herramienta y maletín asignado completo:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.2" onclick="calificacionSERV(this.value,2,'AT_Resp2')" value=".50" id="Res1-22">
+                  <label for="Res1-22">SI</label>
+                  <input type="radio" name="pregunta2.2" onclick="calificacionSERV(this.value,2,'AT_Resp2')" value="200" id="Res2-22">
+                  <label for="Res2-22">NO</label>
+                  <input type="radio" name="pregunta2.2" onclick="calificacionSERV(this.value,2,'AT_Resp2')" value="100" id="Res3-22">
+                  <label for="Res3-22">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.3 Uso de la herramienta adecuadamente:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.3" onclick="calificacionSERV(this.value,2,'AT_Resp3')" value=".50" id="Res1-23">
+                  <label for="Res1-23">SI</label>
+                  <input type="radio" name="pregunta2.3" onclick="calificacionSERV(this.value,2,'AT_Resp3')" value="200" id="Res2-23">
+                  <label for="Res2-23">NO</label>
+                  <input type="radio" name="pregunta2.3" onclick="calificacionSERV(this.value,2,'AT_Resp3')" value="100" id="Res3-23">
+                  <label for="Res3-23">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.4 Herramienta de medición completa:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.4" onclick="calificacionSERV(this.value,2,'AT_Resp4')" value="1.50" id="Res1-24">
+                  <label for="Res1-24">SI</label>
+                  <input type="radio" name="pregunta2.4" onclick="calificacionSERV(this.value,2,'AT_Resp4')" value="200" id="Res2-24">
+                  <label for="Res2-24">NO</label>
+                  <input type="radio" name="pregunta2.4" onclick="calificacionSERV(this.value,2,'AT_Resp4')" value="100" id="Res3-24">
+                  <label for="Res3-24">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.5 Material innecesario en maletín:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.5" onclick="calificacionSERV(this.value,2,'AT_Resp5')" value="1.0" id="Res1-25">
+                  <label for="Res1-25">SI</label>
+                  <input type="radio" name="pregunta2.5" onclick="calificacionSERV(this.value,2,'AT_Resp5')" value="200" id="Res2-25">
+                  <label for="Res2-25">NO</label>
+                  <input type="radio" name="pregunta2.5" onclick="calificacionSERV(this.value,2,'AT_Resp5')" value="100" id="Res3-25">
+                  <label for="Res3-25">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.6 Baja maletín para realizar el servicio:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.6" onclick="calificacionSERV(this.value,2,'AT_Resp6')" value="0" id="Res1-26">
+                  <label for="Res1-26">SI</label>
+                  <input type="radio" name="pregunta2.6" onclick="calificacionSERV(this.value,2,'AT_Resp6')" value="200" id="Res2-26">
+                  <label for="Res2-26">NO</label>
+                  <input type="radio" name="pregunta2.6" onclick="calificacionSERV(this.value,2,'AT_Resp6')" value="100" id="Res3-26">
+                  <label for="Res3-26">OB</label>
+                </div>
+                <h1 id="nombrePregunta">2.7 Condición del celular:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta2.7" onclick="calificacionSERV(this.value,2,'AT_Resp7')"value=".50" id="Res1-27">
+                  <label for="Res1-27">SI</label>
+                  <input type="radio" name="pregunta2.7" onclick="calificacionSERV(this.value,2,'AT_Resp7')" value="200" id="Res2-27">
+                  <label for="Res2-27">NO</label>
+                  <input type="radio" name="pregunta2.7" onclick="calificacionSERV(this.value,2,'AT_Resp7')" value="100" id="Res3-27">
+                  <label for="Res3-27">OB</label>
+                </div>
+              </div>
+              
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo2" name="Titulo2" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+                        
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>
+                  <div class="FWM-photo-container">
+                      <a id="2" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon2" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage2" src=""/>
+                      <input type="hidden" id="imagenC2" name="imagenC2"/>
+                  </div>
+                </div>
+              </div> 
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,2);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+            </div> 
+              <div class="block-title FWM-subtitulo">Evidencias de herramienta</div>  
+              <div class="card data-table">
+                  <div class="infinite-scroll-content">
+                      <table id="tabla_levantamiento2">
+                          <thead>
+                              <tr>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                              </tr>
+                          </thead>
+                          <div id="tabla_levantamiento_content2">
+                              <tbody id="levantamiento_content2"></tbody>
+                          </div>
+                      </table>
+                      <div id="message-nr2" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                          <p>Sin registros</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">3. UNIDAD DE SERVICIO</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P33">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">3.1 Doc. completa y vigente del vehículo: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta3.1" onclick="calificacionSERV(this.value,3,'AT_Resp1')" value="1" id="Res1-31">
+                  <label for="Res1-31">SI</label>
+                  <input type="radio" name="pregunta3.1" onclick="calificacionSERV(this.value,3,'AT_Resp1')" value="200" id="Res2-31">
+                  <label for="Res2-31">NO</label>
+                  <input type="radio" name="pregunta3.1" onclick="calificacionSERV(this.value,3,'AT_Resp1')" value="100" id="Res3-31">
+                  <label for="Res3-31">OB</label>
+                </div>
+                <h1 id="nombrePregunta">3.2 Refacción:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta3.2" onclick="calificacionSERV(this.value,3,'AT_Resp2')" value=".50" id="Res1-32">
+                  <label for="Res1-32">SI</label>
+                  <input type="radio" name="pregunta3.2" onclick="calificacionSERV(this.value,3,'AT_Resp2')" value="200" id="Res2-32">
+                  <label for="Res2-32">NO</label>
+                  <input type="radio" name="pregunta3.2" onclick="calificacionSERV(this.value,3,'AT_Resp2')" value="100" id="Res3-32">
+                  <label for="Res3-32">OB</label>
+                </div>
+                <h1 id="nombrePregunta">3.3 Gato y cruceta:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta3.3" onclick="calificacionSERV(this.value,3,'AT_Resp3')" value=".50" id="Res1-33">
+                  <label for="Res1-33">SI</label>
+                  <input type="radio" name="pregunta3.3" onclick="calificacionSERV(this.value,3,'AT_Resp3')" value="200" id="Res2-33">
+                  <label for="Res2-33">NO</label>
+                  <input type="radio" name="pregunta3.3" onclick="calificacionSERV(this.value,3,'AT_Resp3')" value="100" id="Res3-33">
+                  <label for="Res3-33">OB</label>
+                </div>
+                <h1 id="nombrePregunta">3.4 Limpieza de la unidad:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta3.4" onclick="calificacionSERV(this.value,3,'AT_Resp4')" value="2" id="Res1-34">
+                  <label for="Res1-34">SI</label>
+                  <input type="radio" name="pregunta3.4" onclick="calificacionSERV(this.value,3,'AT_Resp4')" value="200" id="Res2-34">
+                  <label for="Res2-34">NO</label>
+                  <input type="radio" name="pregunta3.4" onclick="calificacionSERV(this.value,3,'AT_Resp4')" value="100" id="Res3-34">
+                  <label for="Res3-34">OB</label>
+                </div>
+                <h1 id="nombrePregunta">3.5 Reporta mtto. de la unidad:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta3.5" onclick="calificacionSERV(this.value,3,'AT_Resp5')" value="1" id="Res1-35">
+                  <label for="Res1-35">SI</label>
+                  <input type="radio" name="pregunta3.5" onclick="calificacionSERV(this.value,3,'AT_Resp5')" value="200" id="Res2-35">
+                  <label for="Res2-35">NO</label>
+                  <input type="radio" name="pregunta3.5" onclick="calificacionSERV(this.value,3,'AT_Resp5')" value="100" id="Res3-35">
+                  <label for="Res3-35">OB</label>
+                </div>
+              </div>
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo3" name="Titulo3" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>                 
+                  <div class="FWM-photo-container">
+                      <a id="3" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon3" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage3" src=""/>
+                      <input type="hidden" id="imagenC3" name="imagenC3"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,3);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+            </div>
+              <div class="block-title FWM-subtitulo">Evidencias unidad de servicio</div>  
+              <div class="card data-table">
+                  <div class="infinite-scroll-content">
+                      <table id="tabla_levantamiento3">
+                          <thead>
+                              <tr>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                              </tr>
+                          </thead>
+                          <div id="tabla_levantamiento_content3">
+                              <tbody id="levantamiento_content3"></tbody>
+                          </div>
+                      </table>
+                      <div id="message-nr3" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                          <p>Sin registros</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">4. REPORTE DE SERVICIO</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P44">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">4.1 Reporte con horas de servicio: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta4.1" onclick="calificacionSERV(this.value,4,'AT_Resp1')" value="2.50" id="Res1-41">
+                  <label for="Res1-41">SI</label>
+                  <input type="radio" name="pregunta4.1" onclick="calificacionSERV(this.value,4,'AT_Resp1')" value="200" id="Res2-41">
+                  <label for="Res2-41">NO</label>
+                  <input type="radio" name="pregunta4.1" onclick="calificacionSERV(this.value,4,'AT_Resp1')" value="100" id="Res3-41">
+                  <label for="Res3-41">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.2 Reporte sin O.S. asignada:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta4.2" onclick="calificacionSERV(this.value,4,'AT_Resp2')" value="2.50" id="Res1-42">
+                  <label for="Res1-42">SI</label>
+                  <input type="radio" name="pregunta4.2" onclick="calificacionSERV(this.value,4,'AT_Resp2')" value="200" id="Res2-42">
+                  <label for="Res2-42">NO</label>
+                  <input type="radio" name="pregunta4.2" onclick="calificacionSERV(this.value,4,'AT_Resp2')" value="100" id="Res3-42">
+                  <label for="Res3-42">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.3 Carga de reporte en kepler link en tiempo y forma:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta4.3" onclick="calificacionSERV(this.value,4,'AT_Resp3')" value="6" id="Res1-43">
+                  <label for="Res1-43">SI</label>
+                  <input type="radio" name="pregunta4.3" onclick="calificacionSERV(this.value,4,'AT_Resp3')" value="200" id="Res2-43">
+                  <label for="Res2-43">NO</label>
+                  <input type="radio" name="pregunta4.3" onclick="calificacionSERV(this.value,4,'AT_Resp3')" value="100" id="Res3-43">
+                  <label for="Res3-43">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.4 Entrega reportes en tiempo y forma:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta44" onclick="calificacionSERV(this.value,4,'AT_Resp4')" value="6" id="Res1-44">
+                  <label for="Res1-44">SI</label>
+                  <input type="radio" name="pregunta44" onclick="calificacionSERV(this.value,4,'AT_Resp4')"  value="200" id="Res2-44">
+                  <label for="Res2-44">NO</label>
+                  <input type="radio" name="pregunta44" onclick="calificacionSERV(this.value,4,'AT_Resp4')"  value="100" id="Res3-44">
+                  <label for="Res3-44">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.5 Anota números de parte de refacciones instaladas:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta45" onclick="calificacionSERV(this.value,4,'AT_Resp5')" value="5" id="Res1-45">
+                  <label for="Res1-45">SI</label>
+                  <input type="radio" name="pregunta45" onclick="calificacionSERV(this.value,4,'AT_Resp5')" value="200" id="Res2-45">
+                  <label for="Res2-45">NO</label>
+                  <input type="radio" name="pregunta45" onclick="calificacionSERV(this.value,4,'AT_Resp5')" value="100" id="Res3-45">
+                  <label for="Res3-45">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.6 Reporte bien redactado y entendible:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta46" onclick="calificacionSERV(this.value,4,'AT_Resp6')" value="8" id="Res1-46">
+                  <label for="Res1-46">SI</label>
+                  <input type="radio" name="pregunta46" onclick="calificacionSERV(this.value,4,'AT_Resp6')" value="200" id="Res2-46">
+                  <label for="Res2-46">NO</label>
+                  <input type="radio" name="pregunta46" onclick="calificacionSERV(this.value,4,'AT_Resp6')"  value="100" id="Res3-46">
+                  <label for="Res3-46">OB</label>
+                </div>
+                <h1 id="nombrePregunta">4.7 Asegura con el cliente el llenado de la encuestas de Satisfación:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta4.7" onclick="calificacionSERV(this.value,4,'AT_Resp7')" value="4" id="Res1-47">
+                  <label for="Res1-47">SI</label>
+                  <input type="radio" name="pregunta4.7" onclick="calificacionSERV(this.value,4,'AT_Resp7')" value="200" id="Res2-47">
+                  <label for="Res2-47">NO</label>
+                  <input type="radio" name="pregunta4.7" onclick="calificacionSERV(this.value,4,'AT_Resp7')" value="100" id="Res3-47">
+                  <label for="Res3-47">OB</label>
+                </div>
+              </div>
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo4" name="Titulo4" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>  
+                  <div class="FWM-photo-container">
+                      <a id="4" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon4" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage4" src=""/>
+                      <input type="hidden" id="imagenC4" name="imagenC4"/>
+                  </div>
+                </div>
+              </div>
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,4);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+            </div>
+              <div class="block-title FWM-subtitulo">Evidencias diagnostico</div>  
+              <div class="card data-table">
+                  <div class="infinite-scroll-content">
+                      <table id="tabla_levantamiento4">
+                          <thead>
+                              <tr>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                              </tr>
+                          </thead>
+                          <div id="tabla_levantamiento_content4">
+                              <tbody id="levantamiento_content4"></tbody>
+                          </div>
+                      </table>
+                      <div id="message-nr4" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                          <p>Sin registros</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">5. CHECK LIST DE DIAGNOSTICO</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P55">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">5.1 Información congruente con el reporte de servicio: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta5.1" onclick="calificacionSERV(this.value,5,'AT_Resp1')" value="24.5" id="Res1-51">
+                  <label for="Res1-51">SI</label>
+                  <input type="radio" name="pregunta5.1" onclick="calificacionSERV(this.value,5,'AT_Resp1')" value="200" id="Res2-51">
+                  <label for="Res2-51">NO</label>
+                  <input type="radio" name="pregunta5.1" onclick="calificacionSERV(this.value,5,'AT_Resp1')" value="100" id="Res3-51">
+                  <label for="Res3-51">OB</label>
+                </div>
+                <h1 id="nombrePregunta">5.2 Parámetros de medición claros:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta5.2" onclick="calificacionSERV(this.value,5,'AT_Resp2')" value="9" id="Res1-52">
+                  <label for="Res1-52">SI</label>
+                  <input type="radio" name="pregunta5.2" onclick="calificacionSERV(this.value,5,'AT_Resp2')" value="200" id="Res2-52">
+                  <label for="Res2-52">NO</label>
+                  <input type="radio" name="pregunta5.2" onclick="calificacionSERV(this.value,5,'AT_Resp2')" value="100" id="Res3-52">
+                  <label for="Res3-52">OB</label>
+                </div>
+                <h1 id="nombrePregunta">5.3 Recomendaciones o comentarios claros:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta5.3" onclick="calificacionSERV(this.value,5,'AT_Resp3')" value=".5" id="Res1-53">
+                  <label for="Res1-53">SI</label>
+                  <input type="radio" name="pregunta5.3" onclick="calificacionSERV(this.value,5,'AT_Resp3')" value="200" id="Res2-53">
+                  <label for="Res2-53">NO</label>
+                  <input type="radio" name="pregunta5.3" onclick="calificacionSERV(this.value,5,'AT_Resp3')"  value="100" id="Res3-53">
+                  <label for="Res3-53">OB</label>
+                </div>
+              </div>
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo5" name="Titulo5" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>  
+                  <div class="FWM-photo-container">
+                      <a id="5" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon5" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage5" src=""/>
+                      <input type="hidden" id="imagenC5" name="imagenC5"/>
+                  </div>
+                </div>
+              </div>
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,5);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+            </div>
+              <div class="block-title FWM-subtitulo">Evidencias diagnostico</div>  
+              <div class="card data-table">
+                  <div class="infinite-scroll-content">
+                      <table id="tabla_levantamiento5">
+                          <thead>
+                              <tr>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                              </tr>
+                          </thead>
+                          <div id="tabla_levantamiento_content5">
+                              <tbody id="levantamiento_content5"></tbody>
+                          </div>
+                      </table>
+                      <div id="message-nr5" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                          <p>Sin registros</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">6. PAPELETA DE SOLICITUD DE REFACCIONES</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <div id="Cali">Puntos: <label id="P66">0.0</label> /10</div>
+              <div id="cajaB">
+                <h1 id="nombrePregunta">6.1 Información correcta y cargada en kepler link: </h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta6.1" onclick="calificacionSERV(this.value,6,'AT_Resp1')" value="12.5" id="Res1-61">
+                  <label for="Res1-61">SI</label>
+                  <input type="radio" name="pregunta6.1" onclick="calificacionSERV(this.value,6,'AT_Resp1')" value="200" id="Res2-61">
+                  <label for="Res2-61">NO</label>
+                  <input type="radio" name="pregunta6.1" onclick="calificacionSERV(this.value,6,'AT_Resp1')" value="100" id="Res3-61">
+                  <label for="Res3-61">OB</label>
+                </div>
+                <h1 id="nombrePregunta">6.2 Anota número de parte y cantidad requerida:</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta6.2" onclick="calificacionSERV(this.value,6,'AT_Resp2')" value="4" id="Res1-62">
+                  <label for="Res1-62">SI</label>
+                  <input type="radio" name="pregunta6.2" onclick="calificacionSERV(this.value,6,'AT_Resp2')" value="200" id="Res2-62">
+                  <label for="Res2-62">NO</label>
+                  <input type="radio" name="pregunta6.2" onclick="calificacionSERV(this.value,6,'AT_Resp2')" value="100" id="Res3-62">
+                  <label for="Res3-62">OB</label>
+                </div>
+                <h1 id="nombrePregunta">6.3 Indica prioridad (A - B - C):</h1>
+                <div id="pregunta">
+                  <input type="radio" name="pregunta6.3" onclick="calificacionSERV(this.value,6,'AT_Resp3')" value=".5" id="Res1-63">
+                  <label for="Res1-63">SI</label>
+                  <input type="radio" name="pregunta6.3" onclick="calificacionSERV(this.value,6,'AT_Resp3')" value="200" id="Res2-63">
+                  <label for="Res2-63">NO</label>
+                  <input type="radio" name="pregunta6.3" onclick="calificacionSERV(this.value,6,'AT_Resp3')" value="100" id="Res3-63">
+                  <label for="Res3-63">OB</label>
+                </div>
+              </div>
+              <span class="span FWM-span-form" style="width: 90%;">Titulo:</span>
+              <input type="text" class="FWM-input" id="Titulo6" name="Titulo6" style="width: 90%;margin-left: 5%;" onchange="inputLleno(this.id,this.value)"/>
+
+              <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                <div>
+                  <span class="span FWM-span-form">Toma de fotografia</span>  
+                  <div class="FWM-photo-container">
+                      <a id="6" onclick="captureMultiplePhoto(this.id);">
+                          <div class="border-capture">
+                              <img class="FWM-photo" src="img/camera.svg" id="photoIcon6" width="45px"/>
+                          </div>
+                      </a>
+                      <img class="FWM-photo-hide" id="smallImage6" src=""/>
+                      <input type="hidden" id="imagenC6" name="imagenC6"/>
+                  </div>
+                </div>
+              </div>
+              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                <div class="row align-items-stretch" style="text-align: center;">
+                  <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                    <span class="resize-handler"></span>
+                    <a href="#" onclick="guardarFotoSERV(1,6);" class="boton-equipo">Guardar Foto</a>
+                  </div>
+                </div>
+            </div>
+              <div class="block-title FWM-subtitulo">Evidencias papeleta</div>  
+              <div class="card data-table">
+                  <div class="infinite-scroll-content">
+                      <table id="tabla_levantamiento6">
+                          <thead>
+                              <tr>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                              </tr>
+                          </thead>
+                          <div id="tabla_levantamiento_content6">
+                              <tbody id="levantamiento_content6"></tbody>
+                          </div>
+                      </table>
+                      <div id="message-nr6" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                          <p>Sin registros</p>
+                      </div>
+                  </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+          <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">OBSERVACIONES</h2>
+          <form class="list" style="margin-top: 0;">
+            <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+              <table style="width: 96%;margin-left: 2%;" class="table table-sm table-striped">
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr class="table-light">
+                  <th colspan="3">Observaciones</th>
+                </tr>
+                <tr align="center">
+                  <td colspan="3">
+                    <textarea class ="FWM-input" id="Observaciones" name="Observaciones" cols="30" rows="10"></textarea>
+                  </td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+                <tr >
+                  <th width="30%">Correo-electronico:</th>
+                  <td style='text-align: left;'><input type='text' name="Correo" id="Correo" class="FWM-textBox"/></td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+
+              </div>
+              <table style="width: 100%;margin-top: 15px;">
+                <tr style='text-align: center;' >
+                  <th colspan="7">PUNTOS DE REVISIÓN</th>
+                </tr>
+                <tr align="center">
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
+                  <td>6</td>
+                </tr>
+                <tr align="center">
+                  <td id="P1">0.0</td>
+                  <td id="P2">0.0</td>
+                  <td id="P3">0.0</td>
+                  <td id="P4">0.0</td>
+                  <td id="P5">0.0</td>
+                  <td id="P6">0.0</td>
+                </tr>
+                <tr>
+                  <td>&nbsp;</td>
+                </tr>
+              </table>
+              <table style="width: 100%" >
+                <tr style='text-align: center;' >
+                  <th colspan="3">RESULTADO</th>
+                </tr>
+                <tr align="center" class="table-info">
+                  <td>% MENOR</td>
+                  <td>GENERAL</td>
+                  <td>CALIFICACION</td>
+                </tr>
+                <tr align="center">
+                  <td>0.0</td>
+                  <td id="GEN">0.0</td>
+                  <td id="CAL">CRITICO</td>
+                </tr>
+              </table>
+
+
+              <div id="tab-3" class="page-content tab bg-color-white" style="margin-top: 20px;background-color: rgb(245, 245, 245);">
+                <div class="block">
+                    <p>
+                        <label style="font-size: 15px;color:#063E7F;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 20px;"><strong> firma del técnico</strong></label>
+                    </p>
+
+                    <div class="BotonesCierreContainer text-center" style="display: flex; flex-direction: row;justify-content: center;">
+                        <a class="link popup-open" href="#" onclick="vertical();" data-popup=".popup-photo"><img src="img/iconsMenu/firmardigital.svg" width="80px" /></a>
+                        <input type="hidden" name="signate1" id="signate1" placeholder="sfirmc"/>
+                        <center>
+                            <img id="ImagenFirmaView1" src="" width="70%"><br>
+                            <span id="VolverFirmar1"></span>
+                            <input type="button" value="Volver a Firmar" style="position:absolute;display:none;margin:0 !important;color:white;background-color: #019cdc;top:40px;margin-left:160px !important" />
+                        </center>        
+                        <a class="link popup-open" href="#" onclick="createFirmaSERV(1)" data-popup=".popup-services"><img src="img/iconsMenu/firmar.svg" width="80px" /></a><br /><br />
+                    </div>
+
+                    <div class="popup popup-photo" style="text-align: center;">
+                        <br/>
+                        <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 50px;">
+                            <a class="link popup-close" onclick="gFotoFirma();" href="#">Guardar Fotografia</a>
+                            <a class="link popup-close" href="#">Cerrar</a>
+                        </div>
+                        <style>
+                            .border-capture{
+                                background-color: white;
+                                border-radius: 20px;
+                                width: 147.76px;
+                                height: 147.76px;
+                                border: solid 3px #00A7B5;
+                            }
+                        </style>
+                        <div class="photoContainer" style="display: block;">
+                            <center>
+                                <div class="border-capture">
+                                    <a href="#" onclick="capturaFirmaMultiSERV(1);"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                                    <div hidden="true" id="ImaCe1" hidden="true"></div>
+                                </div>
+                            </center>
+                            <input type="image" name="smaImage1" style="margin: 0px auto; width: 147.76px; height: 147.76px; border-radius: 17px; display: none; margin-top: -150.65px;" id="smaImage1" src="" /><br>
+                            <input type="hidden" name="imgPhoto1" id="imgPhoto1">
+                        </div>    
+                    </div>
+
+                    <div class="popup popup-services">
+                        <br>
+                        <div class="popup-container" style="height: 300px;">
+                            <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 30px;">
+                                <a class="link popup-close" onclick="gfirmaMULT(1)" href="#">Guardar Firma</a>
+                                <a class="link" onclick="cleanFirma()" href="#">Limpiar</a>
+                                <a class="link popup-close" onclick="gClose()" href="#">Cerrar</a>
+                            </div>
+                            <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                                <p style="margin: 0;">Área para Firmar</p>
+                            </div>
+                            <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                                <canvas id="signature-pad1" class="signature-pad1" width=400 height=200 style="background-color: #e4fff1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <p style="margin-top: 35px;">
+                      <label style="font-size: 15px;color:#063E7F;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 20px;"><strong> firma del auditor</strong></label>
+                  </p>
+                  <div class="BotonesCierreContainer text-center" style="display: flex; flex-direction: row;justify-content: center;">
+                      <a class="link popup-open" href="#" onclick="vertical();" data-popup=".popup-photo2"><img src="img/iconsMenu/firmardigital.svg" width="80px" /></a>
+                      <input type="hidden" name="signate2" id="signate2" placeholder="sfirmc"/>
+                      <center>
+                          <img id="ImagenFirmaView2" src="" width="70%"><br>
+                          <span id="VolverFirmar2"></span>
+                          <input type="button" value="Volver a Firmar" style="position:absolute;display:none;margin:0 !important;color:white;background-color: #019cdc;top:40px;margin-left:160px !important" />
+                      </center>        
+                      <a class="link popup-open" href="#" onclick="createFirmaSERV(2)" data-popup=".popup-services2"><img src="img/iconsMenu/firmar.svg" width="80px" /></a><br /><br />
+                  </div>
+
+                  <div class="popup popup-photo2" style="text-align: center;">
+                      <br/>
+                      <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 50px;">
+                          <a class="link popup-close" onclick="gFotoFirma();" href="#">Guardar Fotografia</a>
+                          <a class="link popup-close" href="#">Cerrar</a>
+                      </div>
+                      <style>
+                          .border-capture{
+                              background-color: white;
+                              border-radius: 20px;
+                              width: 147.76px;
+                              height: 147.76px;
+                              border: solid 3px #00A7B5;
+                          }
+                      </style>
+                      <div class="photoContainer" style="display: block;">
+                          <center>
+                              <div class="border-capture">
+                                  <a href="#" onclick="capturaFirmaMultiSERV(2);"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                                  <div hidden="true" id="ImaCe2" hidden="true"></div>
+                              </div>
+                          </center>
+                          <input type="image" name="smaImage2" style="margin: 0px auto; width: 147.76px; height: 147.76px; border-radius: 17px; display: none; margin-top: -150.65px;" id="smaImage2" src="" /><br>
+                          <input type="hidden" name="imgPhoto2" id="imgPhoto2">
+                      </div>    
+                  </div>
+
+                  <div class="popup popup-services2">
+                      <br>
+                      <div class="popup-container" style="height: 300px;">
+                          <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 30px;">
+                              <a class="link popup-close" onclick="gfirmaMULT(2)" href="#">Guardar Firma</a>
+                              <a class="link" onclick="cleanFirma()" href="#">Limpiar</a>
+                              <a class="link popup-close" onclick="gClose()" href="#">Cerrar</a>
+                          </div>
+                          <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                              <p style="margin: 0;">Área para Firmar</p>
+                          </div>
+                          <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                              <canvas id="signature-pad2" class="signature-pad2" width=400 height=200 style="background-color: #e4fff1"></canvas>
+                          </div>
+                      </div>
+                  </div>
+
+                  <p style="margin-top: 35px;">
+                    <label style="font-size: 15px;color:#063E7F;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 20px;"><strong> firma del gerente</strong></label>
+                </p>
+                <div class="BotonesCierreContainer text-center" style="display: flex; flex-direction: row;justify-content: center;">
+                    <a class="link popup-open" href="#" onclick="vertical();" data-popup=".popup-photo3"><img src="img/iconsMenu/firmardigital.svg" width="80px" /></a>
+                    <input type="hidden" name="signate3" id="signate3" placeholder="sfirmc"/>
+                    <center>
+                        <img id="ImagenFirmaView3" src="" width="70%"><br>
+                        <span id="VolverFirmar3"></span>
+                        <input type="button" value="Volver a Firmar" style="position:absolute;display:none;margin:0 !important;color:white;background-color: #019cdc;top:40px;margin-left:160px !important" />
+                    </center>        
+                    <a class="link popup-open" href="#" onclick="createFirmaSERV(3)" data-popup=".popup-services3"><img src="img/iconsMenu/firmar.svg" width="80px" /></a><br /><br />
+                </div>
+
+                <div class="popup popup-photo3" style="text-align: center;">
+                    <br/>
+                    <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 50px;">
+                        <a class="link popup-close" onclick="gFotoFirma();" href="#">Guardar Fotografia</a>
+                        <a class="link popup-close" href="#">Cerrar</a>
+                    </div>
+                    <style>
+                        .border-capture{
+                            background-color: white;
+                            border-radius: 20px;
+                            width: 147.76px;
+                            height: 147.76px;
+                            border: solid 3px #00A7B5;
+                        }
+                    </style>
+                    <div class="photoContainer" style="display: block;">
+                        <center>
+                            <div class="border-capture">
+                                <a href="#" onclick="capturaFirmaMultiSERV(3);"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                                <div hidden="true" id="ImaCe3" hidden="true"></div>
+                            </div>
+                        </center>
+                        <input type="image" name="smaImage3" style="margin: 0px auto; width: 147.76px; height: 147.76px; border-radius: 17px; display: none; margin-top: -150.65px;" id="smaImage3" src="" /><br>
+                        <input type="hidden" name="imgPhoto3" id="imgPhoto3">
+                    </div>    
+                </div>
+
+                <div class="popup popup-services3">
+                    <br>
+                    <div class="popup-container" style="height: 300px;">
+                        <div class="headerPopupPhoto" style="width: 90%;display: flex;justify-content: space-between;padding-left: 20px;margin-bottom: 30px;">
+                            <a class="link popup-close" onclick="gfirmaMULT(3)" href="#">Guardar Firma</a>
+                            <a class="link" onclick="cleanFirma()" href="#">Limpiar</a>
+                            <a class="link popup-close" onclick="gClose()" href="#">Cerrar</a>
+                        </div>
+                        <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                            <p style="margin: 0;">Área para Firmar</p>
+                        </div>
+                        <div style="display: flex;flex-direction: column;justify-content: center;align-content: center;align-items: center;">
+                            <canvas id="signature-pad3" class="signature-pad3" width=400 height=200 style="background-color: #e4fff1"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <input type='hidden' name="geolocation" id="geolocation" placeholder='Geolocalización...' disabled="disabled"/>
+    
+                <style type="text/css">
+                    .boton-personalizado-4 {
+                        text-decoration: none;
+                        font-size: 16px;
+                        color: #FFFFFF;
+                        padding-top: 13px;
+                        padding-bottom: 10px;
+                        padding-left: 40px;
+                        padding-right: 40px;
+                        background-color: #063E7F;
+                        border-radius: 15px;
+                    }
+                </style>
+                <a onclick="app.views.main.router.back('/yamevoyAditoriaServ/', {force: true, ignoreCache: true, reload: true});">Llevame</a>
+                <div class="block grid-resizable-demo">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="terminarAuditoria(1)" class="boton-personalizado-4 link"> Terminar Auditoria </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</template>
+<script>
+  return {
+    on: {
+      pageInit: function () {
+        var id_cedula = localStorage.getItem("IdCedula");
+        var recorrido = 1;
+       
+        databaseHandler.db.transaction(
+        function (tx) {
+          tx.executeSql(
+              "Select * from SV_Fotos WHERE SV_ID_Cedula = ? and SV_Recorrido = ? ",
+              [id_cedula, recorrido],
+              function (tx, results) {
+                  let length = results.rows.length;
+                  if (length > 0) {
+                      for (var i = 0; i < length; i++) {
+                          var item = results.rows.item(i);                    
+                          if(item.SV_Proceso == 1){
+                          $('#tabla_levantamiento1 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr1').hide();
+                          }else if(item.SV_Proceso == 2){
+                            $('#tabla_levantamiento2 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr2').hide();
+                          }else if(item.SV_Proceso == 3){
+                            $('#tabla_levantamiento3 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr3').hide();
+                          }else if(item.SV_Proceso == 4){
+                            $('#tabla_levantamiento4 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr4').hide();
+                          }else if(item.SV_Proceso == 5){
+                            $('#tabla_levantamiento5 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr5').hide();
+                          }else if(item.SV_Proceso == 6){
+                            $('#tabla_levantamiento6 tbody').append("<tr id='fila" + item.SV_ID_Fotos + "'><td><a href='#' onclick='eliminarFila(" + item.SV_ID_Fotos + ",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='" + item.SV_Foto + "' width='60px'/></td><td style='text-align: center;'>" + item.SV_titulo + "</td><td style='text-align: center;'>" + item.SV_FechaHora + "</td></tr>");
+                          $('#message-nr6').hide();
+                          }else if(item.SV_Proceso == 100){
+                              $('#signate1').val( item.SV_Foto);
+                              $('#ImagenFirmaView1').attr('src', item.SV_Foto);
+                          }else if(item.SV_Proceso == 200){
+                            $('#signate2').val( item.SV_Foto);
+                            $('#ImagenFirmaView2').attr('src', item.SV_Foto);
+                          }else if(item.SV_Proceso == 300){
+                            $('#signate3').val( item.SV_Foto);
+                            $('#ImagenFirmaView3').attr('src', item.SV_Foto);
+                          }
+                      }
+                  } else {
+                  }
+                  app.preloader.hide();
+              },
+              function (tx, error) {
+                  console.log("Error al consultar: " + error.message);
+                  app.preloader.hide();
+              }
+          );
+      },
+      function (error) { },
+      function () { }
+  );
+              databaseHandler.db.transaction(
+                  function(tx){
+                      tx.executeSql(
+                          "Select * from Aud_General where AG_ID_cedula = ?  and AG_Auditoria = ?",
+                          [id_cedula,recorrido],
+                          function(tx, results){
+                              let length = results.rows.length;
+                              for(var i = 0; i< length; i++){
+                                  var item = results.rows.item(i);
+                                  $('#GEN').text(item.AG_CaliGen)
+                                  $('#CAL').text(item.AG_Cali);
+                                  $('#Correo').val(item.AG_Obse);
+                                  $('#Observaciones').val(item.AG_correo);
+                                  $('#puesto').val(item.AG_Puesto);
+                                  $('#id_tec').val(item.AG_ID_Tecnico);
+                                  $('#tec').val(item.AG_Tecnico);
+                                } 
+                          },
+                          function(tx, error){
+                              console.log("Error al guardar cedula: " + error.message);
+                              app.preloader.hide();  
+                          }
+                      );  
+                  },
+                  function(error){},
+                  function(){}
+              );
+              databaseHandler.db.transaction(
+                  function(tx){
+                      tx.executeSql(
+                          "Select*from Aud_Tec  WHERE AT_ID_cedula = ? ",
+                          [id_cedula],
+                          function(tx, results){
+                              let length = results.rows.length;
+                              for(var i = 0; i<= length; i++){
+                                  var item = results.rows.item(i);
+                                if(item.AT_Pregunta == 1){
+                                    $('#P1').text(item.AT_Total)
+                                    $('#P11').text(item.AT_Total)
+
+                                  if(item.AT_Resp1 == 200){                                                                        
+                                    $("#Res2-11").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-11").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 200 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-11").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-12").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-12").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100 && item.AT_Resp2 != 0 ){
+                                    $("#Res1-12").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-13").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-13").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 200 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-13").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp4 == 200){                                                                        
+                                    $("#Res2-14").prop("checked", true);                                     
+                                  }else if(item.AT_Resp4 == 100){
+                                    $("#Res3-14").prop("checked", true);
+                                  }else if(item.AT_Resp4 != 200 && item.AT_Resp4 != 100  && item.AT_Resp4 != 0 ){
+                                    $("#Res1-14").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp5 == 200){                                                                        
+                                    $("#Res2-15").prop("checked", true);                                     
+                                  }else if(item.AT_Resp5 == 100){
+                                    $("#Res3-15").prop("checked", true);
+                                  }else if(item.AT_Resp5 != 200 && item.AT_Resp5 != 100  && item.AT_Resp5 != 0 ){
+                                    $("#Res1-15").prop("checked", true);                                    
+                                  }
+                                }else if(item.AT_Pregunta == 2){
+                                    $('#P2').text(item.AT_Total)
+                                    $('#P22').text(item.AT_Total)
+                                    if(item.AT_Resp1 == 200){                                                                        
+                                    $("#Res2-21").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-21").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 200 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-21").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-22").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-22").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100  && item.AT_Resp2 != 0 ){
+                                    $("#Res1-22").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-23").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-23").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 0 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-23").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp4 == 200){                                                                        
+                                    $("#Res2-24").prop("checked", true);                                     
+                                  }else if(item.AT_Resp4 == 100){
+                                    $("#Res3-24").prop("checked", true);
+                                  }else if(item.AT_Resp4 != 200 && item.AT_Resp4 != 100  && item.AT_Resp4 != 0 ){
+                                    $("#Res1-24").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp5 == 200){                                                                        
+                                    $("#Res2-25").prop("checked", true);                                     
+                                  }else if(item.AT_Resp5 == 100){
+                                    $("#Res3-25").prop("checked", true);
+                                  }else if(item.AT_Resp5 != 200 && item.AT_Resp5 != 100  && item.AT_Resp5 != 0 ){
+                                    $("#Res1-25").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp6 == 200){                                                                        
+                                    $("#Res2-26").prop("checked", true);                                     
+                                  }else if(item.AT_Resp6== 100){
+                                    $("#Res3-26").prop("checked", true);
+                                  }else if(item.AT_Resp6 != 200 && item.AT_Resp6 != 100){
+                                    $("#Res1-26").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp7 == 200){                                                                        
+                                    $("#Res2-27").prop("checked", true);                                     
+                                  }else if(item.AT_Resp7 == 100){
+                                    $("#Res3-27").prop("checked", true);
+                                  }else if(item.AT_Resp7 != 200 && item.AT_Resp7 != 100  && item.AT_Resp7 != 0 ){
+                                    $("#Res1-27").prop("checked", true);                                    
+                                  }
+                                }else if(item.AT_Pregunta == 3){
+                                    $('#P3').text(item.AT_Total)
+                                    $('#P33').text(item.AT_Total)
+                                    if(item.AT_Resp1 == 0){                                                                        
+                                    $("#Res2-31").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-31").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 0 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-31").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-32").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-32").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100  && item.AT_Resp2 != 0 ){
+                                    $("#Res1-32").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-33").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-33").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 200 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-33").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp4 == 200){                                                                        
+                                    $("#Res2-34").prop("checked", true);                                     
+                                  }else if(item.AT_Resp4 == 100){
+                                    $("#Res3-34").prop("checked", true);
+                                  }else if(item.AT_Resp4 != 200 && item.AT_Resp4 != 100  && item.AT_Resp4 != 0 ){
+                                    $("#Res1-34").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp5 == 200){                                                                        
+                                    $("#Res2-35").prop("checked", true);                                     
+                                  }else if(item.AT_Resp5 == 100){
+                                    $("#Res3-35").prop("checked", true);
+                                  }else if(item.AT_Resp5 != 200 && item.AT_Resp5 != 100  && item.AT_Resp5 != 0 ){
+                                    $("#Res1-35").prop("checked", true);                                    
+                                  }
+
+                                }else if(item.AT_Pregunta == 4){
+                                    $('#P4').text(parseFloat(item.AT_Total))
+                                    $('#P44').text(parseFloat(item.AT_Total))
+                                    if(item.AT_Resp1 == 200){                                                                        
+                                    $("#Res2-41").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-41").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 200 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-41").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-42").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-42").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100  && item.AT_Resp2 != 0 ){
+                                    $("#Res1-42").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-43").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-43").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 200 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-43").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp4 == 200){                                                                        
+                                    $("#Res2-44").prop("checked", true);                                     
+                                  }else if(item.AT_Resp4 == 100){
+                                    $("#Res3-44").prop("checked", true);
+                                  }else if(item.AT_Resp4 != 200 && item.AT_Resp4 != 100  && item.AT_Resp4 != 0 ){
+                                    $("#Res1-44").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp5 == 200){                                                                        
+                                    $("#Res2-45").prop("checked", true);                                     
+                                  }else if(item.AT_Resp5 == 100){
+                                    $("#Res3-45").prop("checked", true);
+                                  }else if(item.AT_Resp5 != 200 && item.AT_Resp5 != 100  && item.AT_Resp5 != 0 ){
+                                    $("#Res1-45").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp6 == 200){                                                                        
+                                    $("#Res2-46").prop("checked", true);                                     
+                                  }else if(item.AT_Resp6== 100){
+                                    $("#Res3-46").prop("checked", true);
+                                  }else if(item.AT_Resp6 != 200 && item.AT_Resp6 != 100  && item.AT_Resp6 != 0 ){
+                                    $("#Res1-46").prop("checked", true);                                    
+                                  }
+
+                                  if(item.AT_Resp7 == 200){                                                                        
+                                    $("#Res2-47").prop("checked", true);                                     
+                                  }else if(item.AT_Resp7 == 100){
+                                    $("#Res3-47").prop("checked", true);
+                                  }else if(item.AT_Resp7 != 200 && item.AT_Resp7 != 100  && item.AT_Resp7 != 0 ){
+                                    $("#Res1-47").prop("checked", true);                                    
+                                  }
+
+                                }else if(item.AT_Pregunta == 5){
+                                    $('#P5').text(item.AT_Total)
+                                    $('#P55').text(item.AT_Total)
+
+                                    if(item.AT_Resp1 == 200){                                                                        
+                                    $("#Res2-51").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-51").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 200 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-51").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-52").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-52").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100  && item.AT_Resp2 != 0 ){
+                                    $("#Res1-52").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-53").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-53").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 200 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-53").prop("checked", true);                                    
+                                  }
+
+                                }else if(item.AT_Pregunta == 6){
+
+                                    $('#P6').text(parseFloat(item.AT_Total))
+                                    $('#P66').text(parseFloat(item.AT_Total))
+                                    if(item.AT_Resp1 == 200){                                                                        
+                                    $("#Res2-61").prop("checked", true);                                     
+                                  }else if(item.AT_Resp1 == 100){
+                                    $("#Res3-61").prop("checked", true);
+                                  }else if(item.AT_Resp1 != 200 && item.AT_Resp1 != 100  && item.AT_Resp1 != 0 ){
+                                    $("#Res1-61").prop("checked", true);
+                                  }
+                                  
+                                    if(item.AT_Resp2 == 200){                                                                        
+                                    $("#Res2-62").prop("checked", true);                                     
+                                  }else if(item.AT_Resp2 == 100){
+                                    $("#Res3-62").prop("checked", true);
+                                  }else if(item.AT_Resp2 != 200 && item.AT_Resp2 != 100  && item.AT_Resp2 != 0 ){
+                                    $("#Res1-62").prop("checked", true);
+                                    
+                                  }
+                                
+                                    if(item.AT_Resp3 == 200){                                                                        
+                                    $("#Res2-63").prop("checked", true);                                     
+                                  }else if(item.AT_Resp3 == 100){
+                                    $("#Res3-63").prop("checked", true);
+                                  }else if(item.AT_Resp3 != 200 && item.AT_Resp3 != 100  && item.AT_Resp3 != 0 ){
+                                    $("#Res1-63").prop("checked", true);                                    
+                                  }
+
+                                }                                                
+
+                              }
+                              
+      
+                          },
+                          function(tx, error){
+                              console.log("Error al guardar cedula: " + error.message);
+                              app.preloader.hide();  
+                          }
+                      );  
+                  },
+                  function(error){},
+                  function(){}
+              );
+
+                  var C1 = parseFloat($('#P1').text());
+                  var C2 = parseFloat($('#P2').text());
+                  var C3 = parseFloat($('#P3').text());
+                  var C4 = parseFloat($('#P4').text());
+                  var C5 = parseFloat($('#P5').text());
+                  var C6 = parseFloat($('#P6').text());   
+                  var CaliGen = ((C1 + C2 + C3 + C4 + C5 + C6) / 6);                   
+                  $('#GEN').text(CaliGen.toFixed(2));
+                  var Calificacion = ""
+                  if (CaliGen <= 5.99) {
+                      Calificacion = "CRITICO";
+                      $('#CAL').text(Calificacion);
+                  } else if (CaliGen <= 6.99 && CaliGen > 5.99) {
+                      Calificacion = "ATENCION";
+                      $('#CAL').text(Calificacion);
+                  } else if (CaliGen <= 7.99 && CaliGen > 6.99) {
+                      Calificacion = "REGULAR";
+                      $('#CAL').text(Calificacion);
+                  } else if (CaliGen <= 8.99 && CaliGen > 7.99) {
+                      Calificacion = "BIEN";
+                      $('#CAL').text(Calificacion);
+                  } else if (CaliGen <= 9.9 && CaliGen > 8.99) {
+                      Calificacion = "MUY BIEN";
+                      $('#CAL').text(Calificacion);
+                  } else if (CaliGen <= 10 && CaliGen > 9.9) {
+                      Calificacion = "EXCELENTE";
+                      $('#CAL').text(Calificacion);
+                  }
+      }
+    }
+  }
+</script>

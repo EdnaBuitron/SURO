@@ -1,0 +1,201 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoSMC4();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Datos Mantenimiento</h2>
+
+                    <div style="text-align: left;">     
+                        <form class="list FWM-fixing-form"> 
+                            <span class="span FWM-span-form">Observaciones:</span>
+                            <textarea class ="FWM-input" id="observaciones" name="observaciones" cols="30" rows="10" onchange="inputLleno(this.id,this.value)" onkeyup="mayusculas(this)"></textarea>
+
+                            <div class="FWM-fixing-form" style="margin-left: 0;width: 100%;">
+                                <span class="span FWM-span-form">Estado General del Montacargas:</span>
+                                <span id="text2">
+                                    <select id="estadoGeneral" name="estadoGeneral" style="height: 40px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;">
+                                        <option value="0">Seleccione una opción</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                    </select>
+                                </span>
+                            </div>
+
+                            <div class="FWM-fixing-form" style="margin-left: 0;width: 100%;">
+                                <span class="span FWM-span-form">Numero de Montacargas:</span>
+                                <span id="text2">
+                                    <select id="numeroMontacargas" name="numeroMontacargas" style="height: 40px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;">
+                                        <option value="0">Seleccione una opción</option>
+                                        <option value="1">1 a 5</option>
+                                        <option value="2">6 a 10</option>
+                                        <option value="3">11 a 40</option>
+                                        <option value="4">+50</option>
+                                    </select>
+                                </span>
+                            </div>
+
+                            <span class="span FWM-span-form">Montacargas:</span>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="checkbox" id="tipo1" onclick="checkStatus(this.id)" value="1" >Propio</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="checkbox" id="tipo0" onclick="checkStatus(this.id)" value="0" >Rentado</label>
+                            </div>
+                            
+                            <span class="span FWM-span-form">Marca:</span>
+                            <input type="text" class="FWM-input" id="marca" name="marca" onchange="inputLleno(this.id,this.value)" autocomplete="off"/>
+
+                            <div class="FWM-fixing-form" style="margin-left: 0;width: 100%;">
+                                <span class="span FWM-span-form">Requiere Mantenimiento:</span>
+                                <span id="text2">
+                                    <select id="requiereMantenimiento" name="requiereMantenimiento" style="height: 40px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;">
+                                        <option value="0">Seleccione una opción</option>
+                                        <option value="1">Si</option>
+                                        <option value="2">No</option>
+                                    </select>
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 170px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarDatosMantenimientoSMC();" class="boton-equipo">Guardar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                $('.preloader').remove();
+                $('.infinite-scroll-preloader').remove();
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select observaciones_prospeccion,estado_monta,numero_monta,tipo_monta,marca,mantenimiento from servicioSMC where id_cedula= ?",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.observaciones_prospeccion === null){
+                                } else {
+                                    $("#observaciones").val(item.observaciones_prospeccion);
+                                }
+                                if(item.estado_monta === null){
+                                } else {
+                                    $("#estadoGeneral > option[value="+item.estado_monta+"]").attr("selected",true);
+                                }
+                                if(item.numero_monta === null){
+                                } else {
+                                    $("#numeroMontacargas > option[value="+item.numero_monta+"]").attr("selected",true);
+                                }
+                                if(item.mantenimiento === null){
+                                } else {
+                                    $("#requiereMantenimiento > option[value="+item.mantenimiento+"]").attr("selected",true);
+                                }
+                                if(item.marca === null){
+                                } else {
+                                    $("#marca").val(item.marca);
+                                }
+                                if(item.tipo_monta == null){
+
+                                } else {
+                                    if(item.tipo_monta == 1){
+                                        $("#tipo1").prop("checked", true);
+                                    }
+                                    if(item.tipo_monta == 0){
+                                        $("#tipo0").prop("checked", true);
+                                    }
+                                }
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                var self = this;
+                var app = self.$app; 
+                var OPCV = localStorage.getItem("Opcion");       
+                var Division = localStorage.getItem("Division");
+                var NomJson = 'marcas_SMC';
+
+                self.autocompleteDropdownAjax = app.autocomplete.create({
+                    inputEl: '#marca',
+                    openIn: 'dropdown',
+                    preloader: true, //enable preloader
+                    valueProperty: 'code', //object's "value" property name
+                    textProperty:  'name', //object's "text" property name
+                    limit: 10, //limit to 20 results
+                    dropdownPlaceholderText: 'Seleccionar Cliente...',
+                    source: function (query, render) {
+                        var autocomplete = this;
+                        var results = [];
+                        if (query.length === 0) {
+                            render(results);
+                            return;
+                        }
+                        // Show Preloader
+                        autocomplete.preloaderShow();
+                        // Do Ajax request to Autocomplete data
+                        app.request({
+                            url: cordova.file.dataDirectory + "jsons/"+NomJson+".json",
+                            method: 'GET',
+                            dataType: 'json',
+                            data: {
+                                query: query,
+                            },success: function (data) {
+                                for (var i = 0; i < data.length; i++) {
+                                    if (data[i].name.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i]);
+                                }
+                                autocomplete.preloaderHide();
+                                render(results);
+                            }
+                        }); 
+                    }
+                });
+                $('#marca').change(function () {
+                    var cliente = $("#marca").val();
+                    app.request.get(cordova.file.dataDirectory + "jsons/"+NomJson+".json", function (data) {
+                        var content2 = JSON.parse(data);
+                        for(var x = 0; x < content2.length; x++) {
+                            if(content2[x].code == cliente){
+                                $("#marca").val(content2[x].code + " " + content2[x].name);
+                            }         
+                        }
+                    });
+                }); 
+            }
+        }  
+    }
+</script>

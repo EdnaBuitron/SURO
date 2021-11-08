@@ -1,0 +1,121 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" onclick="regresarRecorridoMer1();">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Datos Generales</h2>
+
+                <form class="list" style="margin-top: 0;">                    
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                        <span class="span" style="font-weight: bold;width: 90%;">Fecha:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="fecha_entrada" id="fecha_entrada" class="FWM-textBox" onchange="inputLleno(this.id,this.value)" disabled/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Proyecto:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="nombre_cliente" id="nombre_cliente" class="FWM-textBox" onchange="inputLleno(this.id,this.value)" disabled/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Sitio/ID(Telcel):</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="sitio" id="sitio" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Orden de Compra:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="orden_compra" id="orden_compra" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Contratista:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="contratista" id="contratista" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Tipo de Proyecto:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="tipo_proyecto" id="tipo_proyecto" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Region:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="region" id="region" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Torre:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 40px;border-bottom: 0;">
+                            <input type='text' name="torre" id="torre" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select fecha_entrada from cedulas_general WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#fecha_entrada").val(item.fecha_entrada);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select orden_compra,nombre_cliente,sitio,contratista,tipo_proyecto,region,torre from reporteFotografico WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#nombre_cliente").val(item.nombre_cliente);
+                                    $("#sitio").val(item.sitio);
+                                    $("#orden_compra").val(item.orden_compra);
+                                    $("#contratista").val(item.contratista);
+                                    $("#tipo_proyecto").val(item.tipo_proyecto);
+                                    $("#region").val(item.region);
+                                    $("#torre").val(item.torre);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

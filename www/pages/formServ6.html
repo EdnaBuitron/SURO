@@ -1,0 +1,176 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar Inicio -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Navbar Fin -->
+            <div class="page-content">
+                <a href="#" class="float" onclick="showTPM()">
+                    <i class="material-icons md-light" style="color: #ffffff;font-size: 35px;">book</i>
+                </a>
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <!-- Inicio Contenido Formulario -->                                
+                    <h2 class="FWN-titulo-2">Revisión de Gabinete en General</h2>
+
+                    <div style="text-align: left;">
+                        <form class="list FWM-fixing-form">
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">27.- Verificación de nivel del equipo</span>
+                                <select id="4-1-select" name="4-1-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">28.- Revisión de sellado de puertas y cortinas</span>
+                                <select id="4-2-select" name="4-2-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">29.- Verificación sistema de levante y arrastre de utencilios</span>
+                                <select id="4-3-select" name="4-3-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">30.- Revisión de operación de sistema de drenado</span>
+                                <select id="4-4-select" name="4-4-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">31.- Comprobar Integridad de depósito de operación</span>
+                                <select id="4-5-select" name="4-5-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">32.- Comprobar Integridad y funcionamiento de termómetros y/o manómetros de medición</span>
+                                <select id="4-6-select" name="4-6-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">33.- Revisión de sellos mecánicos y transmisiones del sistemas</span>
+                                <select id="4-7-select" name="4-7-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">34.- Revisión de válvulas de seguridad de presión</span>
+                                <select id="4-8-select" name="4-8-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">35.- Inspección de repisas, vidrios y/o presión</span>
+                                <select id="4-9-select" name="4-9-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">36.- Revisión de empaques y bisagras</span>
+                                <select id="4-10-select" name="4-10-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <button class="fwm-button-send" onclick="guardarGabineteServind();">Guardar Gabinetes</button>
+                    <!-- Fin Contenido Formulario -->
+                </div>
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select opcion,valor from selectcheck WHERE id_cedula = ? AND fase = '4'",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#4-"+item.opcion+"-select").val(item.valor);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

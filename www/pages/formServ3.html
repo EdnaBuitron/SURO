@@ -1,0 +1,157 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <a href="#" class="float" onclick="showTPM()">
+                    <i class="material-icons md-light" style="color: #ffffff;font-size: 35px;">book</i>
+                </a>
+                <div style="text-align: center; justify-content:center;width: 100%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Revisión de sistema de calentamiento</h2>
+                    <div style="text-align: left;">
+                        <form class="list FWM-fixing-form" style="width: 96%;margin-left: 2%;"> 
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">6.- Adecuación de manguera y tubería de alimentos de gas</span>
+                                <select class="select-check" id="2-1-select" name="2-1-select">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">7.- Fuga de gas en el sistema general del equipo</span>
+                                <select id="2-2-select" name="2-2-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">8.- Revisar y lubricar válvulas de control manual</span>
+                                <select id="2-3-select" name="2-3-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <span class="span FWM-span-form text-check">9.- Inspección y prueba de presión de gas</span>
+                            <div class="container-divided-check">
+                                <label class="text-divided-check">Dinámica<input type="text" id="dinamica" class="input-divided-check"></label>
+                                <label class="text-divided-check">Estática<input type="text" id="estatica" class="input-divided-check"></label>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">10.- Calibración y limpieza sistema encendido de gas</span>
+                                <select id="2-4-select" name="2-4-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">11.- Limpieza y verificación de cámaras de combustión y troneras de salida de monóxido</span>
+                                <select id="2-5-select" name="2-5-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">12.- Limpieza de catalizador</span>
+                                <select id="2-6-select" name="2-6-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+
+                    <button class="fwm-button-send" onclick="guardarCalentamientoServind();">Guardar Sistema</button>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select dinamica,estatica from checklist WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#dinamica").val(item.dinamica);
+                                    $("#estatica").val(item.estatica);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select opcion,valor from selectcheck WHERE id_cedula = ? AND fase = '2'",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#2-"+item.opcion+"-select").val(item.valor);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

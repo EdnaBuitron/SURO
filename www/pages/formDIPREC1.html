@@ -1,0 +1,124 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoDIPREC3();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Notas, Comentarios y Dibujos</h2>
+
+                    <div style="text-align: left;">     
+                        <form class="list FWM-fixing-form"> 
+                            <span class="span FWM-span-form">Observacion:</span>
+                            <textarea class ="FWM-input" id="nota" name="nota"  cols="30" rows="10"></textarea>
+
+                            <span class="span FWM-span-form">Foto:</span>                          
+                            <div class="FWM-photo-container">
+                                <div class="border-capture">
+                                    <a onclick="capturePhoto();">
+                                        <img class="FWM-photo" src="img/camera.svg" id="photoIcon" width="45px" style="margin-left: 50px;"/>
+                                    </a>
+                                </div>
+                                <img class="FWM-photo-hide" id="smallImage" src=""/>
+                                <input type="hidden" id="imagenC" name="imagenC"/>
+                                <input type="hidden" id="sourceP" name="sourceP" value="Camera"/>
+                            </div>
+                            <span class="span FWM-span-form" style="text-align: center;"><b>ó</b></span> 
+                            <div class="box" style="text-align:center;">
+                                <input type="file" accept="image/*" name="image" id="file-1" class="inputfile inputfile-1" onchange="uploadPicture(this,1);"/>
+                                <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span id="textInput">Seleccione&hellip;</span></label>
+                            </div>
+
+                            <div class="block-title FWM-subtitulo">Observaciones</div>  
+                            <div class="card data-table">
+                                <div class="infinite-scroll-content">
+                                    <table id="tabla_notas">
+                                        <thead>
+                                            <tr>
+                                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Observacion</th>
+                                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                            </tr>
+                                        </thead>
+                                        <div id="tabla_levantamiento_content">
+                                            <tbody id="levantamiento_content"></tbody>
+                                        </div>
+                                    </table>
+                                    <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                    <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                        <p>Sin registros</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+                        </form>
+                        
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarNotasCoordinadorDIPREC();" class="boton-equipo">Guardar Nota</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                $('.preloader').remove();
+                $('.infinite-scroll-preloader').remove();
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select * from notas where id_cedula= ?",
+                            [id_cedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length == 0){
+                                    $("#message-nr").css("display", "block");
+                                } else {
+                                    for(var i = 0; i< length; i++){
+                                        var item = results.rows.item(i);
+                                        item.nota = item.nota.split("#$");
+                                        item.nota = item.nota[0];
+                                        $("#tabla_notas tbody").append("<tr id='fila"+ item.id_nota +"'><td class='FWM-table-options'><a href='#' onclick='eliminarFilaDIPREC("+ item.id_nota +",6);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' style='margin-top:10%' /></a><a href='#' onclick='editarFilaDiprec("+ item.id_nota +",2);' style='border: none; outline:none;'><img src='img/editar.svg' width='27px' style='margin-top:10%'/></a></td><td><img src='"+item.foto+"' width='60px' style='margin-top: 4px;'/></td><td style='text-align: center;'>" + unescape(item.nota) + "</td><td style='text-align: center;'>" + item.fecha_registro + "</td></tr>");
+                                        $("#message-nr").css("display", "none");
+                                    }
+                                }
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

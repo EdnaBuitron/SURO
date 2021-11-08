@@ -1,0 +1,225 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px"
+                    alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="back">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Corroborar Que Parámetros Están Dentro Del Rango De Seguridad </h2>
+
+                    <style type="text/css">
+                        input[type=text] {
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+
+                        select {
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 3px;
+                            font-size: 2vw;
+                        }
+
+                        .border-capture-item {
+                            margin-top: 33px;
+                            margin-left: 0px;
+                            margin-right: 33px;
+                            position: relative;
+                        }
+
+                        textarea {
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            font-size: 2vw;
+                        }
+
+                        #cajaB {
+                            width: 350px;
+                        }
+
+                        #cajaB h1 {
+                            color: rgb(126, 123, 123);
+                            font-size: 12px;
+                            text-transform: uppercase;
+                            text-align: left;
+                            line-height: 30px;
+                            margin-left: 5px;
+                            font-weight: bold;
+                            width: 90%;
+                        }
+
+                        #pregunta {
+                            position: relative;
+                            display: flex;
+                            margin-top: 5px;
+                            border: transparent;
+                            box-sizing: border-box;
+                            background: #FAFAFA;
+                        }
+
+                        #pregunta input[type=radio] {
+                            display: none;
+                        }
+
+                        #pregunta label {
+                            display: block;
+                            width: 150px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            transition: 0.5s;
+                            background: #FFF;
+
+                        }
+
+                        #pregunta label:hover {
+                            background: #679ceb;
+                        }
+
+                        #pregunta input[type=radio]:checked+label {
+                            background: #063E7F;
+                            color: #FAFAFA;
+                        }
+                    </style>
+
+                    <form  class="list"  style="margin-top: 0;width: 90%;margin-left: 5%;">
+                        <div id="cajaB" style="width: 100%;">
+                            <div style="width: 100%;border-radius: 15px;border: 0.5px solid #ECECEC;background-color: white;">
+
+                                <span class="span" style="font-weight: bold;width: 90%;">Tomas:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <select id="Turno" name="Turno" onchange=""
+                                        style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                                        <option value="1">✘ Toma 1</option>
+                                        <option value="2">✘ Toma 2</option>
+                                        <option value="3">✘ Toma 3</option>
+                                        <option value="4">✘ Toma 4</option>
+                                        <option value="5">✘ Toma 5</option>
+                                        <option value="6">✘ Toma 6</option>
+                                    </select>
+                                </span>
+                                <span class="span" style="font-weight: bold;width: 90%;">Equipo:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <select id="Turno" name="Turno" onchange=""
+                                        style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                                        <option value="1">✘ Boiler</option>
+                                        <option value="2">✘ Booster</option>
+                                        <option value="3">✘ Lavaloza</option>
+                                    </select>
+                                </span>
+                                
+                                <span class="span" style="font-weight: bold;width: 90%;">Hora:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <input type='text' name="Horario" id="Horario" class="FWM-textBox">
+                                </span>
+
+                                <h2 style="color:#063E7F;font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Entrada</h2>
+
+                                <span class="span" style="font-weight: bold;width: 90%;">Temperatura:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <input type='text' name="Horario" id="Horario" class="FWM-textBox">
+                                </span>
+                                <span class="span" style="font-weight: bold;width: 90%;">Presión:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <input type='text' name="Horario" id="Horario" class="FWM-textBox">
+                                </span>
+                                <br>
+
+                                <h2 style="color:#063E7F;font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Salida</h2>
+
+                                <span class="span" style="font-weight: bold;width: 90%;">Temperatura:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <input type='text' name="Horario" id="Horario" class="FWM-textBox">
+                                </span>
+                                <span class="span" style="font-weight: bold;width: 90%;">Presión:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                    <input type='text' name="Horario" id="Horario" class="FWM-textBox">
+                                </span>
+                                <br>
+                                <span class="span" style="font-weight: bold;width: 90%;">Bitacora de control de temperatura:</span>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;margin-bottom: 10px;"> 
+                                    <div id="pregunta" style="border: 1px solid #063E7F;width: 90%;margin-left: 5%;font-size: 17px;">
+                                        <input type="radio" name="pregunta3"  value="1" id="Res1-13">
+                                        <label for="Res1-13">Si</label>
+                                        <input type="radio" name="pregunta3"  value="2" id="Res2-13">
+                                        <label for="Res2-13">No</label>                           
+                                    </div>
+                                </span>
+                             <br>
+                             <center>
+                                <br>
+                                <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                                  <div>
+                                    <span class="span FWM-span-form">Toma de fotografia</span>
+        
+                                    <div align="center" class="FWM-photo-container">
+                                      <div class="border-capture">
+                                        <a onclick="capturePhoto();"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                                    </div>
+                                      <img style="margin: 0px auto; width: 147.76px; height: 148px; border-radius: 17px; display: none; margin-top: -151px;" id="smallImage" src=""/>
+                                      <input type="hidden" id="imagenC" name="imagenC"/>
+                                    </div>
+                                  </div>
+                                </div>   
+                              </center>
+                              <div class="block-title FWM-subtitulo">Evidencia Rango de Seguridad</div>  
+                              <div class="card data-table">
+                                  <div class="infinite-scroll-content">
+                                      <table id="tabla_ciclo_charola">
+                                          <thead>
+                                              <tr>
+                                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Etapa</th>
+                                                  <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                              </tr>
+                                          </thead>
+                                          <div id="tabla_ciclo_charola_content">
+                                              <tbody id="ciclo_charola_content"></tbody>
+                                          </div>
+                                      </table>
+                                      <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                      <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                          <p>Sin registros</p>
+                                      </div>
+                                  </div>
+                              </div>   
+                              
+                              <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                                <div class="row align-items-stretch" style="text-align: center;">
+                                    <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                        <span class="resize-handler"></span>
+                                        <a href="#" onclick="guardarCCharolaPPL(1);" class="boton-equipo">Guardar datos</a>
+                                    </div>
+                                </div>
+                            </div> 
+                            </div>
+                            </div>
+                    </form>
+
+            </div>
+        </div>
+
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function () {
+                $('.preloader').remove();
+                $('.infinite-scroll-preloader').remove();
+
+            }
+        }
+    }
+</script>

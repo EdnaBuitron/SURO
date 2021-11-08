@@ -1,0 +1,182 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="javascript:location.reload()" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <input type="hidden" id="resp1" name="resp1" />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Recorrido de Servicio</h2></div>
+                    </div>
+                </div>
+                    <div class="buttons-container" style="display: flex;">
+                        <a href="/datosgeneralesSMC4/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/persona2.svg" width="90px" height="90px" id="img1"/>
+                            <span class="fwm-text-recorrido">Datos Generales</span>
+                        </a>
+                        <a href="/antesSMC4/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/servicio.svg" width="90px" height="90px" id="img2"/>
+                            <span class="fwm-text-recorrido">Antes</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                        <a href="/despuesSMC4/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/seguro.svg" width="90px" height="90px" id="img3"/>
+                            <span class="fwm-text-recorrido">Después</span>
+                        </a>
+                        <a href="/formSMC6/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/revision.svg" width="90px" height="90px" id="img4"/>
+                            <span class="fwm-text-recorrido">Datos de Mantenimiento</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                        <a href="/formSMC7/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/servicio.svg" width="90px" height="90px" id="img5"/>
+                            <span class="fwm-text-recorrido">Valores de Mantenimiento</span>
+                        </a>
+                        <a href="/formSMC8/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/datoscoche.svg" width="90px" height="90px" id="img6"/>
+                            <span class="fwm-text-recorrido">Datos del Equipo</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;margin-bottom: 40px;">
+                        <a href="/cierreSMC4/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/estrellas.svg" width="90px" height="90px" id="img7"/>
+                            <span class="fwm-text-recorrido">Evaluación y cierre</span>
+                        </a>
+                    </div>
+                <!-- Inicio FWM Recorrido -->
+                    <div id="FWM-Menu" class="container-items" style="width: 100%;"></div>
+                <!-- Fin FWM Recorrido -->
+                <fwm></fwm>
+            </div> 
+        </div>
+    </div>
+</template>
+           
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from servicioSMC WHERE id_cedula = ? AND (nombre_cliente IS NOT NULL AND rfc_cliente IS NOT NULL AND nombre_contacto IS NOT NULL AND telefono_contacto IS NOT NULL AND correo_contacto IS NOT NULL AND tipo_visita IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img1").src="img/iconsMenu/persona.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from evidencia_servicio_smc WHERE id_cedula = ? AND (fase = 'antes' AND foto IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img2").src="img/iconsMenu/servicio2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from evidencia_servicio_smc WHERE id_cedula = ? AND (fase = 'despues' AND foto IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img3").src="img/iconsMenu/seguro2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select id_cedula,observaciones_prospeccion,estado_monta,numero_monta,tipo_monta,marca,mantenimiento from servicioSMC where id_cedula= ? AND (observaciones_prospeccion IS NOT NULL AND estado_monta IS NOT NULL AND numero_monta IS NOT NULL AND tipo_monta IS NOT NULL AND marca IS NOT NULL AND mantenimiento IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img4").src="img/iconsMenu/revision2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT id_cedula,no_activo,no_contrato from servicioSMC WHERE id_cedula= ? AND (no_activo IS NOT NULL AND no_contrato IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img5").src="img/iconsMenu/servicio2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select id_cedula,marca,tipo_motor,marca_motor,modelo,serie,aditamentos from datos_servicio_smc where id_cedula= ? AND (marca IS NOT NULL AND tipo_motor IS NOT NULL AND marca_motor IS NOT NULL AND modelo IS NOT NULL AND serie IS NOT NULL AND aditamentos IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img6").src="img/iconsMenu/datoscoche2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

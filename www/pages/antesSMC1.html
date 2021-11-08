@@ -1,0 +1,170 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoSMC1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Revisión del Equipo</h2>
+
+                    <div style="text-align: left;">     
+                        <form class="list FWM-fixing-form"> 
+                            <span class="span FWM-span-form">Comentarios de Revisión del Equipo:</span>
+                            <textarea class ="FWM-input" id="comentariosEquipo" name="comentariosEquipo"  cols="30" rows="10" onkeyup="mayusculas(this)"></textarea>
+
+                            <div class="FWM-fixing-form" style="margin-bottom: 15px;margin-left: 0;width: 100%;">
+                                <span class="span FWM-span-form">Lugar de Reparación:</span>
+                                <span id="text2">
+                                    <select id="lugarReparacion" name="lugarReparacion" style="height: 50px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;">
+                                        <option value="0">Seleccione una opción</option>
+                                        <option value="1">Reparación en Sitio</option>
+                                        <option value="2">Reperación en Planta</option>
+                                    </select>
+                                </span>
+                            </div>
+                            <span class="span FWM-span-form">¿El equipo se reparó en esta visita?</span>
+                            <div style="display: flex;justify-content: space-around;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="checkbox" id="reparadoSi" onclick="singleCheck1(this)" value="Si" >Si</label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;"><input type="checkbox" id="reparadoNo" onclick="singleCheck2(this)" value="No" >No</label>
+                            </div>
+
+
+                            <span class="span FWM-span-form">Observaciones:</span>
+                            <input type="text" class="FWM-input" id="observaciones" name="observaciones" onchange="inputLleno(this.id,this.value)"  onkeyup="mayusculas(this)"/>
+
+                            <span class="span FWM-span-form">Foto Revisión:</span>                          
+                            <div class="FWM-photo-container">
+                                <div class="border-capture">
+                                    <a onclick="capturePhoto();">
+                                        <img class="FWM-photo" src="img/camera.svg" id="photoIcon" width="45px" style="margin-left: 50px;"/>
+                                    </a>
+                                </div>
+                                <img class="FWM-photo-hide" id="smallImage" src=""/>
+                                <input type="hidden" id="imagenC" name="imagenC"/>
+                            </div>
+
+                        </form>
+
+                        <div class="block-title FWM-subtitulo">Revisión del Equipo</div>  
+                        <div class="card data-table">
+                            <div class="infinite-scroll-content">
+                                <table id="tabla_levantamiento">
+                                    <thead>
+                                        <tr>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Observaciones</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <div id="tabla_levantamiento_content">
+                                        <tbody id="levantamiento_content"></tbody>
+                                    </div>
+                                </table>
+                                <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                    <p>Sin registros</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarLevantamientoSMC();" class="boton-equipo">Guardar Revisión</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                $('.preloader').remove();
+                $('.infinite-scroll-preloader').remove();
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select * from evidencia_levantamiento_smc where id_cedula= ?",
+                            [id_cedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length == 0){
+                                    $("#message-nr").css("display", "block");
+                                } else {
+                                    for(var i = 0; i< length; i++){
+                                        var item = results.rows.item(i);
+                                        $("#tabla_levantamiento tbody").append("<tr id='fila"+ item.id_evidencia +"'><td><a href='#' onclick='eliminarFilaSMC("+ item.id_evidencia +",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a></td><td><img src='"+item.foto_observacion+"' width='60px'/></td><td style='text-align: center;'>" + unescape(item.observacion) + "</td><td style='text-align: center;'>" + item.fecha_regristro + "</td></tr>");
+                                        $("#message-nr").css("display", "none");
+                                    }
+                                }
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select comentario_equipo,lugar_reparacion,reparo_visita from levantamiento_smc where id_cedula= ?",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.comentario_equipo === null){
+                                } else {
+                                    $("#comentariosEquipo").val(item.comentario_equipo);
+                                }
+                                if(item.lugar_reparacion === null){
+                                } else {
+                                    $("#lugarReparacion > option[value="+item.lugar_reparacion+"]").attr("selected",true);
+                                }
+                                if(item.reparo_visita == null){
+
+                                } else {
+                                    if(item.reparo_visita == 1){
+                                        $("#reparadoSi").prop("checked", true);
+                                    }
+                                    if(item.reparo_visita == 2){
+                                        $("#reparadoNo").prop("checked", true);
+                                    }
+                                }
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

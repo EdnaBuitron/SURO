@@ -1,0 +1,181 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="back">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Capacidad de Equipo</h2>
+  
+                <form class="list" style="margin-top: 0;">
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }
+                        select{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }                      
+                        .border-capture-item{
+                          margin-top: 33px;
+                          margin-left: 0px;
+                          margin-right: 33px;
+                          position: relative;
+                        }
+
+                        textarea{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            font-size: 2vw;
+                        }
+                        #cajaB {
+              width: 350px;
+            }
+
+            #cajaB h1 {
+              color: rgb(3, 3, 3);
+              font-size: 12px;
+              text-transform: uppercase;
+              text-align: left;
+              line-height: 30px;
+              margin-left: 5px;
+            }
+
+            #pregunta {
+              position: relative ;
+              display: flex;
+              margin-top: 5px;
+              border: transparent;
+              box-sizing: border-box;
+              background: #FAFAFA;
+            }
+
+            #pregunta input[type=radio] {
+              display: none;
+            }
+
+            #pregunta label {
+              display: block;
+              width: 150px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: 0.5s;
+              background: #FFF;  
+              
+            }
+
+            #pregunta label:hover {
+              background: #679ceb;
+            }
+
+            #pregunta input[type=radio]:checked + label {
+              background: #063E7F;
+              color: #FAFAFA;
+            }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                      <form>
+                        <div id="cajaB">
+                            <span class="span" style="font-weight: bold;width: 90%;"> Turno:</span>
+                            <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                          <select id="Turno" name="Turno" onchange="" style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                            <option value="1">✘ 1° Primero</option>
+                            <option value="2">✘ Hora Pico (1 er Turno )</option>
+                            <option value="3">✘ 2° Segundo</option>
+                            <option value="4">✘ Hora Pico (2 do Turno )</option>
+                            <option value="5">✘ 3° Tercero</option>
+                            <option value="6">✘ Hora Pico (3 er Turno )</option>
+                            <option value="7">✘ Sillas o asiento por mesa</option>
+                            <option value="8">✘ Sillas o asiento por mesa Cantidad de mesas en comedo</option>
+                          </select>
+                            </span>
+                      
+                        <span class="span" style="font-weight: bold;width: 90%;"> Horario:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Horario" id="Horario"  class="FWM-textBox" >
+                        </span>
+                        
+                        <span class="span" style="font-weight: bold;width: 90%;"> Cantidad:</span>                        
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                          <input type='text' name="Horario" id="Horario"  class="FWM-textBox" >
+                        </span>
+                        
+                        
+                        <span class="span" style="font-weight: bold;width: 90%;"> Utencilio:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                          <select id="Turno" name="Turno" onchange="" style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                            <option value="1">✘ Charola de transporte</option>
+                            <option value="2">✘ Charola de alimentos</option>
+                            <option value="3">✘ Plato sopero</option>
+                            <option value="4">✘ Plato principal</option>
+                            <option value="5">✘ Plato de postre</option>
+                            <option value="6">✘ Tenedor</option>
+                            <option value="7">✘ Cuchara</option>
+                            <option value="8">✘ Cuchillo</option>
+                            <option value="9">✘ Vaso</option>
+                            <option value="10">✘ Jarra</option>
+                            <option value="11">✘ Otros (ollas, sartenes, cacharros, sartenes, etc.)</option>
+                          </select>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Cantidad:</span>
+                        
+                      
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Horario" id="Horario"  class="FWM-textBox" >
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Tipo / Tamaño:</span>
+                        
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Horario" id="Horario"  class="FWM-textBox" >
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;"> Material:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Horario" id="Horario"  class="FWM-textBox" >
+                        </span>
+                       
+                        <span class="span" style="font-weight: bold;width: 90%;"> Notas:</span>
+                        <textarea class ="FWM-input" id="Comentarios" name="Comentarios"  cols="30" rows="10" style="width: 90%;margin-left: 5%;border: 1px solid #cfcbcb !important"></textarea>
+                        
+                        <span class="span" style="font-weight: bold;width: 90%; line-height: 15px;height: auto;"> La máquina lavaloza que se requiere para cumplir con la demanda de sanitización es de:</span>
+                        <textarea class ="FWM-input" id="Comentarios" name="Comentarios"  cols="30" rows="10" style="width: 90%;margin-left: 5%;border: 1px solid #cfcbcb !important"></textarea>
+                      
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                          <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                            <span class="resize-handler"></span>
+                            <a href="#" onclick="guardarCCharolaPPL(1);" class="boton-equipo">Guardar datos</a>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+  </template>
+  <script>
+    return {
+        on: {
+          pageInit: function () {
+            $('.preloader').remove();
+            $('.infinite-scroll-preloader').remove();
+            
+            }
+          }
+    }
+  </script>

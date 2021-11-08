@@ -1,0 +1,98 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar Inicio -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Navbar Fin -->
+            <div class="page-content">
+                <a href="#" class="float" onclick="showTPM()">
+                    <i class="material-icons md-light" style="color: #ffffff;font-size: 35px;">book</i>
+                </a>
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <!-- Inicio Contenido Formulario -->                                
+                    <h2 class="FWN-titulo-2">Revisión de Sensores de Proceso</h2>
+
+                    <div style="text-align: left;">     
+                        <form class="list FWM-fixing-form"> 
+                            <div style="display: flex;justify-content: space-around;margin-bottom: 25px;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Temperatura<input type="text" id="temperatura" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Nivel<input type="text" id="nivel" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Magneto<input type="text" id="magneto" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                            </div>
+                        </form>
+                    </div>
+                    <h2 class="FWN-titulo-2">Revisión de Sistema Microondas</h2>
+                    <div style="text-align: left;">     
+                        <form class="list FWM-fixing-form"> 
+                            <div style="display: flex;justify-content: space-around;margin-bottom: 25px;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Magnetron<input type="text" id="magnetron" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Transformador HV<input type="text" id="transformadorhv" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                            </div>
+                            <div style="display: flex;justify-content: space-around;margin-bottom: 25px;">
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Diodo HV&nbsp;<input type="text" id="diodohv" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                                <label style="font-size: 18px;font-family: 'ITC Avant Garde Gothic', sans-serif;font-weight: bold;color: gray;">Capacitor HV&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="capacitorhv" style="border: 1px solid gray;border-radius: 8px;width: 90%;padding-left:5px"></label>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="block grid-resizable-demo" style="margin-bottom: 170px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                            <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                <span class="resize-handler"></span>
+                                <a href="#" onclick="guardarSensoresServind();" class="boton-equipo">Guardar Sensores</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Fin Contenido Formulario -->
+                </div>
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select temperatura,nivel,magneto,magnetron,transformadorhv,diodohv,capacitorhv from checklist WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#temperatura").val(item.temperatura);
+                                    $("#nivel").val(item.nivel);
+                                    $("#magneto").val(item.magneto);
+                                    $("#magnetron").val(item.magnetron);
+                                    $("#transformadorhv").val(item.transformadorhv);
+                                    $("#diodohv").val(item.diodohv);
+                                    $("#capacitorhv").val(item.capacitorhv);
+                                }
+                                console.log("No trae")
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

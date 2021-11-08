@@ -1,0 +1,119 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd1();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <a href="#" class="float" onclick="showTPM()">
+                    <i class="material-icons md-light" style="color: #ffffff;font-size: 35px;">book</i>
+                </a>
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Revisión de Suministros Mecánicos</h2>
+                    <div style="text-align: left;">    
+                        <form class="list FWM-fixing-form">
+                            <span class="span FWM-span-form"><b>1.- Revision de suministros eléctricos</b></span>
+                            <span class="span FWM-span-form">Voltaje</span>
+                            <input type='text' name="voltaje" id="voltaje" class="FWM-input" onchange="inputLleno(this.id,this.value)"/>
+                            <span class="span FWM-span-form">Amperaje total</span>
+                            <input type='text' name="amperaje" id="amperaje" class="FWM-input" onchange="inputLleno(this.id,this.value)"/>
+                            <span class="span FWM-span-form"><b>2.- Capacidad del Breaker</b></span>
+                            <input type='text' name="breaker" id="breaker" class="FWM-input" onchange="inputLleno(this.id,this.value)"/>
+                            <div class="container-check" style="margin-top: 13px;">
+                                <span class="span FWM-span-form text-check">3.- Verificar sistema a tierra</span>
+                                <select id="1-1-select" name="1-1-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <div class="container-check">
+                                <span class="span FWM-span-form text-check">4.- Adecuación de manguera y tubería de gas</span>
+                                <select id="1-2-select"name="1-2-select" class="select-check">
+                                    <option value="0"></option>
+                                    <option value="1">Bueno</option>
+                                    <option value="2">Regular</option>
+                                    <option value="3">Malo</option>
+                                    <option value="4">Observación</option>
+                                    <option value="5">No Aplica</option>
+                                </select>
+                            </div>
+                            <span class="span FWM-span-form"><b>5.- Presión de Suministros de agua</b></span>
+                            <input type='text' name="presion" id="presion" class="FWM-input" onchange="inputLleno(this.id,this.value)"/>
+                        </form>
+                    </div>
+
+                <button class="fwm-button-send" onclick="guardarSuministrosServind();">Guardar Suministros</button>
+            </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select voltaje,amperaje,breaker,presion from checklist WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#voltaje").val(item.voltaje);
+                                    $("#amperaje").val(item.amperaje);
+                                    $("#breaker").val(item.breaker);
+                                    $("#presion").val(item.presion);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select opcion,valor from selectcheck WHERE id_cedula = ? AND fase = '1'",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#1-"+item.opcion+"-select").val(item.valor);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

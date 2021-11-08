@@ -1,0 +1,109 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="javascript:location.reload()" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <input type="hidden" id="resp1" name="resp1" />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Levantamiento</h2></div>
+                    </div>
+                </div>
+                    <div class="buttons-container" style="display: flex;">
+                    <a href="/datosgenerales2/" class="fwm-button-recorrido">
+                    <img src="img/iconsMenu/persona2.svg" width="90px" height="90px" id="img1"/>
+                    <span class="fwm-text-recorrido">Datos Generales</span>
+                    </a>
+                    <a href="/antes3/" class="fwm-button-recorrido">
+                    <img src="img/iconsMenu/recorrido2.svg" width="90px" height="90px" id="img2"/>
+                    <span class="fwm-text-recorrido">Recorrido</span>
+                    </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                    <a href="/cierre2/" class="fwm-button-recorrido">
+                    <img src="img/iconsMenu/estrellas.svg" width="90px" height="90px" id="img4"/>
+                    <span class="fwm-text-recorrido">Cierre</span>
+                    </a>
+                    </div>
+                <!-- Inicio FWM Recorrido -->
+                    <div id="FWM-Menu" class="container-items" style="width: 100%;"></div>
+                <!-- Fin FWM Recorrido -->
+                <fwm></fwm>
+            </div> 
+        </div>
+    </div>
+</template>
+           
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                 databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("UPDATE cedulas_general SET tipo_cedula = ? WHERE id_cedula = ?",
+                            [tipoCedula,id_cedula],
+                            function(tx, results){
+                                
+                            },
+                            function(tx, error){
+                                console.error("Error al actualizar el tipo de cedula: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                 //Validacion para saber si hay registros guardados 
+                 var id_cedula = localStorage.getItem("IdCedula");  
+
+                 //recorrido
+                 databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select * FROM levantamiento_evidencia INNER JOIN levantamiento_servicio ON levantamiento_servicio.id_cedula = levantamiento_evidencia.id_cedula WHERE levantamiento_evidencia.id_cedula = ? AND grado_infeccion != 0",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img2").src="img/iconsMenu/recorrido1.svg";
+                                }
+                            },
+                            function(tx, error){
+                                console.error("Error al actualizar el tipo de cedula: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select id_cedula,colonia,revision FROM levantamiento_servicio WHERE id_cedula = ? AND colonia IS NOT NULL AND revision IS NOT NULL",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img1").src="img/iconsMenu/persona.svg";
+                                }
+                            },
+                            function(tx, error){
+                                console.error("Error al actualizar el tipo de cedula: " + error.message);
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

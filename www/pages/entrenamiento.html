@@ -1,0 +1,186 @@
+<template>
+<div class="view view-main view-init safe-areas">
+<div class="page">
+    <div class="navbar" style="background-color: #063E7F;height: 52px;">
+        <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+        <div class="navbar-inner sliding" style="height: 52px;">
+            <div class="left">
+                <style>            
+                    .nav-text-regresar{
+                        color: #ffffff;
+                        border: 2px solid white;
+                        padding: 8px 10px;
+                        border-radius: 7px;
+                        font-size: 14px;
+                        margin-left: 15px;
+                    }
+                  </style>
+                <a href="#" onclick="regresarRecorrido();" style="margin-left: 5px;">
+                    <span class="nav-text-regresar">Regresar</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        <style type="text/css">
+                        input[type=text],select{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                        input[type=number]{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                    </style>
+        <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+            <h2 style="color:#00A7B5;margin-top: 36px;">Entrenamiento</h2>
+            <form class="list" id="demo-form1" style="width: 90%;margin-left: 5%;">
+                <span class="span" style="font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Tipo de capacitación:</span>
+                <select  class="spanBlanco" id="TipoCapacitacion" name="TipoCapacitacion" style="height: 50px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;border: 1px solid gray;border-radius: 8px;">
+                    <option value="0">Seleccionar...</option>
+                    <option value="1">Capacitación en línea</option>
+                    <option value="2">Capacitación presencial</option>
+                </select>
+                <span class="span" style="font-weight: bold;font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Persona capacitada:</span>
+                <input class="spanBlanco" type='text' id="personaCapacitada" name="personaCapacitada" style="padding-left: 10px;border: 1px solid gray;font-size: 15px;font-family: 'ITC Avant Garde Gothic', sans-serif;">    
+                <span class="span" style="font-weight: bold;font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Puesto de la persona capacitada:</span>
+                <input class="spanBlanco" type='text' id="puesto" name="puesto" style="padding-left: 10px;border: 1px solid gray;font-size: 15px;font-family: 'ITC Avant Garde Gothic', sans-serif;"/>
+                <span class="span" style="font-weight: bold;font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Tema de capacitación:</span>
+                <input class="spanBlanco"  type='text' id="temaCapacitacion" name ="temaCapacitacion" style="padding-left: 10px;border: 1px solid gray;font-size: 15px;font-family: 'ITC Avant Garde Gothic', sans-serif;"/>
+                <span class="span" style="font-weight: bold;font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Comentario:</span>
+                <input class="spanBlanco" type='text' id="comentario" name="comentario" style="padding-left: 10px;border: 1px solid gray;font-size: 15px;font-family: 'ITC Avant Garde Gothic', sans-serif;"/>
+            </form>
+            <style>
+                .border-capture{
+                    background-color: white;
+                    border-radius: 20px;
+                    width: 147.76px;
+                    height: 147.76px;
+                    border: solid 3px #00A7B5;
+                }
+            </style>
+            <center>
+                <div class="border-capture">
+                    <a onclick="capturePhoto();"><img src="img/camera.svg" id="photoIcon"  width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                </div>
+            </center>
+            <center><img style="margin: 0px auto; width: 147.76px; height: 148px; border-radius: 17px; display: none; margin-top: -151px;" id="smallImage" src="" />
+            <input type="hidden" id="imagenC" name="imagenC"/></center>
+        
+            <div class="block-title" style="font-family: 'ITC Avant Garde Gothic', sans-serif;font-size:16px;font-weight: bold;padding-top: 5px;">Registros Guardados</div>
+            <div class="card data-table">
+            <div class="infinite-scroll-content">
+                <table id ="tablaE">
+                    <thead>
+                        <tr>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Acciones</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fotografía</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Tipo capacitación</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Persona capacitada</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Puesto de la persona capacitada</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Tema capacitacion</th>
+                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Comentario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                               
+                    </tbody>
+                </table>
+                <div class='sentencia preloader color-red infinite-scroll-preloader'></div>
+                </div>
+            </div>
+            <br />
+
+            <style type="text/css">
+                .boton-personalizado-4 {
+                    text-decoration: none;
+                    font-family: 'ITC Avant Garde Gothic', sans-serif;
+                    font-weight: 600;
+                    font-size: 16px;
+                    color: #FFFFFF;
+                    padding-top: 15px;
+                    padding-bottom: 15px;
+                    padding-left: 30px;
+                    padding-right: 30px;
+                    background-color: #00A7B5;
+                    border-radius: 15px;
+                }
+            </style>
+            <div class="block grid-resizable-demo">
+                <div class="row align-items-stretch" style="text-align: center;">
+                    <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                        <span class="resize-handler"></span>
+                        <a href="#" onclick="gentrenamiento()" class="boton-personalizado-4">Guardar datos</a>   
+                    </div>
+                </div>
+            </div>
+
+
+            
+            <div style="text-align: right;">
+                <br />
+                <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                <tr>
+                <!--<td style="text-align: left;"><a href="#" class="link back" style="border: none; outline:none;"><img src="img/save2.png" width="40px" /></a></td> -->
+                <!-- <td style="text-align: right;"><center><a href="#" onclick="gentrenamiento()" style="width: 90%;" class="col button button-fill color-green">Guardar datos</a></center></td> -->
+                </tr>
+                </table>
+            </div> 
+            <br /><br />
+        </div>
+    </div>
+</div>
+</div>
+</template>
+<script>
+  return {
+    on: {
+        pageInit: function () {
+        //Cargar el contenido si lo tiene
+         var icedula = localStorage.getItem("IdCedula");
+         databaseHandler.db.transaction(
+                function(tx5){
+    
+                    tx5.executeSql(
+                        "Select * from entrenamiento where IdCedula = ?",
+                        [icedula],
+                        function(tx5, results){
+                            var length = results.rows.length;
+                            for(var i = 0; i< length; i++){
+                                var item2 = results.rows.item(i);
+                                if(item2.Tipo == 1){
+                                    var TipoCap = "Capacitacion en linea";
+                                }
+                                if(item2.Tipo == 2){
+                                    var TipoCap = "Capacitacion presencial";
+                                }
+
+                                    $("#tablaE tbody").append("<tr id='fila"+ item2.IdEntrenamiento +"'><td><a href='#' onclick='eliminarFila("+ item2.IdEntrenamiento +", 3);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a></td><td><img src='"+item2.ImagenFirma+"' width='60px'/></td><td text-align: center;>" + TipoCap + "</td><td text-align: center;>" + item2.PersonaCapacitada+ "</td><td text-align: center;>" + item2.Puesto + "</td><td text-align: center;>" + item2.TemaCapacitacion + "</td><td text-align: center;>" + item2.Comentario + "</td></tr>");
+
+                                
+                            }
+                            $('.preloader').remove();
+                            $('.infinite-scroll-preloader').remove();    
+                        },
+                        function(tx5, error){
+                            console.log("Error al guardar registro: " + error.message);
+                        }
+                    );  
+                },
+                function(error){},
+                function(){}
+            );
+        $(".spanBlanco").change(function(){
+            if ($(this).val()=="") {
+                 $(this).css("background-color", "#ffffff");
+            } else {
+                 $(this).css("background-color", "#E0F8F7");
+            }
+        });
+      }
+      }
+    }
+</script> 

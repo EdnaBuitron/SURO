@@ -1,0 +1,49 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <input type="hidden" id="resp1" name="resp1" />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Seleccione el Servicio</h2></div>                    </div>
+                </div>
+                <!-- Inicio FWM Recorrido -->
+                    <div class="buttons-container" style="display: flex;">
+                        <a onclick="generarReporteTecnico();" class="fwm-button-recorrido2">
+                            <img src="img/iconsMenu/tecnico2.svg" width="90px" height="90px" id="img1"/>
+                            <span class="fwm-text-recorrido">Reporte Tecnico</span>
+                        </a>
+                    </div>
+                    <div style="display: flex;margin-top: 5%;">
+                        <a onclick="generarMinutaCoordinador();" class="fwm-button-recorrido2">
+                            <img src="img/iconsMenu/encuesta2.svg" width="90px" height="90px" id="img3"/>
+                            <span class="fwm-text-recorrido">Minuta Coordinador</span>
+                        </a>
+                    </div>
+                <!-- Fin FWM Recorrido -->
+                <fwm></fwm>
+            </div> 
+        </div>
+    </div>
+</template>
+           
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                
+            }
+        }
+    }
+</script>

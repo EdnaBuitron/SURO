@@ -1,0 +1,218 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="back">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Cumplimiento de sanitización</h2>
+  
+                <form class="list" style="margin-top: 0;">
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }
+                        select{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }                      
+                        .border-capture-item{
+                          margin-top: 33px;
+                          margin-left: 0px;
+                          margin-right: 33px;
+                          position: relative;
+                        }
+
+                        textarea{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 5px;
+                            font-size: 2vw;
+                        }
+                        #cajaB {
+              width: 350px;
+            }
+
+            #cajaB h1 {
+              color: rgb(3, 3, 3);
+              font-size: 12px;
+              text-transform: uppercase;
+              text-align: left;
+              line-height: 30px;
+              margin-left: 5px;
+            }
+
+            #pregunta {
+              position: relative ;
+              display: flex;
+              margin-top: 5px;
+              border: transparent;
+              box-sizing: border-box;
+              background: #FAFAFA;
+            }
+
+            #pregunta input[type=radio] {
+              display: none;
+            }
+
+            #pregunta label {
+              display: block;
+              width: 150px;
+              height: 40px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              transition: 0.5s;
+              background: #FFF;  
+              
+            }
+
+            #pregunta label:hover {
+              background: #679ceb;
+            }
+
+            #pregunta input[type=radio]:checked + label {
+              background: #063E7F;
+              color: #FAFAFA;
+            }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                      <form>
+                        <div id="cajaB" style="width: 100%;">
+                          <span class="span" style="font-weight: bold;width: 90%;"> Nombre del Puesto:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                          <select id="Etapa" name="Etapa" onchange="NombrePuesto(this.id,this.value);" style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                            <option value="1">✘ Comensal</option>
+                            <option value="2">✘ Gerente/Supervisor De Seguridad e Higiene</option>
+                            <option value="3">✘ Gerente/Supervisor De R.H.</option>
+                            <option value="4">✘ Responsables De Dpto. De Nutrición</option>
+                            <option value="5">✘ Gerente/Supervisor De Cocina</option>
+                            <option value="6">✘ Lavaplatos</option>
+                            <option value="7">✘ Descamochador </option>
+                            <option value="8">✘ Ayudante General De Cocina</option>
+                            <option value="9">✘ Barista</option>
+                            <option value="10">✘ Cocinero</option>
+                            <option value="11">✘ Otros</option>
+                          </select>
+                        </span>
+                       
+                        <br>
+                        <span class="span" style="font-weight: bold;width: 90%; line-height: 15px;"> Actividades relevantes para la sanitización:</span>  
+                        <textarea class ="FWM-input" id="Actividades" name="Actividades"  cols="30" rows="10" disabled style="width: 90%;margin-left: 5%;border: 1px solid #cfcbcb !important;border-radius: 0px;">Usuario final y principal riesgo a convertirse en víctima en caso de no cumplirse las  sanitización y posible portador</textarea>
+                        
+                        <span class="span" style="font-weight: bold;width: 90%;"> Tipo De Contacto:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;"> 
+                        <input type='text' name="Tipo" id="Tipo"  class="FWM-textBox" readonly   value = "Responsable del cumplimiento de cocina">
+                        </span>
+                        
+                        <span class="span" style="font-weight: bold;width: 90%;"> Capacitación minima recomendada :</span>
+                        <div id="pregunta" style="border: 1px solid #063E7F;width: 90%;margin-left: 5%;font-size: 17px;">
+                          <input type="radio" name="pregunta1"  value="1" id="Res1-11">
+                          <label for="Res1-11">IMSS</label>
+                          <input type="radio" name="pregunta1"  value="2" id="Res2-11">
+                          <label for="Res2-11">Secretaría de Salud</label>
+                          <input type="radio" name="pregunta1"  value="13" id="Res3-11">
+                          <label for="Res3-11">Distintivo H</label>
+                        </div>
+                        
+                        <span class="span" style="font-weight: bold;width: 90%;">Certificación minima recomendada:</span>
+                        <div id="pregunta" style="border: 1px solid #063E7F;width: 90%;margin-left: 5%;font-size: 17px;">
+                          <input type="radio" name="pregunta2"  value="1" id="Res1-12">
+                          <label for="Res1-12">IMSS</label>
+                          <input type="radio" name="pregunta2"  value="2" id="Res2-12">
+                          <label for="Res2-12">Secretaría de Salud</label>
+                          <input type="radio" name="pregunta2" value="3" id="Res3-12">
+                          <label for="Res3-12">Distintivo H</label>
+                        </div>
+                            
+                        <span class="span" style="font-weight: bold;width: 90%;"> Observación:</span>
+                        <textarea class ="FWM-input" id="Observacion" name="Observacion"  cols="30" rows="10" disabled style="width: 90%;margin-left: 5%;border: 1px solid #cfcbcb !important;"></textarea>
+                           
+                        <span class="span" style="font-weight: bold;width: 90%;height: auto;line-height: 23px;margin-top: 10px;"> Cuenta con manuales de operación y ayudas visuales:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;margin-bottom: 10px;"> 
+                          <div id="pregunta" style="border: 1px solid #063E7F;width: 90%;margin-left: 5%;font-size: 17px;">
+                            <input type="radio" name="pregunta3"  value="1" id="Res1-13">
+                            <label for="Res1-13">Si</label>
+                            <input type="radio" name="pregunta3"  value="2" id="Res2-13">
+                            <label for="Res2-13">No</label>                           
+                          </div>
+                        </span>
+
+                        </div>
+
+                        <center>
+                          <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                            <div>
+                              <span class="span FWM-span-form">Toma de fotografia</span>
+  
+                              <div align="center" class="FWM-photo-container">
+                                <div class="border-capture">
+                                  <a onclick="capturePhoto();"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                              </div>
+                                <img style="margin: 0px auto; width: 147.76px; height: 148px; border-radius: 17px; display: none; margin-top: -151px;" id="smallImage" src=""/>
+                                <input type="hidden" id="imagenC" name="imagenC"/>
+                              </div>
+                            </div>
+                          </div>    
+                        </center>
+                        <div class="block-title FWM-subtitulo">Evidencia Proceso Charola</div>  
+                        <div class="card data-table">
+                            <div class="infinite-scroll-content">
+                                <table id="tabla_ciclo_charola">
+                                    <thead>
+                                        <tr>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Etapa</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <div id="tabla_ciclo_charola_content">
+                                        <tbody id="ciclo_charola_content"></tbody>
+                                    </div>
+                                </table>
+                                <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                    <p>Sin registros</p>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </style>
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                        <div class="row align-items-stretch" style="text-align: center;">
+                          <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                            <span class="resize-handler"></span>
+                            <a href="#" onclick="guardarCCharolaPPL(1);" class="boton-equipo">Guardar datos</a>
+                          </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+  </template>
+  <script>
+    return {
+        on: {
+          pageInit: function () {
+            $('.preloader').remove();
+            $('.infinite-scroll-preloader').remove();
+            
+            }
+          }
+    }
+  </script>

@@ -1,0 +1,134 @@
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <style>            
+                        .nav-text-regresar{
+                            color: #ffffff;
+                            border: 2px solid white;
+                            padding: 0 10px;
+                            border-radius: 7px;
+                            font-size: 14px;
+                        }
+                      </style>
+                    <a href="#" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Datos Generales</h2>
+
+                <form class="list form-store-data" id="demo-form" style="margin-top: 0;">                    
+                    <br />
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                        <span class="span" style="font-weight: bold;width: 90%;">Cliente:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="cliente" id="cliente" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Sucursal:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="sucursal" id="sucursal" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Dirección:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="direccion" id="direccion" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Nombre Técnico:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="nombreTecnico" id="nombreTecnico" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Persona que recibe:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="personaRecibe" id="personaRecibe" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Documento para ingresar:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="documentoIngresar" id="documentoIngresar" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Horario programado:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                            <input type='text' name="horarioProgramado" id="horarioProgramado" class="FWM-textBox"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Alcance:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 30px;border-bottom: 0;">
+                            <input type='text' name="alcanceServicio" id="alcanceServicio" class="FWM-textBox"/>
+                        </span>
+                    </div>  
+                </form>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+return {
+    on: {      
+      pageInit: function () {
+            var id_cedula = localStorage.getItem("IdCedula");
+            databaseHandler.db.transaction(
+                function(tx){
+                    tx.executeSql(
+                        "Select * from fumigacion WHERE id_cedula = ?",
+                        [id_cedula],
+                        function(tx, results){
+                            let length = results.rows.length;
+                            for(var i = 0; i< length; i++){
+                                var item = results.rows.item(i);
+                                $("#sucursal").val(item.sucursal);
+                                $("#direccion").val(item.direccion);
+                                $("#nombreTecnico").val(localStorage.getItem("nombre"),localStorage.getItem("apellido_materno"));
+                                $("#personaRecibe").val(item.persona_recibe);
+                                $("#documentoIngresar").val(item.documento_ingresar);
+                                $("#alcanceServicio").val(item.alcance_servicio);
+                            } 
+                        },
+                        function(tx, error){
+                            console.log("Error al guardar cedula: " + error.message);
+                            app.preloader.hide();  
+                        }
+                    );
+                },
+                function(error){},
+                function(){}
+            );
+            databaseHandler.db.transaction(
+                function(tx){
+                    tx.executeSql(
+                        "Select nombre_cliente,horario_programado from cedulas_general WHERE id_cedula = ?",
+                        [id_cedula],
+                        function(tx, results){
+                            let length = results.rows.length;
+                            for(var i = 0; i< length; i++){
+                                var item = results.rows.item(i);
+                                $("#cliente").val(item.nombre_cliente);
+                                $("#horarioProgramado").val(item.horario_programado);
+                            } 
+                        },
+                        function(tx, error){
+                            console.log("Error al guardar cedula: " + error.message);
+                            app.preloader.hide();  
+                        }
+                    );
+                    
+                    // $("#cliente").val(item.alcance_servicio);
+                    // $("#horarioProgramado").val(item.alcance_servicio);
+                },
+                function(error){},
+                function(){}
+            );
+        }
+    }
+}
+</script>

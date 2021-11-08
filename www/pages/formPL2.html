@@ -1,0 +1,323 @@
+
+<template>
+    <div class="page" style="background-color: rgb(245, 245, 245);">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="back">
+                        <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Ciclo De Charola Actividad</h2>
+  
+                <form class="list" style="margin-top: 0;">
+                    <style type="text/css">
+                        input[type=text]{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }
+                        select{
+                            margin: 3px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 2px;
+                            font-size: 2vw;
+                        }                      
+                        .border-capture-item{
+                          margin-top: 33px;
+                          margin-left: 0px;
+                          margin-right: 33px;
+                          position: relative;
+                        }
+                    </style>
+                    <div style="width: 90%;border-radius: 15px;margin-left: 5%;border: 0.5px solid #ECECEC;background-color: white;">
+                      <form>
+                        <span class="span" style="font-weight: bold;width: 90%;">Etapa de ciclo:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                          <select id="Etapa" name="Etapa" onchange="EtapasLP(this.id,this.value);" style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                            <option value="10">✘ Estancia en anaquel de limpios</option>
+                            <option value="11">✘ Estancia de gabinete</option>
+                            <option value="12">✘ Estancia en el área de sucios</option>
+                            <option value="13">✘ Estancia en zona de secado y escurrido</option>
+                            <option value="14">✘ Observación de utensilios y perifericos</option>
+                          </select>
+                        </span>
+                        <br>
+                        <span class="span" style="font-weight: bold;width: 90%;">Responsable De Manipulación Directa:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                          <input type='text' name="RespMD" id="RespMD" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Protocolo A Cumplir:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                          <table width="100%">
+                            <tr>
+                              <td width="85%">
+                                <input type='text' name="Protocolo" id="Protocolo" class="FWM-textBox" onchange="inputLleno(this.id,this.value)" value="A"/>
+                              </td>
+                              <td>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                  <a class="button button-fill sheet-open" href="#" data-sheet=".my-sheet-swipe-to-close" style="padding: 5px;width: 38px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  height="100%" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Escala de riesgo:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                          <table width="100%">
+                            <tr>
+                              <td width="85%">
+                                <select id="EscalaR" name="EscalaR" style="height: 38px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid #cfcbcb;border-radius: 8px;">
+                                  <option value="1">0</option>
+                                  <option value="2">1</option>
+                                  <option value="3">2</option>
+                                </select>
+                              </td>
+                              <td>
+                                <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                                  <a class="button button-fill sheet-open" href="#" data-sheet=".my-sheet-swipe-to-call" style="padding: 5px;width: 38px;">
+                                    <svg xmlns="http://www.w3.org/2000/svg"  height="100%" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16">
+                                      <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                      <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                  </a>
+                                </span>
+                              </td>
+                            </tr>
+                          </table>
+                        </span>
+                        <br>
+                        <span class="span" style="font-weight: bold;width: 90%;">Área De Oportunidad Detectada:</span>
+                        <span id="text2" style="width: 90%;margin-bottom: 0;border-bottom: 0;">
+                          <input type='text' name="areaOportunidad" id="areaOportunidad" class="FWM-textBox" onchange="inputLleno(this.id,this.value)"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;width: 90%;">Comentarios:</span>
+                        <textarea class ="FWM-input" id="Comentarios" name="Comentarios"  cols="30" rows="10" style="width: 90%;margin-left: 5%;border: 1px solid #cfcbcb !important"></textarea>
+                        <br>
+                        <center>
+                          <br>
+                          <div style="display: flex;flex-direction: inherit;justify-content: space-around;">
+                            <div>
+                              <span class="span FWM-span-form">Toma de fotografia</span>
+  
+                              <div align="center" class="FWM-photo-container">
+                                <div class="border-capture">
+                                  <a onclick="capturePhoto();"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                              </div>
+                                <img style="margin: 0px auto; width: 147.76px; height: 148px; border-radius: 17px; display: none; margin-top: -151px;" id="smallImage" src=""/>
+                                <input type="hidden" id="imagenC" name="imagenC"/>
+                              </div>
+                            </div>
+                          </div>   
+                        </center>
+                        <div class="block-title FWM-subtitulo">Evidencia Proceso Charola</div>  
+                        <div class="card data-table">
+                            <div class="infinite-scroll-content">
+                                <table id="tabla_ciclo_charola">
+                                    <thead>
+                                        <tr>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Etapa</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <div id="tabla_ciclo_charola_content">
+                                        <tbody id="ciclo_charola_content"></tbody>
+                                    </div>
+                                </table>
+                                <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                    <p>Sin registros</p>
+                                </div>
+                            </div>
+                        </div>                      
+                    </style>
+                    <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                      <div class="row align-items-stretch" style="text-align: center;">
+                        <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                          <span class="resize-handler"></span>
+                          <a href="#" onclick="guardarCCharolaPPL(2);" class="boton-equipo">Guardar datos</a>
+                        </div>
+                      </div>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="sheet-modal my-sheet-swipe-to-call" style="height:auto; --f7-sheet-bg-color: #fff;">
+      <div class="sheet-modal-inner">
+        <div class="page-content">
+          <div class="block">
+            <center>
+              <table width="90%" >
+                <tr >
+                  <td align="center" style="background-color: #063E7F;height: 52px; color: #ccc;" colspan="2">Escala de riesgo</td>
+                </tr>
+                <tr >
+                  <td style="border: 1px solid #000;" align="center" width="10%">0</td><td style="border: 1px solid #000;" width="90%">Etapa controlada</td>
+                </tr>
+                <tr >
+                  <td style="border: 1px solid #000;" align="center">1</td><td style="border: 1px solid #000;">Etapa con bajo riesgo</td>
+                </tr>
+                <tr>
+                  <td style="border: 1px solid #000;" align="center">2</td><td style="border: 1px solid #000;">Etapa con alto riesgo</td>
+                </tr>
+              </table>
+          </center>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sheet-modal my-sheet-swipe-to-close" style="height:auto; --f7-sheet-bg-color: #fff;">
+      <div class="sheet-modal-inner">
+        <div class="page-content">
+          <div class="block">
+            <center>
+            <table width="90%">
+              <tr >
+                <td align="center" style="background-color: #063E7F;height: 52px; color: #fff;" colspan="2">Protocolo A Cumplir</td>
+              </tr>
+              <tr >
+                <td style="border: 1px solid #000;" align="center" width="10%">A</td>
+                <td style="border: 1px solid #000;" width="90%">Protocolo de áreas de trabajo: Áreas limpias, secas, libre de contacto, contacto controlado</td>
+              </tr>
+              <tr >
+                <td style="border: 1px solid #000;" align="center">B</td>
+                <td style="border: 1px solid #000;">Protocolo de manipulación: Personal capacitado, uniforme e higiene persona</td>
+              </tr>
+              <tr >
+                <td style="border: 1px solid #000;" align="center">C</td>
+                <td style="border: 1px solid #000;">Equipos y herramientas de trabajo adecuadas</td>
+              </tr>
+              <tr>
+                <td style="border: 1px solid #000;" align="center">D</td>
+                <td style="border: 1px solid #000;">Protocolos de mesas limpias</td>
+              </tr>
+              <tr >
+                <td style="border: 1px solid #000;" align="center">E</td>
+                <td style="border: 1px solid #000;">Cumplimiento de capacidades, protocolo de temperaturas, normativa de sistemas de lavado mecánico de loza</td>
+              </tr>
+            </table>
+          </center>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+  <script>
+        return {
+        on: {
+          pageInit: function () {
+            $('.preloader').remove();
+            $('.infinite-scroll-preloader').remove();
+            var id_cedula = localStorage.getItem("IdCedula");
+            var etapa = $("#Etapa").val();
+            databaseHandler.db.transaction(
+            function(tx){
+              tx.executeSql(
+                "Select * from Ciclo_Charola WHERE CC_ID_Cedula = ? ",
+                [id_cedula],
+                function(tx, results){
+                  let length = results.rows.length;
+                  if(length>0){
+                    for (var i = 0; i< length; i++){
+                      var item = results.rows.item(i);
+                      $('#Etapa option[value="'+item.CC_Etapa+'"] ').html(function(a, cambiar) {
+                        return cambiar.replace('✘', '✔');
+                      });
+                    }
+                  }
+                },
+                function(tx, error){
+                  console.log("Error al guardar registroPL: " + error.message);
+                  app.preloader.hide();
+                }
+              );
+            },
+            function(error){},
+            function(){}
+            );
+
+
+            databaseHandler.db.transaction(
+              function(tx){
+                tx.executeSql(
+                  "Select * from Ciclo_Charola WHERE CC_ID_Cedula = ? and CC_Etapa = ?",
+                  [id_cedula, etapa],
+                  function(tx, results){
+                  let length = results.rows.length;
+                  if(length>0){
+                    for (var i = 0; i< length; i++){
+                      var item = results.rows.item(i);
+                      $("#RespMD").val(item.CC_Responsable);   
+                      $("#areaOportunidad").val(item.CC_Oportunidad)
+                      $("#Comentarios").val(item.CC_Comentario)
+                      $("#EscalaR").val(item.CC_Escala)
+                      // $("#Etapa").css("background-color","#66D654")
+                      databaseHandler.db.transaction(
+                        function(tx){
+                          tx.executeSql(
+                          "Select * from PL_Fotos WHERE F_ID_Cedula = ? and F_Recorrido = ? and F_Proceso = ?",
+                          [id_cedula, 1,etapa],
+                          function(tx, results){
+                            let length = results.rows.length;
+                            if(length>0){
+                              for (var i = 0; i< length; i++){
+                                var item = results.rows.item(i);
+                                $("#tabla_ciclo_charola tbody").append("<tr id='fila"+ item.F_ID_Fotos +"'><td><a href='#' onclick='eliminarFila("+ item.F_ID_Fotos +",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='"+item.F_Foto+"' width='60px'/></td><td style='text-align: center;'>" + item.F_titulo + "</td><td style='text-align: center;'>"+ item.F_FechaHora + "</td></tr>");
+                                $("#message-nr").hide();
+                                }
+                              }else{
+                                $("#message-nr").show();
+                              }
+                            },
+                              function(tx, error){
+                                console.log("Error al guardar registroPL: " + error.message);
+                                app.preloader.hide();
+                              }
+                              );
+                            },
+                            function(error){},
+                            function(){}
+                          );
+                      }
+                    }else{
+                      $("#RespMD").val(" ");   
+                      $("#areaOportunidad").val(" ")
+                      $("#Comentarios").val(" ")
+                      $("#EscalaR").val(" ")
+                      $("#EscalaR").val("");
+                      $("#imagenC").val("");
+                      $("#smallImage").attr('src','img/blank.png'); 
+                      $("#photoIcon").attr("src","img/camera.svg"); 
+                      $("#message-nr").show();
+                      $("#tabla_ciclo_charola tbody").empty("");
+                      // $("#Etapa").css("background-color","red")
+                    }
+                  },
+                  function(tx, error){
+                  console.log("Error al guardar registroPL: " + error.message);
+                  app.preloader.hide();
+                  }
+                );
+              },
+              function(error){},
+              function(){}
+            );
+            }
+          }
+    }
+  </script>
+  

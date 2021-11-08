@@ -1,0 +1,54 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="#" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <div style="text-align: left;">
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Seleccione el Servicio</h2></div>                    </div>
+                </div>
+                <div class="buttons-container" style="display: flex;">
+                    <a onclick="generarCicloCharola();" class="fwm-button-recorrido2">
+                        <img src="img/iconsMenu/ciclo2.svg" width="90px" height="90px" id="img1"/>
+                        <span class="fwm-text-recorrido">Ciclo de Charola</span>
+                    </a>
+                </div>
+                <br>
+                <div class="buttons-container" style="display: flex;">
+                    <a onclick="FactorHumano();" class="fwm-button-recorrido2">
+                        <img src="img/iconsMenu/factor_humano2.svg" width="90px" height="90px" id="img1"/>
+                        <span class="fwm-text-recorrido">Factor humano</span>
+                    </a>
+                </div>
+                <br>
+                <div class="buttons-container" style="display: flex;">
+                    <a onclick="SanitizacionLava();" class="fwm-button-recorrido2">
+                        <img src="img/iconsMenu/sanitizacion_lavado2.svg" width="90px" height="90px" id="img1"/>
+                        <span class="fwm-text-recorrido">Sanitizació de sistema de lavado</span>
+                    </a>
+                </div>
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+
+<script>
+    return {
+        on: {
+            pageInit: function () {
+
+            }
+        }
+    }
+</script>

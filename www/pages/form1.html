@@ -1,0 +1,46 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorrido();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->
+                
+            <!-- Fin contenido formulario -->
+            <fwm></fwm>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+      on: {
+        pageInit: function (e, page) {
+            var empresa = 'FIELD';
+            cargarEmpresa(`./js/${empresa}.js`, empresaCargada(empresa));
+        
+            function empresaCargada(empresa){
+                console.log(`${empresa}.js ya ha sido cargado`);
+                setTimeout(()=>{constructorHandler('FWM-1')},150);
+            }
+
+            function cargarEmpresa(url, callback){
+                var pie = document.getElementsByTagName('fwm')[0];
+                var script = document.createElement('script');
+                script.type = 'text/javascript';
+                script.src = url;
+                script.onreadystatechange = callback;
+                script.onload = callback;
+                pie.appendChild(script);
+            }
+        }
+      }  
+    }
+</script>

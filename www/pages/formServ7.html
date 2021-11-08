@@ -1,0 +1,163 @@
+<template>
+    <div class="view view-main view-init safe-areas">
+        <div class="page" id="FWM-1">
+            <!-- Navbar -->
+            <div class="navbar" style="background-color: #063E7F;height: 52px;">
+                <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+                <div class="navbar-inner sliding" style="height: 52px;">
+                    <div class="left">
+                        <a href="#" onclick="regresarRecorridoServInd2();">
+                            <span class="nav-text-regresar" id="nav-text-regresar-function">Regresar</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- Contenido Formulario -->                                
+            <div class="page-content">
+                <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;margin-top: 30px;">
+                    <h2 class="FWN-titulo-2">Diagnostico</h2>
+
+                <div style="text-align: left;">     
+                    <form class="list FWM-fixing-form">
+                        <span class="span FWM-span-form">Voltaje:</span>
+                        <input type="text" class="FWM-input" id="voltaje" name="voltaje" onchange="inputLleno(this.id,this.value)"/>
+
+                        <span class="span FWM-span-form">Amp:</span>
+                        <input type="text" class="FWM-input" id="amp" name="amp" onchange="inputLleno(this.id,this.value)"/>
+
+                        <span class="span FWM-span-form">W.C.:</span>
+                        <input type="text" class="FWM-input" id="wc" name="wc" onchange="inputLleno(this.id,this.value)"/>
+                        
+                        <span class="span FWM-span-form">Tierra F:</span>
+                        <input type="text" class="FWM-input" id="tierra_fisica" name="tierra_fisica" onchange="inputLleno(this.id,this.value)"/>
+
+                        <span class="span FWM-span-form">Falla reportada:</span>
+                        <input type="text" class="FWM-input" id="razon_servicio" name="razon_servicio" onchange="inputLleno(this.id,this.value)"/>
+
+                        <span class="span FWM-span-form">El equipo se encontro:</span>
+                        <select id="equipo_encontrado" name="equipo_encontrado" style="height: 50px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;margin-bottom: 10px;">
+                            <option value="0">Seleccione una opcion</option>
+                            <option value="1">En funcionamiento</option>
+                            <option value="2">Sin funcionar</option>
+                            <option value="3">Otra Condicion</option>
+                        </select>
+
+                        <span class="span FWM-span-form">Diagnostico (Detección del problema):</span>
+                        <textarea class ="FWM-input" id="diagnostico" name="diagnostico"  cols="30" rows="10"></textarea>
+                        
+                        <span class="span FWM-span-form">Titulo:</span>
+                        <input type="text" class="FWM-input" id="titulo" name="titulo" onchange="inputLleno(this.id,this.value)"/>
+
+                        <span class="span FWM-span-form">Foto:</span>                          
+                        <div class="FWM-photo-container">
+                            <div class="border-capture">
+                                <a onclick="capturePhoto();">
+                                    <img class="FWM-photo" src="img/camera.svg" id="photoIcon" width="45px" style="margin-left: 50px;"/>
+                                </a>
+                            </div>
+                            <img class="FWM-photo-hide" id="smallImage" src=""/>
+                            <input type="hidden" id="imagenC" name="imagenC"/>
+                        </div>
+                        <div class="block-title FWM-subtitulo">Evidencias Diagnostico:</div>  
+                        <div class="card data-table">
+                            <div class="infinite-scroll-content">
+                                <table id="tabla_diagnostico">
+                                    <thead>
+                                        <tr>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Accion</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Foto</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Titulo</th>
+                                            <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fecha</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div class="sentencia preloader color-grey infinite-scroll-preloader"></div>
+                                <div id="message-nr" style="width: 100%;text-align: center;font-family: 'ITC Avant Garde Gothic', sans-serif;font-size: 16px;" style="display: none;">
+                                    <p>Sin registros</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+                        <div class="block grid-resizable-demo" style="margin-bottom: 70px;">
+                            <div class="row align-items-stretch" style="text-align: center;">
+                                <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                                    <span class="resize-handler"></span>
+                                    <a href="#" onclick="guardarDiagnosticoServ();" class="boton-equipo">Guardar Diagnostico</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Fin contenido formulario -->
+                <fwm></fwm>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql(
+                            "Select voltaje,amp,wc,tierra_fisica,razon_servicio,equipo_encontrado,diagnostico from reporteGeneral WHERE id_cedula = ?",
+                            [id_cedula],
+                            function(tx, results){
+                                let length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item = results.rows.item(i);
+                                    $("#voltaje").val(item.voltaje);
+                                    $("#amp").val(item.amp);
+                                    $("#wc").val(item.wc);
+                                    $("#tierra_fisica").val(item.tierra_fisica);
+                                    $("#razon_servicio").val(item.razon_servicio);
+                                    if(item.equipo_encontrado == null){} else {
+                                        $("#equipo_encontrado").val(item.equipo_encontrado);
+                                    }
+                                    $("#diagnostico").val(item.diagnostico);
+                                } 
+                            },
+                            function(tx, error){
+                                console.log("Error al guardar cedula: " + error.message);
+                                app.preloader.hide();  
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+                databaseHandler.db.transaction(
+                    function(tx1){
+                        tx1.executeSql(
+                            "Select * from evidenciasReporte where id_cedula = ? AND fase = '1'",
+                            [id_cedula],
+                            function(tx, results){
+                                var length = results.rows.length;
+                                if(length == 0){
+                                    $("#message-nr").css("display", "block");
+                                } else {
+                                    for(var i = 0; i< length; i++){
+                                        var item = results.rows.item(i);
+                                        $("#tabla_diagnostico tbody").append("<tr id='fila"+ item.id_evidencia +"'><td><a href='#' onclick='eliminarFilaServ("+ item.id_evidencia +",4);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a></td><td><img src='"+item.foto+"' width='60px' style='margin-top: 4px;'/></td><td style='text-align: center;'>" + unescape(item.titulo) + "</td><td style='text-align: center;'>" + item.fecha_registro + "</td></tr>");
+                                        $("#message-nr").css("display", "none");
+                                    }
+                                }
+                                $('.preloader').remove();
+                                $('.infinite-scroll-preloader').remove();
+                            },
+                            function(tx, error){
+                                console.log("Error al consultar: " + error.message);
+                            }
+                        );
+                        console.log("Consulta correcta");
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }  
+    }
+</script>

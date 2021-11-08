@@ -1,0 +1,209 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner" style="height: 52px;">
+                <div class="left">
+                    <a href="javascript:location.reload()" class="link back" style="margin-left: 5px;">
+                        <span class="nav-text-regresar-recorrido">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content" style="background-color: #f6f7f9; ">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <input type="hidden" id="resp1" name="resp1" />
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title" style="text-align: center; font-size: 20px;"><h2 style="color:#505759;font-size: 22px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Recorrido Levantamiento</h2></div>
+                    </div>
+                </div>
+                    <div class="buttons-container" style="display: flex;">
+                        <a href="/datosgeneralesSURO/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/persona2.svg" width="90px" height="90px" id="img1"/>
+                            <span class="fwm-text-recorrido">Datos Generales</span>
+                        </a>
+                        <a href="/antesSURO/" class="fwm-button-recorrido">
+                            <img src="img/iconsMenu/antes.svg" width="90px" height="90px" id="img2"/>
+                            <span class="fwm-text-recorrido">Antes</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                        <a class="fwm-button-recorrido" id="button1" onclick="alertNotReadySURO()">
+                            <img src="img/iconsMenu/durante.svg" width="90px" height="90px" id="img3"/>
+                            <span class="fwm-text-recorrido">Durante</span>
+                        </a>
+                        <a class="fwm-button-recorrido" id="button2" onclick="alertNotReadySURO()">
+                            <img src="img/iconsMenu/fomites.svg" width="90px" height="90px" id="img4"/>
+                            <span class="fwm-text-recorrido">Fomites</span>
+                        </a>
+                    </div>
+                    <div class="buttons-container" style="display: flex;margin-top: 5%;">
+                        <a class="fwm-button-recorrido" id="button3" onclick="alertNotReadySURO()">
+                            <img src="img/iconsMenu/editarGrupo.svg" width="90px" height="90px" id="img5"/>
+                            <span class="fwm-text-recorrido">Editar grupos</span>
+                        </a>
+                        <a class="fwm-button-recorrido" id="button4" onclick="alertNotReadySURO()">
+                            <img src="img/iconsMenu/estrellas.svg" width="90px" height="90px" id="img6"/>
+                            <span class="fwm-text-recorrido">Evaluación y cierre</span>
+                        </a>
+                    </div>
+                <!-- Inicio FWM Recorrido -->
+                    <div id="FWM-Menu" class="container-items" style="width: 100%;"></div>
+                <!-- Fin FWM Recorrido -->
+                <fwm></fwm>
+            </div> 
+        </div>
+    </div>
+</template>
+           
+<script>
+    return {
+        on: {      
+            pageInit: function () {
+                //Datos generales
+                var id_cedula = localStorage.getItem("IdCedula");
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from sanitizacion_Suro WHERE id_cedula = ? AND (nombre_cliente IS NOT NULL AND sucursal IS NOT NULL AND direccion IS NOT NULL AND correo IS NOT NULL AND nombre_usuario IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img1").src="img/iconsMenu/persona.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                //Antes
+                var equipoSet = 0;
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("Select foto_epp,foto_maquina,foto_aspersor FROM sanitizacion_Suro WHERE id_cedula = ? AND (foto_epp IS NOT NULL AND foto_maquina IS NOT NULL AND foto_aspersor IS NOT NULL)",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(results.rows.length > 0){
+                                    equipoSet = equipoSet + 1;
+                                    databaseHandler.db.transaction(
+                                        function(tx){
+                                            tx.executeSql("Select foto_quimico,foto_accesos,foto_delimita_area FROM sanitizacion_Suro WHERE id_cedula = ? AND (foto_quimico IS NOT NULL AND foto_accesos IS NOT NULL AND foto_delimita_area IS NOT NULL)",
+                                                [id_cedula],
+                                                function(tx, results){
+                                                    var item = results.rows.item(0);
+                                                    if(results.rows.length > 0){
+                                                        equipoSet = equipoSet + 1;
+                                                        if(equipoSet == 2){
+                                                            document.getElementById("img2").src="img/iconsMenu/antes2.svg";
+                                                            $("#button1").removeAttr("onclick");
+                                                            $("#button2").removeAttr("onclick");
+                                                            $("#button3").removeAttr("onclick");
+                                                            $("#button4").removeAttr("onclick");
+                                                            $("#button1").attr("href", "/duranteSURO/"); 
+                                                            $("#button2").attr("href", "/fomitesSURO/"); 
+                                                            $("#button3").attr("href", "/editarGrupoSURO/"); 
+                                                            $("#button4").attr("href", "/cierreSURO/");
+                                                        }
+                                                    }
+                                                },
+                                                function(tx, error){
+                                                }
+                                            );
+                                        },
+                                        function(error){},
+                                        function(){}
+                                    );
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                //Durante
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from evidencia WHERE id_cedula = ? AND (id_evidencia IS NOT NULL AND fases = 'durante')",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img3").src="img/iconsMenu/durante2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                //Fomites
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from evidencia WHERE id_cedula = ? AND (id_evidencia IS NOT NULL AND fases = 'fomites')",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    document.getElementById("img4").src="img/iconsMenu/fomites2.svg";
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+                //Grupos
+                var gruposSet = 0;
+                databaseHandler.db.transaction(
+                    function(tx){
+                        tx.executeSql("SELECT * from grupos WHERE id_cedula = ? AND (nombre_grupo <> 'Grupo 1' AND fases = 'durante')",
+                            [id_cedula],
+                            function(tx, results){
+                                var item = results.rows.item(0);
+                                if(item.id_cedula > 0){
+                                    gruposSet = gruposSet + 1;
+                                    databaseHandler.db.transaction(
+                                        function(tx){
+                                            tx.executeSql("SELECT * from grupos WHERE id_cedula = ? AND (nombre_grupo <> 'Grupo 1' AND fases = 'fomites')",
+                                                [id_cedula],
+                                                function(tx, results){
+                                                    var item = results.rows.item(0);
+                                                    if(item.id_cedula > 0){
+                                                        gruposSet = gruposSet + 1;
+                                                        if(gruposSet == 2){
+                                                            document.getElementById("img5").src="img/iconsMenu/editarGrupo2.svg";
+                                                        }
+                                                    }
+                                                },
+                                                function(tx, error){
+                                                }
+                                            );
+                                        },
+                                        function(error){},
+                                        function(){}
+                                    );
+                                }
+                            },
+                            function(tx, error){
+                            }
+                        );
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

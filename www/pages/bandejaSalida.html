@@ -1,0 +1,104 @@
+<template>
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <style>            
+                        .nav-text-regresar{
+                            color: #ffffff;
+                            border: 2px solid white;
+                            padding: 0 10px;
+                            border-radius: 7px;
+                            font-size: 14px;
+                        }
+                    </style>
+                    <a href="#" class="link back" onclick="regresar();" style="margin-left: 5px;">
+                        <span class="nav-text-regresar">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <style>
+            .bandeja-salida{
+                text-align: left;
+                background-color: #00A7B5;
+                color:white;
+                margin: 46px 0 15px 0;
+                width: 94%;
+                padding: 7px 0 7px 22px;
+                font-size: 16px;
+                border: 1px solid white;
+            }
+            .send-ced{
+                background-color: #00A7B5;
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-content: center;
+                align-items: center;
+            }
+            .list .item-after {
+                align-items: center;
+                align-content: center;
+            }
+            li:nth-child(2n) {
+                background-color: #1896A726;
+            }
+        </style>
+        <div class="page-content">
+            <div style="text-align: center; margin-top: 46px; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#00A7B5;">Bandeja de salida</h2> 
+                <div style="text-align: left;">        
+                    <div class="item-inner">
+                        <div class="block-title bandeja-salida">VISITA DE SERVICIO FIELD</div>
+                    </div>
+                </div>
+                <div class="list sortable" id="cedpendientes" style="background-color:white;margin-top: 0;margin-bottom: 0;">
+                  <ul id="bandeja" style="background-color: white;"></ul>
+                </div>
+            </div>
+        </div>
+    </div> 
+</template>
+<script>
+    return {
+        on: {
+            pageInit: function (e, page) {
+                var IdUsuario = localStorage.getItem("id_usuario");
+                databaseHandler.db.transaction(
+                    function(tx5){
+                        tx5.executeSql("SELECT * FROM cedulas_general WHERE id_usuario = ? AND (estatus = 1 OR estatus = 2 OR estatus = 3) ORDER BY estatus ASC;",
+                            [IdUsuario],
+                            function(tx5, results){
+                                var length = results.rows.length;
+                                for(var i = 0; i< length; i++){
+                                    var item2 = results.rows.item(i);
+                                    if(item2.estatus == 1){
+                                        var NomEnv = "Lista para enviar";
+                                        $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloRojo.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>" + item2.nombre_cliente + "</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' class='send-ced' onclick='llevarTodo("+item2.id_cedula+", \""+item2.tipo_cedula+"\",);' style='border: none; outline:none;'><img src='img/send.svg'  width='30px' height='30px' /></a></div></div></div><div class='sortable-handler'></div></li>");
+                                    }
+                                    if(item2.estatus == 2){
+                                        var NomEnv = "Enviando...";
+                                        $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloNaranja.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>" + item2.nombre_cliente + "</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;<a href='#' class='send-ced' onclick='llevarTodo("+item2.id_cedula+",\""+item2.tipo_cedula+"\");' style='border: none; outline:none;'><img src='img/send.svg'  width='30px' height='30px'/></a></div></div></div><div class='sortable-handler'></div></li>"); 
+                                    } 
+                                    if(item2.estatus == 3){
+                                        var NomEnv = "Enviado";
+                                        $("#bandeja").append("<li><div class='item-content'><div class='item-media'><i class='icon'><img src='img/circuloVerde.png' width='20px' height='20px' /></i></div> <div class='item-inner'><div class='item-title'>" + item2.nombre_cliente + "</div> <div class='item-after'>"+NomEnv+"&nbsp;&nbsp;&nbsp;</div></div></div><div class='sortable-handler'></div></li>"); 
+                                    }
+                                }
+                            },
+                            function(tx5, error){
+                                console.error("Error al consultar bandeja de salida: " + error.message);
+                            }
+                        );  
+                    },
+                    function(error){},
+                    function(){}
+                );
+            }
+        }
+    }
+</script>

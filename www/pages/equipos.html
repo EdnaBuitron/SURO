@@ -1,0 +1,365 @@
+<template>
+<div class="view view-main view-init safe-areas">
+    <div class="page">
+        <div class="navbar" style="background-color: #063E7F;height: 52px;">
+            <div style="text-align: center;"><img src="img/logo-FWM.png" style="margin-top: 5px;" height="41.38px" alt="Logo Field"></div>
+            <div class="navbar-inner sliding" style="height: 52px;">
+                <div class="left">
+                    <style>            
+                        .nav-text-regresar{
+                            color: #ffffff;
+                            border: 2px solid white;
+                            padding: 8px 10px;
+                            border-radius: 7px;
+                            font-size: 14px;
+                            margin-left: 15px;
+                        }
+                      </style>
+                    <a href="#" onclick="regresarRecorrido();" style="margin-left: 5px;">
+                        <span class="nav-text-regresar">Regresar</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fab fab-center-bottom fab-morph" data-morph-to=".demo-fab-fullscreen-sheet.fab-morph-target">
+                  <a href="#" style="background-color: #DCEFF2 !important;">
+                    <i class="icon f7-icons if-not-md" style="color: #00A7B5;">add</i>
+                    <i class="icon material-icons md-only" style="color: #00A7B5;">add</i>
+                  </a>
+                </div>
+                <div class="demo-fab-fullscreen-sheet fab-morph-target">
+                    <div style="text-align: right; width:93%;"><br /><a href="#" class="fab-close"><img src="img/close.svg" alt="Cerrar" width="20px" height="20px"></a></div>
+                    <h3 style="color:#00A7B5; text-align: center;">Agregar Equipo</h3>
+
+                    <form data-search-container=".search-list" data-search-in=".item-title" class="searchbar searchbar-init">
+                        <div class="searchbar-inner" style="margin-left: 20px;border: 1px solid gray;width: 90%;font-size: 16px;">
+                            <div class="searchbar-input-wrap">
+                                <input type="search" name="NuevoP" placeholder="Buscar Producto" id="autocomplete-dropdown-ajax" style="font-size: 16px;"/>
+                                <i class="searchbar-icon"></i>
+                                <span class="input-clear-button"></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div style="width:95%; margin: 0 auto; border-collapse: collapse;">
+                        <input type="hidden" id="PCode" name="PCode" />
+                        <input type="hidden" style="font-weight: normal; width:95%;" id="PDesc" name="PDesc"/>
+                        <a href="#" onclick="guardadNuevoEq();" style="margin-top: 45px;width: 100%;text-align: center;display: flex;justify-content: center;"><div style="display: flex;flex-direction: row;justify-content: center;align-content: center;background-color: #00A7B5;padding-top: 10px;padding-bottom: 10px;padding-left: 30px;padding-right: 30px;align-items: center;width: 100px;border-radius: 8px;"><span style="color: white;margin-right: 10px;">Guardar</span><img src="img/save.svg" width="35px"/></div></a>
+                    </div>
+                </div>
+        <div class="page-content">
+            <div style="text-align: center; justify-content:center; margin-right:auto; margin-left:auto; width: 99%;">
+                <h2 style="color:#063E7F;font-size: 20px;font-family: 'ITC Avant Garde Gothic', sans-serif;margin-top: 35px;">Equipos</h2>
+                <br />
+                
+                <form class="list" id="demo-form1" style="width: 90%;margin-left: 5%;">
+                    <style type="text/css">
+                        input[type=text],select{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                        input[type=number]{
+                            margin: 8px 0;
+                            border: 1px solid #ccc;
+                            border-radius: 6px;
+                        }
+                    </style>
+                	
+                    <div id="productos"> </div>
+                    <span class="span" style="font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Código:</span>
+                    <select id="codigos" class ="spanBlanco" name="codigos" onchange="DatosEqu();" style="height: 50px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;border: 1px solid gray;border-radius: 8px;">
+                        <option value="0">Seleccione una opción</option>
+                    </select>
+
+                    <div style="float:left;">
+                        <label class="item-radio item-content" style="border:none">
+                            <input class="radioBM" type="radio" id="Bradio" name="demo-radio" value="Equipo en buen estado" />
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                              <div class="item-title" style="font-size: 14px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Buen estado</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div style="float:right;">
+                        <label class="item-radio item-content">
+                            <input class="radioBM" type="radio" id="Mradio" name="demo-radio" value="Equipo en mal estado"/>
+                            <i class="icon icon-radio"></i>
+                            <div class="item-inner">
+                              <div class="item-title" style="font-size: 14px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Mal estado</div>
+                            </div>
+                        </label>
+                    </div>
+                    <br /><br />
+                    <div>
+                        <input type="hidden" id="DescEqu" name="DescEqu" /><br>
+                        <span class="span" style="font-weight: bold;font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Cantidad:</span>
+                        <span id="text">
+                            <input class ="spanBlanco" type='number' id="cantidad" name="cantidad" style="padding-left: 10px;background-color: white;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;border: 1px solid gray;border-radius: 8px;"/>
+                        </span>
+
+                        <span class="span" style="font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Ubicación:</span>
+                        <span id="text2" style="border: none;">
+                            <input type='text' id="ubicacion" name="ubicacion" style="padding-left: 10px;background-color: white;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;border: 1px solid gray;border-radius: 8px;"/>
+                        </span>
+                        <span class="span" style="font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Motivo (Ticke's):</span>             
+                        <span id="text2">
+                            <select id="tickets" name="tickets" style="height: 50px;padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif; background-color: white;border: 1px solid gray;border-radius: 8px;">
+                                <option value="0">Seleccione una ópcion</option>
+                                <option value="1">Daño del equipo por uso normal</option>
+                                <option value="2">Equipo dañado por descuido</option>
+                                <option value="3">Mantenimiento correctivo</option>
+                                <option value="4">Cambio de equipos (Despachadores de Jabón, Toallero o Higiénico)</option>
+                                <option value="5">Envío de Rack de 10 o 20 litros y Rack para atomizadores</option>
+                            </select>
+                        </span>
+                        <span class="span" style="font-weight: bold;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;">Comentario:</span>
+                        <span id="text" style="border:none;">
+                            <input class ="spanBlanco" type='text' id="comentario" name="comentario" style="padding-left: 10px;font-size: 16px;font-family: 'ITC Avant Garde Gothic', sans-serif;border: 1px solid gray;border-radius: 8px;"/>
+                        </span>
+                    </div>
+                </form>
+                <style>
+                    .border-capture{
+                        background-color: white;
+                        border-radius: 20px;
+                        width: 147.76px;
+                        height: 147.76px;
+                        border: solid 3px #00A7B5;
+                    }
+                </style>
+                <center>
+                    <div class="border-capture">
+                        <a onclick="capturePhoto();"><img src="img/camera.svg" id="photoIcon" width="45px" style="position: absolute;position: fixed;z-index: 100;margin-top: 50px; position: relative;"/></a>
+                    </div>
+                </center>
+	            <center><img style="margin: 0px auto; width: 147.76px; height: 148px; border-radius: 17px; display: none; margin-top: -151px;" id="smallImage" src=""/>
+	            <input type="hidden" id="imagenC" name="imagenC"/></center>
+                
+                <!-- TABLA DE PRODUCTOS AGREGADOS --><br />
+                <div class="block-title" style="font-family: 'ITC Avant Garde Gothic', sans-serif;font-size:16px;font-weight: bold;padding-top: 5px;">Registros Guardados</div>
+                <div class="card data-table" >
+                <div class="infinite-scroll-content">
+
+                    <table id="TabEquipos">
+                        <thead>
+                            <tr>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Acciones</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Fotografía</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Codigo</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Descripción</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Cantidad</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Ubicación</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Estatus</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Comentarios</th>
+                                <th class="numeric-cell" style="text-align: center;background-color: #063E7F;color: white;">Motivo (Ticket)</th>
+                            </tr>
+                        </thead>
+                    <div id="#mostrarP">
+                        <tbody id="Eq">
+                        
+                        </tbody>
+                    </div>
+                    </table>
+                    <div class='sentencia preloader color-red infinite-scroll-preloader'></div>
+                </div>
+                </div>
+                <!-- FIN DE TABLA DE PRODUCTOS AGREGADOS -->
+                <br />
+                <div id="articles"></div>
+
+
+                <style type="text/css">
+                    .boton-personalizado-4 {
+                        text-decoration: none;
+                        font-family: 'ITC Avant Garde Gothic', sans-serif;
+                        font-weight: 600;
+                        font-size: 16px;
+                        color: #FFFFFF;
+                        padding-top: 15px;
+                        padding-bottom: 15px;
+                        padding-left: 30px;
+                        padding-right: 30px;
+                        background-color: #00A7B5;
+                        border-radius: 15px;
+                    }
+                </style>
+                <div class="block grid-resizable-demo">
+                    <div class="row align-items-stretch" style="text-align: center;">
+                        <div class="col-100 medium-50" style="min-width: 50px; border-style: none;">
+                            <span class="resize-handler"></span>
+                            <a href="#" onclick="guardarEquipo();" class="boton-personalizado-4">Guardar datos</a>   
+                        </div>
+                    </div>
+                </div>
+                <table style="width:100%; margin: 0 auto; text-align: center;  border-collapse: collapse;">
+                <tr>
+                    
+                 
+                </tr>
+                </table>
+                <br /><br /><br /><br /><br /><br />
+            </div>
+        </div>
+    </div>
+</div>
+</template>
+<script>
+  
+  return {
+    on: {
+      pageInit: function (e, page) {
+        var IdC = localStorage.getItem("IdCte");
+        var Division = localStorage.getItem("Division");
+        
+        if(Division == 3){
+            var NomEquipos = 'equipos_cteCDC';
+            var NomBusEq = 'EquiposCDC';
+            //select = document.getElementById("codigos");
+        } else {
+            var NomEquipos = 'equipos_cte';
+            var NomBusEq = 'Equipos';
+      
+        
+        
+        } //aplica para la div soluciones
+        app.request.get(cordova.file.dataDirectory + "jsons/"+NomEquipos+".json", function (data) {
+        var content = JSON.parse(data);
+        select = document.getElementById("codigos");
+        for(var i=0; i < content.length; i++){
+            if(content[i].IdCte == IdC){
+                option = document.createElement("option");
+                option.value = content[i].IdPrd;
+                option.text = unescape(content[i].IdPrd + "   " + content[i].Descripcion);
+                select.appendChild(option);
+            }
+        }
+        });
+
+        $('#codigos').change(function () {
+            var IdC = localStorage.getItem("IdCte");
+            var cval = $("#codigos").val();
+            app.request.get(cordova.file.dataDirectory + "jsons/"+NomEquipos+".json", function (data) {
+                var content2 = JSON.parse(data);
+                for(var x = 0; x < content2.length; x++) {
+                    if(content2[x].IdCte == IdC && content2[x].IdPrd == cval){
+                        $("#ubicacion").val(content2[x].Ubicacion);
+                        $("#DescEqu").val(content2[x].Descripcion);
+                    }         
+                } 
+            });
+        });
+        $(".spanBlanco").change(function(){
+            if ($(this).val()=="") {
+                 $(this).css("background-color", "#ffffff");
+            } else {
+                 $(this).css("background-color", "#E0F8F7");
+            }
+        });
+        //Cargar el contenido si lo tiene
+         var icedula = localStorage.getItem("IdCedula");    
+       databaseHandler.db.transaction(
+            function(tx1){
+
+                tx1.executeSql(
+                    "Select * from ced_equipos where IdCedula= ?",
+                    [icedula],
+                    function(tx, results){
+                        var length = results.rows.length;
+                        for(var i = 0; i< length; i++){
+                            var item = results.rows.item(i);
+                            
+	                            if(item.Tickets == 1){ 
+	                                $NT = "Daño del equipo por uso normal";
+	                            }else if(item.Tickets == 2){
+	                                $NT = "Equipo dañado por descuido";
+	                            }else if(item.Tickets == 3){
+                                    $NT = "Mantenimiento correctivo";
+                                }else if(item.Tickets == 4){
+                                    $NT = "Cambio de equipos (Despachadores de Jabón, Toallero o Higiénico)";
+                                }else if(item.Tickets == 5){
+                                    $NT = "Envío de Rack de 10 o 20 litros y Rack para atomizadores";
+                                }else if(item.Tickets != 1 || item.Tickets != 3 || item.Tickets != 3 || item.Tickets != 4 || item.Tickets != 5){
+                                    $NT = "";
+                                }
+
+	                            $("#TabEquipos tbody").append("<tr id='fila"+ item.IdCedproductos +"'><td><a href='#' onclick='eliminarFila("+ item.IdCedproductos +",1);' style='border: none; outline:none;'><img src='img/borrar.png' width='30px' /></a><td><img src='"+item.ImgPrd+"' width='60px'/></td><td style='text-align: center;'>" + item.IdPrd + "</td><td style='text-align: center;'>" + unescape(item.Descripcion) + "</td><td style='text-align: center;'>"+ item.Cantidad + "</td><td style='text-align: center;'>" + item.Ubicacion + "</td><td>"+item.checkBox+"</td><td>"+  item.Comentario  +"</td><td>" +  $NT +"</td></tr>");
+	                           
+                        }
+
+                        $('.preloader').remove();
+                        $('.infinite-scroll-preloader').remove();
+                    },
+                    function(tx, error){
+                        console.log("Error al consultar: " + error.message);
+                    }
+                );
+                console.log("Consulta correcta");
+            },
+            function(error){},
+            function(){}
+        );
+       //seccion del autocompletado
+       self.autocompleteDropdownAjax = app.autocomplete.create({
+            inputEl: '#autocomplete-dropdown-ajax',
+            openIn: 'dropdown',
+            preloader: true,
+            valueProperty: 'IdPrd',
+            textProperty:  'Descripcion',
+            limit: 5, //limit to 20 results
+            dropdownPlaceholderText: 'Seleccionar Producto...',
+            source: function (query, render) {
+                var autocomplete = this;
+                var results = [];
+                if (query.length === 0) {
+                    render(results);
+                    return;
+                }
+                autocomplete.preloaderShow();
+                app.request({
+                    url: cordova.file.dataDirectory + "jsons/"+NomBusEq+".json",
+                    method: 'GET',
+                    dataType: 'json',
+                    data: {
+                    query: query,
+                    },
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].Descripcion.toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(data[i].IdPrd+"-"+data[i].Descripcion); 
+                        }
+                        autocomplete.preloaderHide();
+                        render(results);
+                    }
+                });
+            }
+        });
+
+        $('#autocomplete-dropdown-ajax').change(function () {
+            
+            var cval = $("#autocomplete-dropdown-ajax").val();
+            var cod = cval.split('-');
+            var co = cod[0];
+
+            app.request.get(cordova.file.dataDirectory + "jsons/"+NomBusEq+".json", function (data) {
+                var content2 = JSON.parse(data);
+                for(var x = 0; x < content2.length; x++) {
+                    if(content2[x].IdPrd == co){
+                        
+                        $("#PCode").val(content2[x].IdPrd);
+                        $("#PDesc").val(content2[x].Descripcion);
+                       $("#autocomplete-dropdown-ajax").val(content2[x].IdPrd + " - "+content2[x].Descripcion);
+
+                    }         
+                } 
+            });
+
+        });
+        $('#Obser').change(function () {
+            ObservacionesPe();
+            
+        });
+       //fin de la seccion del autocompketador            
+      }
+    }  
+  }
+</script>
